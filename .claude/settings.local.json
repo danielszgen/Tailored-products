@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s https://gist.githubusercontent.com/ThariqS/3d446e7c7aa9eb94f468194deb73028f/raw)",
+      "Bash(npx create-video@latest --no-open .)",
+      "Bash(where.exe node:*)",
+      "Bash(where.exe npm:*)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/dloza/Documents/Clode jobs/Motiongraphics/$APPDATA/**)",
+      "Read(//c/Users/dloza/Documents/Clode jobs/Motiongraphics/$HOME/**)",
+      "Read(//c//**)",
+      "Bash(cmd.exe /c \"where node\")",
+      "Bash(cmd.exe /c \"node --version\")",
+      "Bash(cmd.exe /c \"npm --version\")",
+      "Bash(powershell.exe -Command \"node --version\")",
+      "Bash(powershell.exe -Command \"Get-Command node -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source\")",
+      "Bash(powershell.exe -Command \"winget install OpenJS.NodeJS.LTS --accept-package-agreements --accept-source-agreements\")",
+      "Bash(export PATH=\"/c/Program Files/nodejs:$PATH\")",
+      "Bash(npm --version)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "WebFetch(domain:www.doga.es)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(pkill -f \"remotion\")",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //F //PID 38636)",
+      "Bash(ls \"C:/Users/dloza/Documents/Clode jobs/Motiongraphics/node_modules/.bin/remotion\"*)",
+      "Bash(npx remotion:*)",
+      "Bash(mkdir -p out/presenter-titles)",
+      "Bash(\"C:/Program Files/nodejs/node.exe\" node_modules/@remotion/cli/remotion-cli.js render PresenterTitles --image-format=png --sequence --output=out/presenter-titles)",
+      "Bash(mkdir -p out/cinematic-titles-avenir)",
+      "Bash(\"C:/Program Files/nodejs/node.exe\" node_modules/@remotion/cli/remotion-cli.js render CinematicTitlesAvenir --image-format=png --sequence --output=out/cinematic-titles-avenir)",
+      "Bash(\"C:/Program Files/nodejs/npm.cmd\" install --silent)",
+      "Bash(curl -s http://localhost:5174/)",
+      "Bash(curl -sv http://localhost:5174/)",
+      "Bash(curl -s http://localhost:5174/src/index.css)",
+      "Bash(curl -s \"http://localhost:5174/src/index.css?t=$\\(date +%s\\)\" -o /tmp/idx.css)",
+      "Read(//tmp/**)",
+      "Bash(\"C:/Program Files/nodejs/node.exe\" node_modules/tailwindcss/lib/cli.js -i src/index.css -o /tmp/tw-out.css)",
+      "Bash(git config *)"
+    ]
+  }
+}
