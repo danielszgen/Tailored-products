@@ -2,7 +2,9 @@
 
 [![Deploy](https://github.com/danielszgen/Tailored-products/actions/workflows/deploy-preview.yml/badge.svg?branch=main)](https://github.com/danielszgen/Tailored-products/actions/workflows/deploy-preview.yml)
 
-> 🔗 **Live preview:** **<https://danielszgen.github.io/Tailored-products/>**
+> 🔗 **Tailored Products preview:** **<https://danielszgen.github.io/Tailored-products/>**
+>
+> 📊 **Website Review Dashboard:** **<https://danielszgen.github.io/Tailored-products/#/dashboard>**
 
 Maqueta de la nueva sección **Tailored Products** para la web de **DOGA — Drive Systems Division**, junto con el sistema de motion graphics en Remotion para los videos del producto.
 
