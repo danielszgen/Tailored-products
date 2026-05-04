@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1180">
+<title>DOGA — R&D Drive Systems</title>
+<style>
+/* ── Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Montserrat", sans-serif; background: #ECECEC; color: #0f172a; min-height: 100vh; }
+img { display: block; max-width: 100%; }
+button { font-family: "Montserrat", sans-serif; cursor: pointer; }
+
+/* ── Tokens ── */
+:root {
+  --navy:    #17355f;
+  --navy-dk: #0D3B5D;
+  --red:     #df1e24;
+  --red-dk:  #BF0811;
+  --steel:   #8194AD;
+  --gray-50: #f8fafc;
+  --gray-100:#f1f5f9;
+  --gray-200:#e2e8f0;
+  --gray-500:#64748b;
+  --gray-700:#334155;
+  --white:   #ffffff;
+}
+
+/* ── Layout ── */
+.page-wrap  { max-width: 1180px; margin: 0 auto; padding: 20px 16px 40px; }
+.section-shell { background: #fff; border: 1px solid rgba(15,23,42,0.08); border-radius: 22px; box-shadow: 0 10px 35px rgba(15,23,42,0.06); overflow: hidden; }
+
+/* ── Badge ── */
+.badge { display: inline-flex; align-items: center; border-radius: 9999px; border: 1px solid; padding: 3px 12px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; line-height: 1.6; }
+.badge-red   { border-color: rgba(223,30,36,0.2); background: rgba(223,30,36,0.05); color: var(--red); }
+.badge-blue  { border-color: rgba(23,53,95,0.2);  background: rgba(23,53,95,0.05);  color: var(--navy); }
+.badge-white { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); }
+
+/* ── Eyebrow ── */
+.eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.24em; color: var(--red); margin-bottom: 8px; }
+
+/* ── Bullet list ── */
+.bullet-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li { display: flex; gap: 10px; font-size: 14px; line-height: 1.7; color: var(--gray-700); }
+.bullet-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; margin-top: 7px; }
+
+/* ── HEADER ── */
+.header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--gray-200); padding: 14px 28px; background: #fff; }
+.header-logo { font-weight: 800; font-style: italic; font-size: 26px; color: var(--red); letter-spacing: -0.01em; }
+.header-nav  { display: flex; align-items: center; gap: 22px; }
+.header-nav a { font-size: 13px; font-weight: 600; color: var(--gray-700); text-decoration: none; transition: color 0.15s; }
+.header-nav a:hover { color: var(--navy); }
+.header-search { width: 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff; border: none; display: flex; align-items: center; justify-content: center; }
+.header-cta { background: var(--red); color: #fff; border: none; border-radius: 6px; padding: 8px 16px; font-size: 12px; font-weight: 700; }
+.header-cta:hover { background: var(--red-dk); }
+.breadcrumb { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.22em; color: var(--gray-500); margin-bottom: 16px; margin-top: 20px; }
+
+/* ── HERO SPLIT ── */
+.hero-split { display: grid; grid-template-columns: 0.92fr 1.58fr; gap: 16px; padding: 16px; }
+.hero-text-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 20px; }
+.hero-h1 { font-size: 42px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; color: var(--navy); max-width: 320px; }
+.hero-p { font-size: 14px; line-height: 1.7; color: var(--gray-700); max-width: 320px; }
+
+/* Dark hero card */
+.hero-dark {
+  border-radius: 24px; padding: 32px; position: relative; overflow: hidden;
+  background-image:
+    linear-gradient(rgba(12,29,51,0.82), rgba(12,29,51,0.70)),
+    radial-gradient(circle at 18% 18%, rgba(255,255,255,0.12), transparent 24%),
+    radial-gradient(circle at 78% 32%, rgba(227,30,36,0.18), transparent 20%),
+    linear-gradient(120deg, #20324c 0%, #122033 100%);
+}
+.hero-dark-grid {
+  position: absolute; inset: 0; opacity: 0.5;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+.hero-dark-inner {
+  position: relative; z-index: 1;
+  background: rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px; padding: 28px; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between; color: #fff;
+}
+.hero-dark-h2 { font-size: 34px; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; max-width: 520px; margin-top: 16px; }
+.hero-dark-p  { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.75); max-width: 520px; margin-top: 14px; }
+.btn-play { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--navy); border: none; border-radius: 9999px; padding: 10px 18px; font-size: 13px; font-weight: 700; }
+.btn-play svg { fill: currentColor; }
+.hero-dark-sub { font-size: 10px; text-transform: uppercase; letter-spacing: 0.24em; color: rgba(255,255,255,0.55); }
+
+/* ── SECTION WRAPPER ── */
+.section-pad { padding: 0 28px 28px; }
+.section-head { margin-bottom: 20px; }
+.section-h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; color: var(--navy); margin-top: 6px; }
+
+/* ── 3-col grid ── */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+/* ── Pillar card ── */
+.pillar-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 24px; padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.pillar-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(23,53,95,0.07); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; color: var(--navy); }
+.pillar-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-top: 10px; margin-bottom: 8px; }
+.pillar-body { font-size: 13px; line-height: 1.7; color: var(--gray-500); margin-bottom: 16px; }
+
+/* ── Tech block ── */
+.tech-block { display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 16px; align-items: stretch; margin-bottom: 16px; }
+.tech-text { background: #fff; border: 1px solid var(--gray-200); border-radius: 24px; padding: 28px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.tech-h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--navy); margin: 10px 0 14px; line-height: 1.2; }
+.tech-p  { font-size: 13.5px; line-height: 1.7; color: var(--gray-500); margin-bottom: 18px; }
+
+/* Image placeholder */
+.img-placeholder { border: 1px solid var(--gray-200); border-radius: 22px; padding: 16px; background: linear-gradient(135deg, var(--gray-100) 0%, #fff 100%); display: flex; align-items: stretch; }
+.img-placeholder-inner { flex: 1; border: 2px dashed var(--gray-200); border-radius: 16px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; min-height: 220px; }
+.img-placeholder-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.18em; color: var(--red); margin-bottom: 10px; }
+.img-placeholder-text  { font-size: 12px; line-height: 1.6; color: var(--gray-500); max-width: 280px; }
+
+/* ── Focus cards (dark) ── */
+.focus-card {
+  border-radius: 24px; padding: 24px; color: #fff;
+  background: var(--navy);
+  box-shadow: 0 18px 45px rgba(23,53,95,0.16);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between; min-height: 250px;
+}
+.focus-card-glare {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.32), transparent 22%),
+              linear-gradient(130deg, rgba(255,255,255,0.18), transparent 58%);
+  opacity: 0.15;
+}
+.focus-label { display: inline-flex; border: 1px solid rgba(255,255,255,0.2); border-radius: 9999px; padding: 3px 12px; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.24em; color: rgba(255,255,255,0.75); margin-bottom: 12px; }
+.focus-h4 { font-size: 22px; font-weight: 800; line-height: 1.2; max-width: 260px; }
+.focus-p  { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.72); max-width: 290px; margin-top: 12px; }
+.focus-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; color: rgba(255,255,255,0.6); }
+.focus-footer-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.22em; }
+
+/* ── Team structure ── */
+.team-split { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 24px; align-items: center; padding: 28px; }
+.team-h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--navy); margin-top: 6px; margin-bottom: 14px; }
+.team-p  { font-size: 14px; line-height: 1.7; color: var(--gray-500); margin-bottom: 20px; }
+.discipline-chip { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 16px; padding: 14px 16px; font-size: 13px; font-weight: 600; color: var(--gray-700); }
+
+/* ── CTA section ── */
+.cta-split { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 24px; align-items: center; padding: 28px; }
+.cta-h2 { font-size: 28px; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--red); max-width: 290px; margin-top: 6px; }
+.cta-p  { font-size: 14px; line-height: 1.7; color: var(--gray-500); max-width: 270px; margin-top: 14px; }
+.cta-chip { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 18px; padding: 14px 16px; font-size: 13px; font-weight: 600; color: var(--gray-700); }
+.cta-bar { grid-column: span 2; display: flex; align-items: center; justify-content: space-between; background: #fff; border: 1px solid var(--gray-200); border-radius: 20px; padding: 16px 20px; margin-top: 4px; }
+.cta-bar-text { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 600; color: var(--gray-700); }
+.cta-bar-icon { color: var(--red); }
+.btn-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--red); color: #fff; border: none; border-radius: 9999px; padding: 12px 22px; font-size: 13px; font-weight: 700; box-shadow: 0 10px 24px rgba(223,30,36,0.22); transition: background 0.2s; }
+.btn-cta:hover { background: var(--red-dk); }
+
+/* ── Spacer ── */
+.gap-section { height: 28px; }
+</style>
+
+<template id="__bundler_thumbnail" data-bg-color="#ECECEC">
+  <svg viewBox="0 0 1180 900" xmlns="http://www.w3.org/2000/svg">
+    <!-- Page bg -->
+    <rect width="1180" height="900" fill="#ECECEC"/>
+    <!-- Shell card -->
+    <rect x="20" y="20" width="1140" height="860" rx="22" fill="#fff" opacity="0.95"/>
+    <!-- Header bar -->
+    <rect x="20" y="20" width="1140" height="58" rx="22" fill="#fff"/>
+    <rect x="20" y="64" width="1140" height="2" fill="#e2e8f0"/>
+    <rect x="40" y="34" width="60" height="28" rx="4" fill="#df1e24" opacity="0.9"/>
+    <rect x="900" y="36" width="80" height="24" rx="4" fill="#df1e24" opacity="0.8"/>
+    <!-- Hero left card -->
+    <rect x="36" y="90" width="360" height="280" rx="20" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <rect x="56" y="114" width="60" height="18" rx="9" fill="#df1e24" opacity="0.15"/>
+    <rect x="56" y="144" width="280" height="32" rx="4" fill="#17355f" opacity="0.85"/>
+    <rect x="56" y="184" width="240" height="12" rx="3" fill="#17355f" opacity="0.2"/>
+    <rect x="56" y="202" width="200" height="12" rx="3" fill="#17355f" opacity="0.15"/>
+    <!-- Hero dark card -->
+    <rect x="412" y="90" width="728" height="280" rx="20" fill="#17355f"/>
+    <rect x="428" y="110" width="690" height="242" rx="16" fill="#000" opacity="0.15"/>
+    <rect x="448" y="130" width="80" height="18" rx="9" fill="#fff" opacity="0.2"/>
+    <rect x="448" y="160" width="420" height="28" rx="4" fill="#fff" opacity="0.85"/>
+    <rect x="448" y="196" width="360" height="12" rx="3" fill="#fff" opacity="0.4"/>
+    <rect x="448" y="214" width="300" height="12" rx="3" fill="#fff" opacity="0.3"/>
+    <!-- 3 pillar cards -->
+    <rect x="36" y="394" width="357" height="180" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+    <rect x="409" y="394" width="357" height="180" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+    <rect x="782" y="394" width="358" height="180" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+    <!-- Pillar dots -->
+    <circle cx="68" cy="422" r="16" fill="#17355f" opacity="0.07"/>
+    <circle cx="441" cy="422" r="16" fill="#17355f" opacity="0.07"/>
+    <circle cx="814" cy="422" r="16" fill="#17355f" opacity="0.07"/>
+    <!-- Focus cards (navy) -->
+    <rect x="36" y="600" width="357" height="200" rx="20" fill="#17355f"/>
+    <rect x="409" y="600" width="357" height="200" rx="20" fill="#17355f"/>
+    <rect x="782" y="600" width="358" height="200" rx="20" fill="#17355f"/>
+    <!-- Focus text lines -->
+    <rect x="56" y="660" width="200" height="18" rx="4" fill="#fff" opacity="0.8"/>
+    <rect x="56" y="686" width="160" height="10" rx="3" fill="#fff" opacity="0.4"/>
+    <rect x="429" y="660" width="200" height="18" rx="4" fill="#fff" opacity="0.8"/>
+    <rect x="802" y="660" width="200" height="18" rx="4" fill="#fff" opacity="0.8"/>
+  </svg>
+</template>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">Drive Systems</div>
+
+  <div class="section-shell">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-logo">DOGA</div>
+      <nav class="header-nav">
+        <a href="#">Products</a>
+        <a href="#">Markets</a>
+        <a href="#">Company</a>
+        <a href="#">Sustainability</a>
+        <a href="#">Careers</a>
+        <button class="header-search" aria-label="Search">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><line x1="11" y1="11" x2="15" y2="15"/></svg>
+        </button>
+      </nav>
+      <button class="header-cta">Contact us</button>
+    </header>
+
+    <main>
+
+      <!-- ── HERO ── -->
+      <section class="hero-split">
+
+        <div class="hero-text-card">
+          <div><span class="badge badge-red">R&amp;D</span></div>
+          <h1 class="hero-h1">R&amp;D built for reliable product development.</h1>
+          <p class="hero-p">We combine hardware, firmware, software and validation capabilities to develop robust motion solutions for demanding applications.</p>
+        </div>
+
+        <div class="hero-dark">
+          <div class="hero-dark-grid"></div>
+          <div class="hero-dark-inner">
+            <div>
+              <span class="badge badge-white">Integrated capabilities</span>
+              <div class="hero-dark-h2">From engineering architecture to validation, all in one R&amp;D ecosystem.</div>
+              <p class="hero-dark-p">A technical story combining electronics design, simulation, firmware development and laboratory validation — a single integrated development workflow.</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:24px">
+              <button class="btn-play">
+                <svg width="14" height="14" viewBox="0 0 14 14"><polygon points="3,1 13,7 3,13" fill="#17355f"/></svg>
+                Play preview
+              </button>
+              <span class="hero-dark-sub">Technical · Industrial · Trustworthy</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── HOW WE WORK ── -->
+      <section class="section-pad" style="padding-top:28px">
+        <div class="section-head">
+          <div class="eyebrow">How we work</div>
+          <h2 class="section-h2">An end-to-end development structure</h2>
+        </div>
+        <div class="grid-3">
+
+          <!-- Hardware -->
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <span class="badge badge-blue">Hardware Design</span>
+            <div class="pillar-title"></div>
+            <p class="pillar-body">Electronics, mechanical and electromagnetic design combined into a single engineering workflow.</p>
+            <ul class="bullet-list">
+              <li><span class="bullet-dot"></span><span>Electronics design and architecture</span></li>
+              <li><span class="bullet-dot"></span><span>Mechanical CAD and DFMEA</span></li>
+              <li><span class="bullet-dot"></span><span>Electromagnetic and thermal simulation</span></li>
+            </ul>
+          </div>
+
+          <!-- Firmware -->
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M9 7h6M9 11h6"/></svg>
+            </div>
+            <span class="badge badge-blue">Firmware &amp; Software</span>
+            <div class="pillar-title"></div>
+            <p class="pillar-body">Embedded control, software architecture and application tools designed for robust motor performance.</p>
+            <ul class="bullet-list">
+              <li><span class="bullet-dot"></span><span>Motor control firmware</span></li>
+              <li><span class="bullet-dot"></span><span>Layered software architecture</span></li>
+              <li><span class="bullet-dot"></span><span>Customer and lab tools</span></li>
+            </ul>
+          </div>
+
+          <!-- Lab -->
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+            </div>
+            <span class="badge badge-blue">Laboratory &amp; Validation</span>
+            <div class="pillar-title"></div>
+            <p class="pillar-body">In-house and external testing capabilities to validate performance, quality and reliability.</p>
+            <ul class="bullet-list">
+              <li><span class="bullet-dot"></span><span>Motors and electronics test benches</span></li>
+              <li><span class="bullet-dot"></span><span>CAN, LIN and data acquisition tools</span></li>
+              <li><span class="bullet-dot"></span><span>EMI, vibration and traction tests</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── CORE CAPABILITIES ── -->
+      <section class="section-pad">
+        <div class="section-head" style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px">
+          <div>
+            <div class="eyebrow">Technical blocks</div>
+            <h2 class="section-h2">Core R&amp;D capabilities</h2>
+          </div>
+          <p style="font-size:13px;line-height:1.7;color:var(--gray-500);max-width:340px;text-align:right">Structured to show credibility, breadth and the integrated nature of the DOGA R&amp;D department.</p>
+        </div>
+
+        <!-- Tech 1 -->
+        <div class="tech-block">
+          <div class="tech-text">
+            <span class="badge badge-red">Hardware design</span>
+            <h3 class="tech-h3">Electronics, mechanical and electromagnetics working together</h3>
+            <p class="tech-p">Hardware design combines electronics development, mechanical architecture and multi-physics simulation to reduce uncertainty and improve product performance early in the process.</p>
+            <ul class="bullet-list">
+              <li><span class="bullet-dot"></span><span>Electronics design with architecture focused on quality and robustness</span></li>
+              <li><span class="bullet-dot"></span><span>Mechanical CAD, stress simulation and DFMEA-oriented development</span></li>
+              <li><span class="bullet-dot"></span><span>Electromagnetic and thermal simulation for system-level optimization</span></li>
+              <li><span class="bullet-dot"></span><span>Shorter development cycles with fewer physical prototypes</span></li>
+            </ul>
+          </div>
+          <div class="img-placeholder">
+            <div class="img-placeholder-inner">
+              <div>
+                <div class="img-placeholder-title">Slide-inspired visual</div>
+                <p class="img-placeholder-text">Technical collage mixing PCB design, CAD assembly and simulation views.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech 2 -->
+        <div class="tech-block">
+          <div class="tech-text">
+            <span class="badge badge-red">Firmware &amp; software</span>
+            <h3 class="tech-h3">Embedded intelligence for control, customization and usability</h3>
+            <p class="tech-p">Firmware and software capabilities span architecture, validation, motor control and application tools, enabling flexible customer-facing solutions and robust internal development workflows.</p>
+            <ul class="bullet-list">
+              <li><span class="bullet-dot"></span><span>Layered and modular software architecture</span></li>
+              <li><span class="bullet-dot"></span><span>Motor control firmware for DC and brushless systems</span></li>
+              <li><span class="bullet-dot"></span><span>Testing, code analysis and DevOps-oriented workflows</span></li>
+              <li><span class="bullet-dot"></span><span>Tools for debugging, production, lab automation and customer configuration</span></li>
+            </ul>
+          </div>
+          <div class="img-placeholder">
+            <div class="img-placeholder-inner">
+              <div>
+                <div class="img-placeholder-title">Slide-inspired visual</div>
+                <p class="img-placeholder-text">Software architecture, motor-control logic and application interface screenshots.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech 3 -->
+        <div class="tech-block" style="margin-bottom:0">
+          <div class="tech-text">
+            <span class="badge badge-red">Laboratory &amp; validation</span>
+            <h3 class="tech-h3">Validation capabilities that support reliable industrialization</h3>
+            <p class="tech-p">Testing is not a separate step — it is a core capability integrated into product development to verify motors, electronics and software under real conditions.</p>
+            <ul class="bullet-list">
+              <li><span class="bullet-dot"></span><span>Motors and electronics test benches</span></li>
+              <li><span class="bullet-dot"></span><span>Data acquisition with CANoe, KVASER and LabView interfaces</span></li>
+              <li><span class="bullet-dot"></span><span>CAN and LIN communication validation</span></li>
+              <li><span class="bullet-dot"></span><span>External EMI, vibration and traction tests with DOGA follow-up</span></li>
+            </ul>
+          </div>
+          <div class="img-placeholder">
+            <div class="img-placeholder-inner">
+              <div>
+                <div class="img-placeholder-title">Slide-inspired visual</div>
+                <p class="img-placeholder-text">Laboratory photography or controlled test-bench scene with technical overlays.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TEAM STRUCTURE ── -->
+      <section class="section-pad">
+        <div class="section-shell">
+          <div class="team-split">
+            <div>
+              <div class="eyebrow">Department overview</div>
+              <h2 class="team-h2">Cross-functional R&amp;D team structure</h2>
+              <p class="team-p">The department brings together electronics design, firmware and software, mechanical engineering, systems engineering, laboratory validation and electromagnetics to support end-to-end development.</p>
+              <div class="grid-2">
+                <div class="discipline-chip">Electronics design</div>
+                <div class="discipline-chip">Firmware &amp; software</div>
+                <div class="discipline-chip">Mechanical design</div>
+                <div class="discipline-chip">Motor product engineering</div>
+                <div class="discipline-chip">SQA &amp; validation</div>
+                <div class="discipline-chip">Electromagnetics</div>
+              </div>
+            </div>
+            <div class="img-placeholder" style="min-height:320px">
+              <div class="img-placeholder-inner">
+                <div>
+                  <div class="img-placeholder-title">Team / ecosystem visual</div>
+                  <p class="img-placeholder-text">Diagram, team-capability map or branded composition summarizing the different R&amp;D disciplines.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── FOCUS CARDS ── -->
+      <section class="section-pad">
+        <div class="section-head">
+          <div class="eyebrow">Current development focus</div>
+          <h2 class="section-h2">What this R&amp;D capability is already enabling</h2>
+        </div>
+        <div class="grid-3">
+
+          <div class="focus-card">
+            <div class="focus-card-glare"></div>
+            <div style="position:relative;z-index:1">
+              <div class="focus-label">Current development</div>
+              <h4 class="focus-h4">Wipers Innovation</h4>
+              <p class="focus-p">Fine adjustment, automatic configuration and precision parking algorithms for more robust wiper applications.</p>
+            </div>
+            <div class="focus-footer" style="position:relative;z-index:1">
+              <span class="focus-footer-label">R&amp;D focus</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </div>
+          </div>
+
+          <div class="focus-card">
+            <div class="focus-card-glare"></div>
+            <div style="position:relative;z-index:1">
+              <div class="focus-label">Current development</div>
+              <h4 class="focus-h4">Electronics Innovation</h4>
+              <p class="focus-p">Wireless communication, external modules and universal controllers for scalable and configurable motion systems.</p>
+            </div>
+            <div class="focus-footer" style="position:relative;z-index:1">
+              <span class="focus-footer-label">R&amp;D focus</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </div>
+          </div>
+
+          <div class="focus-card">
+            <div class="focus-card-glare"></div>
+            <div style="position:relative;z-index:1">
+              <div class="focus-label">Current development</div>
+              <h4 class="focus-h4">Smart Motors</h4>
+              <p class="focus-p">Advanced firmware, safety-aligned control and data-ready software foundations for next-generation motor systems.</p>
+            </div>
+            <div class="focus-footer" style="position:relative;z-index:1">
+              <span class="focus-footer-label">R&amp;D focus</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── CTA ── -->
+      <section class="section-pad" style="padding-bottom:40px">
+        <div class="section-shell">
+          <div class="cta-split">
+            <div>
+              <div class="eyebrow">Contact</div>
+              <h2 class="cta-h2">Interested in DOGA R&amp;D capabilities?</h2>
+              <p class="cta-p">Let's explore how these capabilities could support your next product or technical challenge.</p>
+            </div>
+            <div class="grid-2" style="gap:12px">
+              <div class="cta-chip">Hardware architecture</div>
+              <div class="cta-chip">Firmware &amp; software</div>
+              <div class="cta-chip">Validation &amp; testing</div>
+              <div class="cta-chip">Custom electronics</div>
+              <div class="cta-chip">Simulation support</div>
+              <div class="cta-chip">Tailored mechatronics</div>
+            </div>
+          </div>
+          <div style="padding:0 28px 28px">
+            <div class="cta-bar">
+              <div class="cta-bar-text">
+                <svg class="cta-bar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                Trusted industrial development mindset
+              </div>
+              <button class="btn-cta">
+                Get in touch
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+</body>
+</html>
