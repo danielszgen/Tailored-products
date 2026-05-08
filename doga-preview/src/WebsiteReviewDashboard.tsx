@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import {
   X,
   ChevronRight,
@@ -34,7 +34,12 @@ import {
   Link,
   Save,
   Send,
+  LogIn,
+  LogOut,
+  Loader2,
 } from 'lucide-react';
+import { supabase } from './supabase';
+import type { Session } from '@supabase/supabase-js';
 
 type PhaseStatus = 'completed' | 'in_progress' | 'pending';
 
@@ -215,7 +220,7 @@ const DEFAULT_PAGES: PageData[] = [
 
 const STORAGE_KEY = 'doga-review-state-v2';
 
-function loadState(): PageData[] {
+function loadLocalState(): PageData[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return DEFAULT_PAGES;
@@ -225,8 +230,87 @@ function loadState(): PageData[] {
   }
 }
 
-function saveState(pages: PageData[]) {
+function saveLocalState(pages: PageData[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(pages));
+}
+
+async function loadSupabaseState(): Promise<PageData[] | null> {
+  const { data, error } = await supabase
+    .from('dashboard_state')
+    .select('data')
+    .eq('id', 'main')
+    .single();
+  if (error || !data) return null;
+  const parsed = data.data as PageData[];
+  if (!Array.isArray(parsed) || parsed.length === 0) return null;
+  return parsed;
+}
+
+async function saveSupabaseState(pages: PageData[]) {
+  await supabase
+    .from('dashboard_state')
+    .upsert({ id: 'main', data: pages, updated_at: new Date().toISOString() });
+}
+
+function LoginModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () => void }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    setLoading(true);
+    setError('');
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    setLoading(false);
+    if (error) {
+      setError(error.message);
+    } else {
+      onSuccess();
+      onClose();
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h2 className="text-base font-bold text-gray-900">Admin Login</h2>
+            <p className="text-xs text-gray-400 mt-0.5">Sign in to edit the dashboard</p>
+          </div>
+          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg"><X size={18} className="text-gray-400" /></button>
+        </div>
+        <div className="space-y-3">
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            type="email"
+            className="w-full text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-dogaBlue bg-gray-50"
+          />
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            type="password"
+            className="w-full text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-dogaBlue bg-gray-50"
+            onKeyDown={(e) => { if (e.key === 'Enter') handleLogin(); }}
+          />
+          {error && <p className="text-xs text-red-500 bg-red-50 border border-red-200 rounded-lg px-3 py-2">{error}</p>}
+          <button
+            onClick={handleLogin}
+            disabled={loading || !email || !password}
+            className="w-full py-3 bg-dogaBlue text-white rounded-xl text-sm font-semibold hover:bg-blue-900 transition-all disabled:opacity-40 flex items-center justify-center gap-2"
+          >
+            {loading ? <Loader2 size={16} className="animate-spin" /> : <LogIn size={16} />}
+            {loading ? 'Signing in...' : 'Sign In'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function computeProgress(phases: Phase[]): number {
@@ -1198,16 +1282,51 @@ function ImportModal({ onImport, onClose }: { onImport: (data: PageData[]) => vo
 }
 
 export default function WebsiteReviewDashboard() {
-  const [pages, setPages] = useState<PageData[]>(loadState);
+  const [pages, setPages] = useState<PageData[]>(DEFAULT_PAGES);
   const [selectedPage, setSelectedPage] = useState<PageData | null>(null);
   const [filter, setFilter] = useState<FilterType>('all');
   const [editMode, setEditMode] = useState(false);
   const [showExport, setShowExport] = useState(false);
   const [showImport, setShowImport] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const saveTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  const isAdmin = !!session;
 
   useEffect(() => {
-    saveState(pages);
+    supabase.auth.getSession().then(({ data }) => setSession(data.session));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      if (!session) setEditMode(false);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    loadSupabaseState().then((data) => {
+      if (data) setPages(data);
+      else setPages(loadLocalState());
+      setLoading(false);
+    });
+  }, []);
+
+  const persistPages = useCallback((newPages: PageData[]) => {
+    saveLocalState(newPages);
+    if (session) {
+      if (saveTimer.current) clearTimeout(saveTimer.current);
+      setSaving(true);
+      saveTimer.current = setTimeout(() => {
+        saveSupabaseState(newPages).finally(() => setSaving(false));
+      }, 1000);
+    }
+  }, [session]);
+
+  useEffect(() => {
+    persistPages(pages);
     if (selectedPage) {
       const updated = pages.find((p) => p.pageName === selectedPage.pageName);
       if (updated) setSelectedPage(updated);
@@ -1324,6 +1443,17 @@ export default function WebsiteReviewDashboard() {
     return JSON.stringify(pages) !== JSON.stringify(DEFAULT_PAGES);
   }, [pages]);
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 size={32} className="animate-spin text-dogaBlue mx-auto mb-3" />
+          <p className="text-sm text-gray-500 font-medium">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <style>{`
@@ -1344,43 +1474,68 @@ export default function WebsiteReviewDashboard() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {hasLocalChanges && (
-                <span className="hidden sm:flex text-[10px] bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-1 rounded-full font-medium items-center gap-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  Auto-saved
+              {saving && (
+                <span className="hidden sm:flex text-[10px] bg-blue-50 text-blue-600 border border-blue-200 px-2 py-1 rounded-full font-medium items-center gap-1">
+                  <Loader2 size={10} className="animate-spin" />
+                  Syncing...
                 </span>
               )}
-              <button
-                onClick={() => setShowImport(true)}
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-all border border-gray-200"
-              >
-                <Upload size={14} /> Import
-              </button>
-              <button
-                onClick={() => setShowExport(true)}
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-all border border-gray-200"
-              >
-                <Download size={14} /> Export
-              </button>
-              {hasLocalChanges && (
+              {!saving && hasLocalChanges && (
+                <span className="hidden sm:flex text-[10px] bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-1 rounded-full font-medium items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  Saved
+                </span>
+              )}
+              {isAdmin && (
+                <>
+                  <button
+                    onClick={() => setShowImport(true)}
+                    className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-all border border-gray-200"
+                  >
+                    <Upload size={14} /> Import
+                  </button>
+                  <button
+                    onClick={() => setShowExport(true)}
+                    className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-all border border-gray-200"
+                  >
+                    <Download size={14} /> Export
+                  </button>
+                  {hasLocalChanges && (
+                    <button
+                      onClick={() => setShowResetConfirm(true)}
+                      className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-500 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all border border-gray-200"
+                    >
+                      <RotateCcw size={14} /> Reset
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setEditMode((v) => !v)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all border ${
+                      editMode
+                        ? 'bg-amber-500 text-white border-amber-500 shadow-sm'
+                        : 'text-gray-600 border-gray-200 hover:bg-gray-100'
+                    }`}
+                  >
+                    <Edit3 size={14} />
+                    {editMode ? 'Editing...' : 'Edit'}
+                  </button>
+                </>
+              )}
+              {isAdmin ? (
                 <button
-                  onClick={() => setShowResetConfirm(true)}
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-500 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all border border-gray-200"
+                  onClick={() => { supabase.auth.signOut(); setEditMode(false); }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-500 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all border border-gray-200"
                 >
-                  <RotateCcw size={14} /> Reset
+                  <LogOut size={14} /> Logout
+                </button>
+              ) : (
+                <button
+                  onClick={() => setShowLogin(true)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-dogaBlue hover:bg-blue-900 rounded-lg transition-all"
+                >
+                  <LogIn size={14} /> Admin
                 </button>
               )}
-              <button
-                onClick={() => setEditMode((v) => !v)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all border ${
-                  editMode
-                    ? 'bg-amber-500 text-white border-amber-500 shadow-sm'
-                    : 'text-gray-600 border-gray-200 hover:bg-gray-100'
-                }`}
-              >
-                <Edit3 size={14} />
-                {editMode ? 'Editing...' : 'Edit'}
-              </button>
             </div>
           </div>
         </div>
@@ -1539,6 +1694,7 @@ export default function WebsiteReviewDashboard() {
 
       {showExport && <ExportModal pages={pages} onClose={() => setShowExport(false)} />}
       {showImport && <ImportModal onImport={handleImport} onClose={() => setShowImport(false)} />}
+      {showLogin && <LoginModal onClose={() => setShowLogin(false)} onSuccess={() => {}} />}
 
       {showResetConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={() => setShowResetConfirm(false)}>
