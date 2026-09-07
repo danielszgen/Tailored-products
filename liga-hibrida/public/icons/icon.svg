@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Liga Híbrida app icon: the BrandMark (src/brand/icons/BrandMark.tsx) on a dark rounded square.
+       The mark stays inside the central 80 % so the icon also works as a maskable icon. -->
+  <rect width="512" height="512" rx="104" fill="#0E1420"/>
+  <g transform="translate(51.2 51.2) scale(6.4)">
+    <path d="M32 2l25.98 15v30L32 62 6.02 47V17z" fill="#E9A82A"/>
+    <path d="M32 6.5l22.08 12.75v25.5L32 57.5 9.92 44.75v-25.5z" fill="#E23D4A"/>
+    <path d="M13.5 35.5L26.5 17l6.5 9.5 5.5-5.5L50.5 35.5z" fill="#FFFFFF"/>
+    <rect x="13" y="39.5" width="38" height="4" rx="2" fill="#E9A82A"/>
+    <rect x="17.5" y="35.5" width="5" height="12" rx="1.5" fill="#E9A82A"/>
+    <rect x="41.5" y="35.5" width="5" height="12" rx="1.5" fill="#E9A82A"/>
+  </g>
+</svg>
