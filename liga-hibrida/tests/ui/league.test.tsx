@@ -37,10 +37,11 @@ describe('LIGA and RUTAS (Etapa I read-only views)', () => {
 
   it('RUTAS lists the 7 interference rules and 10 compatibility rows', async () => {
     renderAt(<RoutesScreen />, '/rutas');
-    expect(await screen.findByText(/Plan aeróbico · Ola 1/)).toBeInTheDocument();
+    expect(await screen.findByText(/Esta semana · Ola 1/)).toBeInTheDocument();
+    expect(screen.getByText("objetivo 90–150'")).toBeInTheDocument();
     const rules = screen.getByText('Reglas de interferencia').closest('details')!;
     expect(within(rules).getAllByRole('listitem')).toHaveLength(7);
-    const compat = screen.getByText('Mismo día').closest('section')!;
+    const compat = screen.getByText('Semáforo de compatibilidad').closest('details')!;
     expect(within(compat).getAllByRole('listitem')).toHaveLength(10);
   });
 });
