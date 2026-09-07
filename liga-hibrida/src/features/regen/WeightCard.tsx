@@ -2,9 +2,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { Button, Card, Eyebrow, Pill, Segmented, Stepper } from '@/components';
+import { Button, Card, Pill, Segmented, Stepper } from '@/components';
 import { getCheckin, saveCheckin, useProfile, weightSeries } from '@/data';
-import { MASTER_RULE } from '@/domain/content/nutrition';
 import { addDaysISO, formatShort, todayISO } from '@/lib/date';
 import { mean, movingAverage7, roundTo } from '@/lib/math';
 import { WeightChart } from './WeightChart';
@@ -101,12 +100,6 @@ export function WeightCard() {
             para registrar el peso de hoy.
           </p>
         )}
-      </div>
-      <div className="mt-4 border-t border-line pt-3">
-        <Eyebrow className="block mb-1">Próximo ajuste calórico</Eyebrow>
-        <p className="text-sm text-ink2">
-          Etapa II · semanas 1–2 solo se mide. <span className="text-ink3">{MASTER_RULE}</span>
-        </p>
       </div>
     </Card>
   );

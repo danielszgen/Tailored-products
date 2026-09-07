@@ -9,7 +9,7 @@ import { TodayScreen } from '@/features/today';
 import { GymScreen, GymSessionScreen } from '@/features/gym';
 import { RoutesScreen } from '@/features/routes';
 import { LeagueScreen } from '@/features/league';
-import { RegenScreen } from '@/features/regen';
+import { CouncilScreen, RegenScreen } from '@/features/regen';
 import { SettingsScreen } from '@/features/settings';
 
 /** Gate: without a Profile the only screen is the onboarding ("Semana 0"). */
@@ -45,6 +45,7 @@ export function AppRoutes() {
         <Route path="liga" element={<LeagueScreen />} />
         <Route path="regen" element={<RegenScreen />} />
         <Route path="regen/ajustes" element={<SettingsScreen />} />
+        <Route path="regen/consejo" element={<CouncilScreen />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

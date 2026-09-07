@@ -1,15 +1,29 @@
-// REGEN tab — Etapa I subset of SPEC §8.6.
+// REGEN tab (SPEC §8.6): weight + R7, symptoms + R8, regen log, microdose, Mochila, Consejo, data.
 import { Link } from 'react-router-dom';
-import { Card, Screen } from '@/components';
+import { Screen, Splash } from '@/components';
 import { Collapsible } from '@/components/Collapsible';
+import { useRegen } from '@/data';
 import { MORNING_CHECK, MORNING_DECISION } from '@/domain/content/items';
 import { NUTRITION_DISCLAIMER } from '@/domain/content/nutrition';
+import { addDaysISO } from '@/lib/date';
+import { useToday } from '@/features/today/useToday';
 import { BackpackCard } from './BackpackCard';
+import { CouncilCard } from './CouncilCard';
 import { DataCard } from './DataCard';
+import { KcalCard } from './KcalCard';
 import { MicrodoseCard } from './MicrodoseCard';
+import { RegenLogCard } from './RegenLogCard';
+import { countRegen } from './regenCounts';
+import { SymptomsCard } from './SymptomsCard';
 import { WeightCard } from './WeightCard';
 
 export function RegenScreen() {
+  const model = useToday();
+  const { profile, today, weekStart } = model;
+  const weekRegen = useRegen({ from: weekStart, to: addDaysISO(weekStart, 6) });
+  if (profile === undefined) return <Splash />;
+  if (!profile) return null;
+
   return (
     <Screen
       title="Centro Regen"
@@ -24,10 +38,10 @@ export function RegenScreen() {
       }
     >
       <WeightCard />
-      <Card eyebrow="Síntomas" title="Muñeca y aductor · 28 días">
-        <p className="text-sm text-ink3">Gráfica y avisos de tendencia (R8) en la Etapa II.</p>
-      </Card>
-      <MicrodoseCard />
+      <KcalCard profile={profile} today={today} />
+      <SymptomsCard model={model} />
+      <RegenLogCard today={today} weekStart={weekStart} />
+      <MicrodoseCard counts={countRegen(weekRegen ?? [])} />
       <BackpackCard />
       <Collapsible title="Chequeo matinal de 30 s" eyebrow="Documento 06">
         <ul className="flex flex-col gap-2">
@@ -40,11 +54,7 @@ export function RegenScreen() {
         </ul>
         <p className="mt-2">{MORNING_DECISION.join(' ')}</p>
       </Collapsible>
-      <Card eyebrow="Consejo de la Liga" title="Domingo">
-        <p className="text-sm text-ink3">
-          Scorecard, wizard de 7 pasos e informe para El Rival: Etapa II.
-        </p>
-      </Card>
+      <CouncilCard model={model} />
       <DataCard />
       <p className="text-xs text-ink3 px-1">{NUTRITION_DISCLAIMER}</p>
     </Screen>

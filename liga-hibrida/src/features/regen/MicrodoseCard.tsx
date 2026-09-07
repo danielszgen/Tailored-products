@@ -1,4 +1,4 @@
-// Wrist and adductor microdose as read-only guides (SPEC §6.6, §8.6). Counters arrive in Etapa II.
+// Wrist and adductor microdose guides with this week's counters (SPEC §6.6, §8.6).
 import { Card, Eyebrow, Pill } from '@/components';
 import { Collapsible } from '@/components/Collapsible';
 import {
@@ -6,13 +6,20 @@ import {
   WEEKLY_MOBILITY_MINIMUM,
   WRIST_MICRODOSE,
 } from '@/domain/content/regen';
+import type { RegenCounts } from './regenCounts';
 
-export function MicrodoseCard() {
+export function MicrodoseCard({ counts }: { counts?: RegenCounts }) {
   return (
     <Card
       eyebrow="Microdosis"
       title="Muñeca y aductor"
-      right={<Pill tone="neutral">contadores · Etapa II</Pill>}
+      right={
+        counts && (
+          <Pill tone="neutral">
+            muñeca {counts.wrist}/3 · aductor {counts.adductor}/2
+          </Pill>
+        )
+      }
     >
       <div className="flex flex-col gap-3">
         <Collapsible
