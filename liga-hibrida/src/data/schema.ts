@@ -141,14 +141,23 @@ export const RegenLogSchema = z.object({
 });
 
 export const PlannedItemSchema = z.discriminatedUnion('kind', [
-  z.object({ kind: z.literal('gym'), gymId: GymIdSchema, version: SessionVersionSchema }),
+  z.object({
+    kind: z.literal('gym'),
+    gymId: GymIdSchema,
+    version: SessionVersionSchema,
+    note: z.string().optional(),
+  }),
   z.object({
     kind: z.literal('route'),
     routeKind: RouteKindSchema,
     minutes: MinutesRangeSchema,
     optional: z.boolean().optional(),
   }),
-  z.object({ kind: z.literal('wild'), wildKind: WildKindSchema.optional() }),
+  z.object({
+    kind: z.literal('wild'),
+    wildKind: WildKindSchema.optional(),
+    note: z.string().optional(),
+  }),
   z.object({
     kind: z.literal('regen'),
     what: z.enum(['yoga', 'movilidad', 'natacion_suave', 'paseo']),
@@ -257,6 +266,7 @@ export const ProfileSchema = z.object({
   dietNotes: z.string().optional(),
   calorieMode: z.enum(['contar', 'porciones']).optional(),
   defaultTemplate: WeekTemplateSchema.optional(),
+  squatVariant: z.enum(['tolerated', 'barbell']).optional(),
 });
 
 export const StoredProfileSchema = ProfileSchema.extend({ id: z.literal(PROFILE_ID) });

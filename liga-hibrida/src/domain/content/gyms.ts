@@ -686,6 +686,27 @@ export const GYMS: Record<GymId, GymSpec> = {
   },
 };
 
+/**
+ * Barbell-squat transition (document 05): when tolerated, A1 of Cantera becomes
+ * "high-bar squat 3–4×5–8 RIR 3→2". Same rest and load step as the hack squat.
+ */
+export const HIGH_BAR_SQUAT: ExerciseSpec = {
+  id: 'high_bar_squat',
+  name: 'High-bar squat (transición)',
+  slot: 'A1',
+  sets: 4,
+  repMin: 5,
+  repMax: 8,
+  rirTarget: [3, 2],
+  restSec: [150, 180],
+  note: 'Si el síntoma vuelve, regresa a la variante tolerada',
+  types: ['fuerza', 'masa'],
+  loadStepKg: 5,
+};
+
+/** The exercise the transition replaces. */
+export const TRANSITION_REPLACES = 'hack_squat';
+
 // ---------------------------------------------------------------------------
 // Operational text (document 05)
 // ---------------------------------------------------------------------------
@@ -735,6 +756,7 @@ export function getGym(id: GymId): GymSpec {
 }
 
 export function getExercise(gymId: GymId, exerciseId: string): ExerciseSpec | undefined {
+  if (gymId === 'cantera' && exerciseId === HIGH_BAR_SQUAT.id) return HIGH_BAR_SQUAT;
   return GYMS[gymId].main.find((e) => e.id === exerciseId);
 }
 
@@ -756,9 +778,17 @@ const VERSION_KEY: Record<SessionVersion, keyof GymSpec['versions']> = {
 };
 
 /** Exercises included in a session version, in slot order. */
-export function exercisesForVersion(gym: GymSpec, version: SessionVersion): ExerciseSpec[] {
+export function exercisesForVersion(
+  gym: GymSpec,
+  version: SessionVersion,
+  opts: { squatVariant?: 'tolerated' | 'barbell' } = {},
+): ExerciseSpec[] {
   const ids = new Set(gym.versions[VERSION_KEY[version]]);
-  return gym.main.filter((e) => ids.has(e.id));
+  const list = gym.main.filter((e) => ids.has(e.id));
+  if (gym.id === 'cantera' && opts.squatVariant === 'barbell') {
+    return list.map((e) => (e.id === TRANSITION_REPLACES ? HIGH_BAR_SQUAT : e));
+  }
+  return list;
 }
 
 export function versionNote(gym: GymSpec, version: SessionVersion): string {

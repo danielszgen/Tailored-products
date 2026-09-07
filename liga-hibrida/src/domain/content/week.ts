@@ -336,6 +336,71 @@ export function plannedItemLabel(item: PlannedItem): string {
   }
 }
 
+/** Priorities of SPEC §6.4: A = 2 Lower + 2 Upper + 1 Z2 + 1 movilidad; B = 2.º Z2 + natación suave + juego técnico; C = extra recreativo. */
+export type Priority = 'A' | 'B' | 'C' | 'rest';
+
+export interface ClassifiedItem {
+  day: DayIndex;
+  slot: 'am' | 'pm';
+  item: PlannedItem;
+  priority: Priority;
+}
+
+const DAY_ORDER: DayIndex[] = [0, 1, 2, 3, 4, 5, 6];
+
+/**
+ * Classifies every planned item of a week. The first non-optional Z2 route and the first
+ * yoga/movilidad are anchors (A); later ones are B (2.º Z2) or recovery. Optional items and the
+ * Zona Salvaje are C ("solo si todo está verde"). // DECISION: see docs/PREGUNTAS.md (R9).
+ */
+export function classifyWeek(days: Record<DayIndex, PlannedDay>): ClassifiedItem[] {
+  const out: ClassifiedItem[] = [];
+  let z2Seen = false;
+  let mobilitySeen = false;
+  for (const day of DAY_ORDER) {
+    for (const slot of ['am', 'pm'] as const) {
+      const item = days[day][slot];
+      if (!item) continue;
+      let priority: Priority;
+      switch (item.kind) {
+        case 'gym':
+          priority = 'A';
+          break;
+        case 'route':
+          if (item.optional) priority = 'C';
+          else if (!z2Seen) {
+            priority = 'A';
+            z2Seen = true;
+          } else priority = 'B';
+          break;
+        case 'regen':
+          if (item.what === 'yoga' || item.what === 'movilidad') {
+            if (!mobilitySeen) {
+              priority = 'A';
+              mobilitySeen = true;
+            } else priority = 'rest';
+          } else if (item.what === 'natacion_suave') priority = 'B';
+          else priority = 'rest';
+          break;
+        case 'sport':
+          priority = item.optional ? 'C' : 'B';
+          break;
+        case 'wild':
+          priority = 'C';
+          break;
+        case 'note':
+          priority = 'B';
+          break;
+        case 'off':
+          priority = 'rest';
+          break;
+      }
+      out.push({ day, slot, item, priority });
+    }
+  }
+  return out;
+}
+
 export function plannedItemKindLabel(item: PlannedItem): string {
   switch (item.kind) {
     case 'gym':

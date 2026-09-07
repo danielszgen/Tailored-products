@@ -46,6 +46,13 @@ export function movingAverage7(points: DatedValue[], windowDays = 7): DatedValue
   });
 }
 
+/** Decimals needed to display multiples of `step` (2.5 → 1, 0.1 → 1, 5 → 0), capped at 2. */
+export function decimalsOf(step: number): number {
+  const text = String(step);
+  const dot = text.indexOf('.');
+  return dot < 0 ? 0 : Math.min(2, text.length - dot - 1);
+}
+
 export function percent(part: number, total: number): number {
   if (total === 0) return 0;
   return (part / total) * 100;

@@ -163,9 +163,10 @@ export interface WeekPlan {
   substitutions: { date: ISODate; removed: string; reason: string }[];
 }
 export type PlannedItem =
-  | { kind: 'gym'; gymId: GymId; version: SessionVersion }
+  // + `note`: free text attached by a substitution (R5), e.g. "Reduce tirón/antebrazo" on Vértigo
+  | { kind: 'gym'; gymId: GymId; version: SessionVersion; note?: string }
   | { kind: 'route'; routeKind: RouteKind; minutes: [number, number]; optional?: boolean }
-  | { kind: 'wild'; wildKind?: WildKind }
+  | { kind: 'wild'; wildKind?: WildKind; note?: string }
   | { kind: 'regen'; what: 'yoga' | 'movilidad' | 'natacion_suave' | 'paseo' }
   | { kind: 'off' }
   // + Technical sport slot (e.g. Wednesday "escalada o skate técnico 45–60' RPE ≤ 6")
@@ -220,6 +221,8 @@ export interface Profile {
   dietNotes?: string;
   calorieMode?: 'contar' | 'porciones'; // + onboarding question (SPEC §8.1)
   defaultTemplate?: WeekTemplate; // + settings: default week template
+  /** + Barbell-squat transition (§6.5 / R8): 'barbell' replaces Cantera A1 by the high-bar squat. */
+  squatVariant?: 'tolerated' | 'barbell';
 }
 export interface Adjustment {
   id: string;
@@ -234,4 +237,6 @@ export interface Advisory {
   level: 1 | 2 | 3 | 4 | 5;
   message: string;
   source: string; // document reference, e.g. "06 §6"
+  id?: string; // + stable id, used to acknowledge sticky advisories
+  sticky?: boolean; // + R8: "no se puede descartar sin leerlo"
 }

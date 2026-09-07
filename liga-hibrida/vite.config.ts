@@ -67,6 +67,15 @@ export default defineConfig({
       provider: 'v8',
       include: ['src/domain/**', 'src/lib/**', 'src/data/**'],
       reporter: ['text', 'html'],
+      // SPEC §9 Etapa II: rules coverage ≥ 95 %.
+      thresholds: {
+        'src/domain/rules/**/*.ts': {
+          statements: 95,
+          lines: 95,
+          functions: 95,
+          branches: 95,
+        },
+      },
     },
   },
 });
