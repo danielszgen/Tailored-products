@@ -15,6 +15,7 @@ Maqueta de la nueva sección **Tailored Products** para la web de **DOGA — Dri
 | Carpeta | Qué es |
 |---|---|
 | [`doga-preview/`](./doga-preview) | App **Vite + React + Tailwind** con la maqueta interactiva del design system DOGA. Lo que se ve en el deploy. |
+| [`liga-hibrida/`](./liga-hibrida) | **Liga Híbrida** — PWA (iPhone) que convierte el sistema de entrenamiento en un juego de entrenador. Especificación en `liga-hibrida/docs/SPEC.md`, bitácora en `liga-hibrida/docs/PROGRESO.md`. |
 | [`src/`](./src) | Composiciones **Remotion** para videos animados (presenter titles, cinematic titles, subtítulos estilo Instagram, motion graphics de la home). |
 | [`public/`](./public) | Assets fuente (videos `.mp4 / .mov`, archivos `.srt`). *No se versionan en Git por tamaño — solicitarlos al equipo.* |
 | [`.github/workflows/`](./.github/workflows) | CI que despliega `doga-preview/` a GitHub Pages en cada push a `main`. |
