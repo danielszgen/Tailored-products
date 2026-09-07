@@ -1,8 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { db, saveCheckin } from '@/data';
+import { db, saveCheckin, saveSession } from '@/data';
 import { GymSessionScreen } from '@/features/gym';
+import { makeSession, sets } from '../fixtures/records';
 import { freezeDate, renderAt, resetDb, seedProfile, unfreezeDate } from './helpers';
 
 describe('GYM · combat in Cantera (SPEC §8.3)', () => {
@@ -76,5 +77,25 @@ describe('GYM · combat in Cantera (SPEC §8.3)', () => {
       expect(sessions[0].energyEnd).toBeDefined();
     });
     expect(await screen.findByText(/Resumen del combate/)).toBeInTheDocument();
+  });
+
+  it('suggests +2,5 kg after 8/8/8/8 at RIR 2 (R2) and prefills the load', async () => {
+    await saveSession(
+      makeSession('yunque', '2026-09-01', {
+        exercises: [{ exerciseId: 'bench_press', sets: sets(70, [8, 8, 8, 8]) }],
+      }),
+    );
+    const user = userEvent.setup();
+    renderAt(<GymSessionScreen />, '/gym/yunque?version=60', '/gym/:gymId');
+    await user.click(await screen.findByRole('button', { name: 'Empezar combate' }));
+
+    const box = await screen.findByTestId('suggestion-bench_press');
+    expect(box).toHaveTextContent('Subo 2,5 kg porque completaste 8/8/8/8 a RIR 2. Objetivo 5–6.');
+    expect(box).toHaveTextContent('Subir carga');
+    expect(box).toHaveTextContent('Objetivo hoy: 4 series × 5–6 reps · RIR 2');
+
+    for (const box of screen.getAllByRole('checkbox')) await user.click(box);
+    await user.click(screen.getByRole('button', { name: 'Calentamiento completo' }));
+    expect((await screen.findAllByLabelText('Carga'))[0]).toHaveValue('72,5');
   });
 });

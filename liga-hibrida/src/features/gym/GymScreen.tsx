@@ -46,6 +46,7 @@ export function GymScreen() {
             {status === 'cargado' &&
               "Estado CARGADO: versión sugerida 45', −1 serie en accesorios, RIR +1."}
             {status === 'ko' && "Estado KO: sesión reducida a técnica suave y movilidad (45')."}
+            {model.wave === 'deload' && ' Semana de descarga: 90 % de carga, series × 0,65, RIR 4.'}
           </p>
         ) : (
           <p className="text-sm text-ink2">

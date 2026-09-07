@@ -1,8 +1,17 @@
-// Combat session state: loads/creates today's SessionLog for a gym and persists every change.
+// Combat session state: loads/creates today's SessionLog for a gym, persists every change and
+// computes the R2 suggestion of every exercise from the last sessions and today's context.
 import { useCallback, useMemo, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { lastExerciseLogs, listSessions, saveSession } from '@/data';
-import { exercisesForVersion, GYMS } from '@/domain/content/gyms';
+import { exercisesForVersion, GYMS, HIGH_BAR_SQUAT } from '@/domain/content/gyms';
+import { waveForWeek } from '@/domain/content/block';
+import {
+  hardSportBefore,
+  lowSleepStreak,
+  suggestProgression,
+  type ProgressionSession,
+  type ProgressionSuggestion,
+} from '@/domain/rules/progression';
 import type {
   ExerciseLog,
   ExerciseSpec,
@@ -25,6 +34,16 @@ export interface FinishInput {
   sportLast24h?: string;
 }
 
+function toProgressionSession(entry: PreviousLog): ProgressionSession {
+  return {
+    date: entry.session.date,
+    wave: waveForWeek(entry.session.weekOfBlock),
+    statusAtStart: entry.session.statusAtStart,
+    feel: entry.session.feel,
+    sets: entry.log.sets,
+  };
+}
+
 export function useSession(gymId: GymId) {
   const today = useToday();
   const gym = GYMS[gymId];
@@ -44,20 +63,50 @@ export function useSession(gymId: GymId) {
   }, [today, gymId]);
 
   const version: SessionVersion = session?.version ?? 60;
+  const squatVariant = today.profile?.squatVariant;
   const exercises: ExerciseSpec[] = useMemo(() => {
     const omitted = new Set(adjustment?.omitExerciseIds ?? []);
-    return exercisesForVersion(gym, version).filter((e) => !omitted.has(e.id));
-  }, [gym, version, adjustment]);
+    return exercisesForVersion(gym, version, { squatVariant }).filter((e) => !omitted.has(e.id));
+  }, [gym, version, adjustment, squatVariant]);
+
+  const catalogue = useMemo(
+    () => (gymId === 'cantera' ? [...gym.main, HIGH_BAR_SQUAT] : gym.main),
+    [gym, gymId],
+  );
 
   const previous = useLiveQuery(async () => {
     const entries = await Promise.all(
-      gym.main.map(
+      catalogue.map(
         async (e) =>
-          [e.id, await lastExerciseLogs(e.id, { count: 1, before: today.today })] as const,
+          [e.id, await lastExerciseLogs(e.id, { count: 3, before: today.today })] as const,
       ),
     );
     return Object.fromEntries(entries) as Record<string, PreviousLog[]>;
-  }, [gym, today.today]);
+  }, [catalogue, today.today]);
+
+  const wave = today.wave ?? 1;
+  const status = today.pvResult?.status ?? 'ok';
+  const hardSport = hardSportBefore(today.today, today.wildNear, today.routesNear);
+  const lowSleep = lowSleepStreak(today.checkins28, today.today);
+  const baselines = today.profile?.baselines;
+
+  const suggestions: Record<string, ProgressionSuggestion> = useMemo(() => {
+    const out: Record<string, ProgressionSuggestion> = {};
+    for (const spec of catalogue) {
+      out[spec.id] = suggestProgression({
+        spec,
+        history: (previous?.[spec.id] ?? []).map(toProgressionSession),
+        status,
+        wave,
+        baseline: baselines?.[spec.id],
+        hardSportLast24h: hardSport,
+        lowSleepStreak: lowSleep,
+        accessorySetDelta: adjustment?.accessorySetDelta ?? 0,
+        rirDelta: adjustment?.rirDelta ?? 0,
+      });
+    }
+    return out;
+  }, [catalogue, previous, status, wave, baselines, hardSport, lowSleep, adjustment]);
 
   const start = useCallback(
     async (params: { version: SessionVersion; energyStart: Scale5 }) => {
@@ -157,6 +206,8 @@ export function useSession(gymId: GymId) {
     adjustment,
     exercises,
     previous: previous ?? {},
+    suggestions,
+    wave,
     start,
     completeWarmup,
     logSet,

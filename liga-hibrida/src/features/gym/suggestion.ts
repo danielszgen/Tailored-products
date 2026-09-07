@@ -1,24 +1,13 @@
-// Etapa I load suggestion: "misma carga que la última vez" (no double progression yet — R2 is Etapa II).
+// Helpers around the R2 suggestion for the combat screen (formatting, R1 targets, best sets).
 import type { ExerciseLog, ExerciseSpec, SessionLog, SetLog } from '@/domain/types';
 import type { SessionAdjustment } from '@/domain/rules/pv';
+import type { ProgressionSuggestion } from '@/domain/rules/progression';
 
-export interface LoadSuggestion {
-  loadKg?: number;
-  reps?: number;
-  rir?: number;
-  seconds?: number;
-  text: string;
-  source: 'last' | 'none';
-}
+export { formatKg } from '@/lib/format';
 
 export interface PreviousLog {
   session: SessionLog;
   log: ExerciseLog;
-}
-
-/** Spanish decimal formatting: 2.5 → "2,5", 70 → "70". */
-export function formatKg(value: number): string {
-  return Number.isInteger(value) ? String(value) : value.toFixed(1).replace('.', ',');
 }
 
 /** Best set = highest load, then most reps (or seconds). */
@@ -30,36 +19,6 @@ export function bestSet(log: ExerciseLog | undefined): SetLog | undefined {
     const rb = b.seconds ?? b.reps;
     return rb - ra;
   })[0];
-}
-
-export function lastLoadSuggestion(spec: ExerciseSpec, previous: PreviousLog[]): LoadSuggestion {
-  const last = previous.find((p) => p.log.sets.length > 0);
-  const best = bestSet(last?.log);
-  if (!last || !best) {
-    const range =
-      spec.isometric && spec.secondsMin !== undefined && spec.secondsMax !== undefined
-        ? `${spec.secondsMin}–${spec.secondsMax} s`
-        : `${spec.repMin}–${spec.repMax}`;
-    return {
-      source: 'none',
-      text: `Sin historial: elige la carga y completa el rango ${range}`,
-    };
-  }
-
-  const loadText = spec.weightedBodyweight
-    ? `lastre ${formatKg(best.loadKg)} kg`
-    : `${formatKg(best.loadKg)} kg`;
-  const repsText =
-    spec.isometric && best.seconds !== undefined ? `${best.seconds} s` : `${best.reps}`;
-  const side = spec.perSide ? ' por lado' : '';
-  return {
-    source: 'last',
-    loadKg: best.loadKg,
-    reps: best.reps,
-    rir: best.rir,
-    seconds: best.seconds,
-    text: `Misma carga que la última vez: ${loadText} × ${repsText}${side} (RIR ${best.rir})`,
-  };
 }
 
 export interface AdjustedTargets {
@@ -80,7 +39,26 @@ export function adjustedTargets(
   return { sets, rirTarget };
 }
 
+/** Targets of the day from the R2 suggestion (sets and RIR already include R1 and deloads). */
+export function targetsFromSuggestion(
+  spec: ExerciseSpec,
+  suggestion: ProgressionSuggestion,
+): AdjustedTargets {
+  const rirTarget: number | [number, number] =
+    suggestion.kind === 'deload' || typeof spec.rirTarget === 'number'
+      ? suggestion.rir
+      : [spec.rirTarget[0] + (suggestion.rir - Math.min(...spec.rirTarget)), suggestion.rir];
+  return { sets: suggestion.sets, rirTarget };
+}
+
 /** Last value of the RIR target ("3→2" → 2). */
 export function rirTargetEnd(rir: number | [number, number]): number {
   return typeof rir === 'number' ? rir : rir[1];
 }
+
+export const SUGGESTION_KIND_LABEL: Record<ProgressionSuggestion['kind'], string> = {
+  first: 'Primera vez',
+  increase: 'Subir carga',
+  hold: 'Misma carga',
+  deload: 'Descarga',
+};

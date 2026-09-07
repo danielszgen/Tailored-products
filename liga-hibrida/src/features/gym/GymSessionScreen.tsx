@@ -3,14 +3,16 @@ import { useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { Button, Card, Eyebrow, Pill, Screen, Segmented, Splash, StatusPill } from '@/components';
 import { GymIcon } from '@/brand/icons';
+import { updateProfile } from '@/data';
 import { GYM_ORDER, GYM_NAMES, SESSION_CODE_LABEL, versionNote } from '@/domain/content/gyms';
 import { hierarchyName } from '@/domain/content/constitution';
+import { deloadSummary } from '@/domain/rules/deload';
 import type { GymId, Scale5, SessionVersion } from '@/domain/types';
 import { ExerciseCard } from './ExerciseCard';
 import { FinishSheet } from './FinishSheet';
 import { RestTimer } from './RestTimer';
 import { SessionSummary } from './SessionSummary';
-import { adjustedTargets, bestSet, lastLoadSuggestion } from './suggestion';
+import { bestSet, targetsFromSuggestion } from './suggestion';
 import { useRestTimer } from './useRestTimer';
 import { useSession } from './useSession';
 import { WarmupChecklist } from './WarmupChecklist';
@@ -46,7 +48,8 @@ function Combat({ gymId }: { gymId: GymId }) {
   const [energyStart, setEnergyStart] = useState<Scale5>(3);
   const [version, setVersion] = useState<SessionVersion>(defaultVersion);
   const [finishOpen, setFinishOpen] = useState(false);
-  const { gym, session, finished, adjustment, exercises, previous, today } = model;
+  const { gym, session, finished, adjustment, exercises, previous, suggestions, today, wave } =
+    model;
 
   if (session === undefined || today.profile === undefined) return <Splash />;
 
@@ -56,6 +59,13 @@ function Combat({ gymId }: { gymId: GymId }) {
       {GYM_NAMES[gymId]}
     </span>
   );
+  const planItem =
+    today.day?.am?.kind === 'gym' && today.day.am.gymId === gymId
+      ? today.day.am
+      : today.day?.pm?.kind === 'gym' && today.day.pm.gymId === gymId
+        ? today.day.pm
+        : null;
+  const deloadLines = deloadSummary(wave);
 
   if (finished) {
     return (
@@ -93,6 +103,9 @@ function Combat({ gymId }: { gymId: GymId }) {
               ))}
             </ul>
           )}
+          {planItem?.note && (
+            <p className="text-sm text-status-cargado mb-3">Nota del plan: {planItem.note}</p>
+          )}
           <Segmented
             label="Energía al empezar"
             value={energyStart}
@@ -118,6 +131,16 @@ function Combat({ gymId }: { gymId: GymId }) {
             Empezar combate
           </Button>
         </Card>
+        {deloadLines.length > 0 && (
+          <Card eyebrow="R3" title={wave === 'deload' ? 'Semana de descarga' : 'Final de Liga'}>
+            <ul className="text-sm text-ink2 flex flex-col gap-1">
+              {deloadLines.map((l) => (
+                <li key={l}>· {l}</li>
+              ))}
+            </ul>
+          </Card>
+        )}
+        {gymId === 'cantera' && <TransitionCard model={model} />}
         <Card eyebrow="Combustible" title="Pre y post">
           <p className="text-sm text-ink2 mb-2">{gym.fuelPre}</p>
           <p className="text-sm text-ink2">{gym.fuelPost}</p>
@@ -129,7 +152,7 @@ function Combat({ gymId }: { gymId: GymId }) {
   const locked = !session.warmupDone;
   const firstIncomplete = exercises.find((e) => {
     const log = session.exercises.find((l) => l.exerciseId === e.id);
-    const targetSets = (e.perSide ? 2 : 1) * adjustedTargets(e, adjustment ?? { ...NO_ADJ }).sets;
+    const targetSets = (e.perSide ? 2 : 1) * targetsFromSuggestion(e, suggestions[e.id]).sets;
     return !log?.skipped && (log?.sets.length ?? 0) < targetSets;
   });
 
@@ -141,6 +164,12 @@ function Combat({ gymId }: { gymId: GymId }) {
     >
       <WarmupBlock model={model} />
 
+      {planItem?.note && (
+        <p className="text-xs text-status-cargado">Nota del plan: {planItem.note}</p>
+      )}
+      {wave === 'deload' && (
+        <p className="text-xs text-ink3">Semana de descarga: series y RIR reducidos (R3).</p>
+      )}
       {adjustment && adjustment.omitExerciseIds.length > 0 && (
         <p className="text-xs text-status-ko">Omitido hoy por estado: fondos lastrados.</p>
       )}
@@ -155,7 +184,8 @@ function Combat({ gymId }: { gymId: GymId }) {
 
       {exercises.map((spec) => {
         const log = session.exercises.find((l) => l.exerciseId === spec.id);
-        const targets = adjustedTargets(spec, adjustment ?? { ...NO_ADJ });
+        const suggestion = suggestions[spec.id];
+        const targets = targetsFromSuggestion(spec, suggestion);
         const prevLogs = previous[spec.id] ?? [];
         return (
           <ExerciseCard
@@ -164,7 +194,7 @@ function Combat({ gymId }: { gymId: GymId }) {
             gymId={gymId}
             targets={targets}
             adjusted={!!adjustment && adjustment.status === 'cargado'}
-            suggestion={lastLoadSuggestion(spec, prevLogs)}
+            suggestion={suggestion}
             previousSets={prevLogs[0]?.log.sets}
             log={log}
             locked={locked}
@@ -223,18 +253,6 @@ function Combat({ gymId }: { gymId: GymId }) {
   );
 }
 
-const NO_ADJ = {
-  status: 'ok' as const,
-  accessorySetDelta: 0 as const,
-  rirDelta: 0 as const,
-  pmToRecovery: false,
-  reducedToTechnique: false,
-  omitExerciseIds: [] as string[],
-  omitWarmupTags: [] as string[],
-  substituteLowerWithMobility: false,
-  advisories: [],
-};
-
 function WarmupBlock({ model }: { model: ReturnType<typeof useSession> }) {
   const { gym, session, adjustment } = model;
   if (!session) return null;
@@ -245,5 +263,41 @@ function WarmupBlock({ model }: { model: ReturnType<typeof useSession> }) {
       done={!!session.warmupDone}
       onComplete={() => model.completeWarmup()}
     />
+  );
+}
+
+/** Barbell-squat transition (§6.5 / R8): offered when tolerated; Daniel decides. */
+function TransitionCard({ model }: { model: ReturnType<typeof useSession> }) {
+  const { today } = model;
+  const variant = today.profile?.squatVariant ?? 'tolerated';
+  const offer = today.transition;
+  if (variant === 'barbell') {
+    return (
+      <Card eyebrow="Transición a sentadilla con barra" title="High-bar squat activo">
+        <p className="text-sm text-ink2 mb-3">
+          A1 es high-bar squat 3–4×5–8 RIR 3→2. Si el síntoma vuelve, regresa a la variante
+          tolerada.
+        </p>
+        <Button
+          full
+          variant="secondary"
+          onClick={() => void updateProfile({ squatVariant: 'tolerated' })}
+        >
+          Volver a la variante tolerada
+        </Button>
+      </Card>
+    );
+  }
+  if (!offer.offer) return null;
+  return (
+    <Card eyebrow="Transición a sentadilla con barra" title="La app te la ofrece">
+      <p className="text-sm text-ink2 mb-3">{offer.reason}</p>
+      <div className="flex flex-col gap-2">
+        <Button full onClick={() => void updateProfile({ squatVariant: 'barbell' })}>
+          Probar high-bar squat en A1
+        </Button>
+        <Eyebrow>Decides tú; la app solo lo propone cuando el aductor lo tolera.</Eyebrow>
+      </div>
+    </Card>
   );
 }

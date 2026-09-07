@@ -1,14 +1,14 @@
 // One-hand set logging: load ± step, reps (or seconds), RIR, side (SPEC §8.3).
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Segmented, Stepper } from '@/components';
+import type { ProgressionSuggestion } from '@/domain/rules/progression';
 import type { ExerciseSpec, GymId, SetLog } from '@/domain/types';
-import type { LoadSuggestion } from './suggestion';
 import { rirTargetEnd } from './suggestion';
 
 export interface SetFormProps {
   spec: ExerciseSpec;
   gymId: GymId;
-  suggestion: LoadSuggestion;
+  suggestion: ProgressionSuggestion;
   lastSet?: SetLog;
   rirTarget: number | [number, number];
   disabled?: boolean;
@@ -29,12 +29,24 @@ export function SetForm({
   const lower = gymId === 'cantera' || gymId === 'resorte';
   const step = spec.loadStepKg || 1;
   const [loadKg, setLoadKg] = useState<number>(lastSet?.loadKg ?? suggestion.loadKg ?? 0);
-  const [reps, setReps] = useState<number>(lastSet?.reps ?? suggestion.reps ?? spec.repMin);
+  const [reps, setReps] = useState<number>(
+    lastSet?.reps ?? (suggestion.isometric ? spec.repMin : suggestion.repTarget[0]),
+  );
   const [seconds, setSeconds] = useState<number>(
-    lastSet?.seconds ?? suggestion.seconds ?? spec.secondsMin ?? 20,
+    lastSet?.seconds ?? (suggestion.isometric ? suggestion.repTarget[0] : (spec.secondsMin ?? 20)),
   );
   const [rir, setRir] = useState<number>(lastSet?.rir ?? rirTargetEnd(rirTarget));
   const [side, setSide] = useState<'L' | 'R'>(lastSet?.side === 'L' ? 'R' : 'L');
+
+  // The R2 suggestion arrives after the history loads: follow it until the first set is logged.
+  useEffect(() => {
+    if (lastSet) return;
+    setLoadKg(suggestion.loadKg ?? 0);
+    if (suggestion.isometric) setSeconds(suggestion.repTarget[0]);
+    else setReps(suggestion.repTarget[0]);
+    setRir(rirTargetEnd(rirTarget));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [suggestion.loadKg, suggestion.repTarget[0], suggestion.rir, lastSet === undefined]);
 
   const save = () => {
     onSave({

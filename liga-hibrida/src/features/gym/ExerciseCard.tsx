@@ -1,9 +1,10 @@
-// Exercise block: targets, suggestion, last session, logged sets and the set form.
+// Exercise block: targets, R2 suggestion with its reason, last session, logged sets and the set form.
 import { Button, Card, Eyebrow, Pill } from '@/components';
 import { formatRest, formatRir, formatSetsReps, isMainLift } from '@/domain/content/gyms';
+import type { ProgressionSuggestion } from '@/domain/rules/progression';
 import type { ExerciseLog, ExerciseSpec, GymId, SetLog } from '@/domain/types';
 import { SetForm } from './SetForm';
-import type { AdjustedTargets, LoadSuggestion } from './suggestion';
+import { SUGGESTION_KIND_LABEL, type AdjustedTargets } from './suggestion';
 import { formatSet } from './volume';
 
 export interface ExerciseCardProps {
@@ -11,7 +12,7 @@ export interface ExerciseCardProps {
   gymId: GymId;
   targets: AdjustedTargets;
   adjusted: boolean;
-  suggestion: LoadSuggestion;
+  suggestion: ProgressionSuggestion;
   previousSets?: SetLog[];
   log?: ExerciseLog;
   locked: boolean;
@@ -20,6 +21,13 @@ export interface ExerciseCardProps {
   onUndo: () => void;
   onSkip: (skipped: boolean) => void;
 }
+
+const KIND_TONE = {
+  first: 'neutral',
+  increase: 'ok',
+  hold: 'neutral',
+  deload: 'regen',
+} as const;
 
 export function ExerciseCard({
   spec,
@@ -39,6 +47,11 @@ export function ExerciseCard({
   const targetSets = spec.perSide ? targets.sets * 2 : targets.sets;
   const complete = sets.length >= targetSets;
   const skipped = log?.skipped;
+  const unit = suggestion.isometric ? 's' : 'reps';
+  const targetText =
+    suggestion.repTarget[0] === suggestion.repTarget[1]
+      ? `${suggestion.repTarget[0]} ${unit}`
+      : `${suggestion.repTarget[0]}–${suggestion.repTarget[1]} ${unit}`;
 
   return (
     <Card
@@ -65,9 +78,15 @@ export function ExerciseCard({
         <p className="text-xs text-ink3">Alternativa: {spec.alternatives.join(' · ')}</p>
       )}
 
-      <div className="mt-3 rounded-list bg-surface2 p-3">
-        <Eyebrow className="block mb-1">Sugerencia</Eyebrow>
-        <p className="text-sm text-ink">{suggestion.text}</p>
+      <div className="mt-3 rounded-list bg-surface2 p-3" data-testid={`suggestion-${spec.id}`}>
+        <div className="flex items-center justify-between gap-2 mb-1">
+          <Eyebrow>Sugerencia R2</Eyebrow>
+          <Pill tone={KIND_TONE[suggestion.kind]}>{SUGGESTION_KIND_LABEL[suggestion.kind]}</Pill>
+        </div>
+        <p className="text-sm text-ink">{suggestion.reason}</p>
+        <p className="text-xs text-ink2 mt-1">
+          Objetivo hoy: {suggestion.sets} series × {targetText} · RIR {suggestion.rir}
+        </p>
         {previousSets && previousSets.length > 0 && (
           <p className="text-xs text-ink3 mt-1">
             Última sesión: {previousSets.map((s) => formatSet(s)).join(' · ')}
