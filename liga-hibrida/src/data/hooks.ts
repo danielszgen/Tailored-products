@@ -1,17 +1,33 @@
 // React live-query hooks over the repositories (dexie-react-hooks). They always use the app
 // singleton `db`. Conventions: `undefined` = still loading, `null` = loaded but nothing stored.
 import { useLiveQuery } from 'dexie-react-hooks';
-import type { Checkin, ISODate, Medal, SessionLog, WeekPlan } from '@/domain/types';
+import type {
+  Adjustment,
+  Checkin,
+  ISODate,
+  Medal,
+  RegenLog,
+  RouteLog,
+  SessionLog,
+  WeekPlan,
+  WildLog,
+} from '@/domain/types';
 import type { StoredProfile } from './db';
 import {
   activeSession,
   getCheckin,
   getProfile,
   getWeek,
+  listAdjustments,
   listCheckins,
   listMedals,
+  listRegen,
+  listRoutes,
   listSessions,
+  listWeeks,
+  listWild,
   weightSeries,
+  type DateRangeOptions,
   type ListCheckinsOptions,
   type ListSessionsOptions,
   type WeightPoint,
@@ -54,4 +70,29 @@ export function useWeightSeries(days?: number): WeightPoint[] | undefined {
 /** Stored medals in gym order. Call ensureMedals() once (e.g. after onboarding) to create them. */
 export function useMedals(): Medal[] | undefined {
   return useLiveQuery(() => listMedals(), []);
+}
+
+export function useRoutes(opts: DateRangeOptions = {}): RouteLog[] | undefined {
+  const { from, to } = opts;
+  return useLiveQuery(() => listRoutes({ from, to }), [from, to]);
+}
+
+export function useWild(opts: DateRangeOptions = {}): WildLog[] | undefined {
+  const { from, to } = opts;
+  return useLiveQuery(() => listWild({ from, to }), [from, to]);
+}
+
+export function useRegen(opts: DateRangeOptions = {}): RegenLog[] | undefined {
+  const { from, to } = opts;
+  return useLiveQuery(() => listRegen({ from, to }), [from, to]);
+}
+
+/** Most recent first. */
+export function useAdjustments(): Adjustment[] | undefined {
+  return useLiveQuery(() => listAdjustments(), []);
+}
+
+/** All stored weeks, ascending. */
+export function useWeeks(): WeekPlan[] | undefined {
+  return useLiveQuery(() => listWeeks(), []);
 }

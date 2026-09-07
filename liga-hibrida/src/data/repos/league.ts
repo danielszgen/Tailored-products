@@ -53,6 +53,13 @@ export async function saveAdjustment(adjustment: Adjustment, database: LigaDB = 
   await database.adjustments.put(adjustment);
 }
 
+export async function getAdjustment(
+  id: string,
+  database: LigaDB = db,
+): Promise<Adjustment | undefined> {
+  return database.adjustments.get(id);
+}
+
 /** Most recent first. */
 export async function listAdjustments(database: LigaDB = db): Promise<Adjustment[]> {
   return database.adjustments.orderBy('date').reverse().toArray();
