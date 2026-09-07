@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from 'react';
 import { cn } from '@/lib/cn';
-import { clamp, roundTo } from '@/lib/math';
+import { clamp, decimalsOf, roundTo } from '@/lib/math';
 
 export interface StepperProps {
   label: string;
@@ -31,7 +31,7 @@ export function Stepper({
   min = 0,
   max = 999,
   unit,
-  decimals = step < 1 ? 1 : 0,
+  decimals = decimalsOf(step),
   hint,
   size = 'md',
   inputMode = 'decimal',
