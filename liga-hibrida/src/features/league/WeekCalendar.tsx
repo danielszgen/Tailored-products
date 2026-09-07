@@ -22,10 +22,14 @@ const DAYS: DayIndex[] = [0, 1, 2, 3, 4, 5, 6];
 
 function Item({ item }: { item: PlannedItem | undefined }) {
   if (!item) return <span className="text-ink3">—</span>;
+  const note = item.kind === 'gym' || item.kind === 'wild' ? item.note : undefined;
   return (
-    <span className="flex items-center gap-1.5">
-      {item.kind === 'gym' && <GymIcon gym={item.gymId} size={16} />}
-      <span>{plannedItemLabel(item)}</span>
+    <span className="flex flex-col">
+      <span className="flex items-center gap-1.5">
+        {item.kind === 'gym' && <GymIcon gym={item.gymId} size={16} />}
+        <span>{plannedItemLabel(item)}</span>
+      </span>
+      {note && <span className="text-xs text-status-cargado">{note}</span>}
     </span>
   );
 }
@@ -100,8 +104,21 @@ export function WeekCalendar({
           );
         })}
       </ol>
+      {plan.substitutions.length > 0 && (
+        <div className="mt-3">
+          <Eyebrow className="block mb-1">Sustituciones aplicadas</Eyebrow>
+          <ul className="text-xs text-ink2 flex flex-col gap-0.5" aria-label="Sustituciones">
+            {plan.substitutions.map((s, i) => (
+              <li key={`${s.date}-${i}`}>
+                {formatShort(s.date)} · {s.removed} — {s.reason}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <p className="text-xs text-ink3 mt-3">
-        Solo lectura · la edición llega con el Consejo de la Liga (Etapa II).
+        Solo lectura · la semana siguiente se genera en el Consejo de la Liga; las sustituciones
+        llegan desde RUTAS y el recorte desde HOY.
         {!stored && ' Semana generada desde la plantilla.'}
       </p>
       <div className="mt-3 flex flex-col gap-2">

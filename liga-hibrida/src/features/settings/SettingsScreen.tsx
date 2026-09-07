@@ -7,13 +7,17 @@ import {
   clearAll,
   exportAll,
   exportFileName,
+  saveWeek,
   SCHEMA_VERSION,
   serializeExport,
   updateProfile,
   useProfile,
 } from '@/data';
-import { WEEK_TEMPLATE_NAMES } from '@/domain/content/week';
+import { BLOCK_WEEKS } from '@/domain/content/block';
+import { buildWeekPlan, WEEK_TEMPLATE_NAMES } from '@/domain/content/week';
+import { applyDeloadToWeek } from '@/domain/rules/deload';
 import type { WeekTemplate } from '@/domain/types';
+import { todayISO, weekOfBlock, weekStartOf } from '@/lib/date';
 import { downloadText } from '@/features/regen/download';
 
 const THEME_OPTIONS: { value: ThemePref; label: string }[] = [
@@ -32,10 +36,32 @@ export function SettingsScreen() {
   const { pref, setPref } = useTheme();
   const profile = useProfile();
   const [wipeOpen, setWipeOpen] = useState(false);
+  const [applyOpen, setApplyOpen] = useState(false);
+  const [applied, setApplied] = useState<string | null>(null);
   const [confirmText, setConfirmText] = useState('');
   const [busy, setBusy] = useState(false);
 
   if (profile === undefined) return <Splash />;
+
+  const today = todayISO();
+  const wob = profile ? weekOfBlock(today, profile.blockStart) : 0;
+  const inBlock = wob >= 1 && wob <= BLOCK_WEEKS;
+  const template = profile?.defaultTemplate ?? 'estandar';
+
+  async function applyTemplate() {
+    if (!profile || !inBlock) return;
+    setBusy(true);
+    try {
+      const plan = applyDeloadToWeek(
+        buildWeekPlan({ weekStart: weekStartOf(today), weekOfBlock: wob, template }),
+      );
+      await saveWeek(plan);
+      setApplyOpen(false);
+      setApplied(`Semana ${wob} regenerada con la plantilla ${WEEK_TEMPLATE_NAMES[template]}.`);
+    } finally {
+      setBusy(false);
+    }
+  }
 
   const setWindow = (key: 'amWindow' | 'pmWindow', index: 0 | 1, value: string) => {
     if (!profile) return;
@@ -92,8 +118,23 @@ export function SettingsScreen() {
             columns={2}
           />
           <p className="text-xs text-ink3 mt-2">
-            Las plantillas distintas de Estándar se aplican al planificador desde la Etapa II.
+            Se usa al generar cada semana (primera apertura y Consejo de la Liga). Fatiga y Viaje
+            activan el orden de recorte (R9) en HOY.
           </p>
+          <Button
+            full
+            variant="secondary"
+            className="mt-3"
+            onClick={() => setApplyOpen(true)}
+            disabled={!inBlock}
+          >
+            Aplicar a esta semana
+          </Button>
+          {applied && (
+            <p role="status" className="text-sm text-status-ok mt-2">
+              {applied}
+            </p>
+          )}
         </Card>
       )}
 
@@ -127,6 +168,22 @@ export function SettingsScreen() {
         <Eyebrow className="block">Liga Híbrida · Esquema v{SCHEMA_VERSION}</Eyebrow>
         <Eyebrow className="block">Local-first · sin analítica · sin cookies</Eyebrow>
       </div>
+
+      <Sheet
+        open={applyOpen}
+        onClose={() => setApplyOpen(false)}
+        title="¿Aplicar la plantilla a esta semana?"
+        footer={
+          <Button full onClick={applyTemplate} disabled={busy}>
+            Aplicar {WEEK_TEMPLATE_NAMES[template]}
+          </Button>
+        }
+      >
+        <p className="text-sm text-ink2">
+          Sustituye el plan de la semana {wob} (y sus sustituciones) por la plantilla{' '}
+          {WEEK_TEMPLATE_NAMES[template]}. Los combates y rutas registrados no se tocan.
+        </p>
+      </Sheet>
 
       <Sheet
         open={wipeOpen}
