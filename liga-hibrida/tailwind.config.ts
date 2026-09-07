@@ -17,6 +17,7 @@ export default {
         ink2: 'var(--c-ink2)',
         ink3: 'var(--c-ink3)',
         accent: 'var(--c-accent)',
+        'on-accent': 'var(--c-on-accent)',
         gold: 'var(--c-gold)',
         type: colors.types,
         status: colors.status,

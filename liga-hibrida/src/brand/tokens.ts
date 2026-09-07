@@ -1,4 +1,8 @@
 // Brand tokens — SPEC §4.2. Keep values in sync with the CSS variables in src/index.css.
+// DECISION: two light values are darkened to meet SPEC §11 "contraste AA en ambos temas":
+//   ink3 #7C879B → #63708A (labels on bg/surface: 3.3:1 → 4.6:1) and accent #E23D4A → #DA3541
+//   (white text on buttons: 4.2:1 → 4.6:1). `onAccent` is the text color used on accent surfaces
+//   (dark ink in the dark theme, where white on #FF5462 is only 3:1). See docs/PREGUNTAS.md.
 export const colors = {
   light: {
     bg: '#F3F5F9',
@@ -7,9 +11,10 @@ export const colors = {
     line: '#D3DAE6',
     ink: '#141B2B',
     ink2: '#4A5468',
-    ink3: '#7C879B',
-    accent: '#E23D4A',
+    ink3: '#63708A',
+    accent: '#DA3541',
     gold: '#E9A82A',
+    onAccent: '#FFFFFF',
   },
   dark: {
     bg: '#0E1420',
@@ -21,6 +26,7 @@ export const colors = {
     ink3: '#7E8899',
     accent: '#FF5462',
     gold: '#F5B942',
+    onAccent: '#141B2B',
   },
   types: {
     masa: '#8E5CF0',

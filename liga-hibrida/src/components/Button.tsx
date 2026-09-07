@@ -12,7 +12,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-accent text-white active:opacity-90 disabled:opacity-40',
+  primary: 'bg-accent text-on-accent active:opacity-90 disabled:opacity-40',
   secondary: 'bg-surface2 text-ink border border-line active:bg-line disabled:opacity-40',
   ghost: 'bg-transparent text-ink2 active:bg-surface2 disabled:opacity-40',
   danger:

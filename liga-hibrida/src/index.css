@@ -10,9 +10,10 @@
   --c-line: #d3dae6;
   --c-ink: #141b2b;
   --c-ink2: #4a5468;
-  --c-ink3: #7c879b;
-  --c-accent: #e23d4a;
+  --c-ink3: #63708a; /* AA on bg/surface (see tokens.ts) */
+  --c-accent: #da3541; /* AA with white text (see tokens.ts) */
   --c-gold: #e9a82a;
+  --c-on-accent: #ffffff;
   color-scheme: light;
 }
 
@@ -27,6 +28,7 @@
     --c-ink3: #7e8899;
     --c-accent: #ff5462;
     --c-gold: #f5b942;
+    --c-on-accent: #141b2b;
     color-scheme: dark;
   }
 }
@@ -41,6 +43,7 @@
   --c-ink3: #7e8899;
   --c-accent: #ff5462;
   --c-gold: #f5b942;
+  --c-on-accent: #141b2b;
   color-scheme: dark;
 }
 
@@ -104,5 +107,12 @@
   }
   .safe-top {
     padding-top: env(safe-area-inset-top, 0px);
+  }
+  /* Text/date/time inputs: ≥ 44 px, ≥ 16 px font (no iOS zoom), themed. */
+  .input {
+    @apply w-full min-h-touch rounded-list bg-surface border border-line px-3 text-ink;
+  }
+  .input:focus {
+    @apply border-accent;
   }
 }

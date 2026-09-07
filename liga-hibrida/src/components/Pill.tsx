@@ -19,7 +19,7 @@ const tones: Record<PillTone, string> = {
   aventura: 'bg-type-aventura/20 text-ink',
   regen: 'bg-type-regen/20 text-ink',
   neutral: 'bg-surface2 text-ink2',
-  accent: 'bg-accent text-white',
+  accent: 'bg-accent text-on-accent',
   gold: 'bg-gold text-[#141B2B]',
 };
 
@@ -37,11 +37,13 @@ export interface PillProps {
   children?: ReactNode;
   className?: string;
   size?: 'sm' | 'md';
+  title?: string;
 }
 
-export function Pill({ tone = 'neutral', children, className, size = 'sm' }: PillProps) {
+export function Pill({ tone = 'neutral', children, className, size = 'sm', title }: PillProps) {
   return (
     <span
+      title={title}
       className={cn(
         'inline-flex items-center gap-1.5 rounded-pill font-pixel uppercase tracking-[1px] whitespace-nowrap',
         size === 'sm' ? 'text-[10px] px-2 py-1' : 'text-[11px] px-2.5 py-1.5',
