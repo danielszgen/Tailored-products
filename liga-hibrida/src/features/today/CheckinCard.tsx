@@ -38,15 +38,17 @@ function draftFrom(
 }
 
 export function CheckinCard({ model }: { model: TodayModel }) {
-  const { today, checkin, pvResult, yesterday, lastWeight } = model;
+  const { today, checkin, pvResult, yesterdayCheckin, lastWeight } = model;
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [draft, setDraft] = useState<Draft>(() => draftFrom(checkin, yesterday, lastWeight?.value));
+  const [draft, setDraft] = useState<Draft>(() =>
+    draftFrom(checkin, yesterdayCheckin, lastWeight?.value),
+  );
 
   const showForm = !checkin || editing;
 
   const startEdit = () => {
-    setDraft(draftFrom(checkin, yesterday, lastWeight?.value));
+    setDraft(draftFrom(checkin, yesterdayCheckin, lastWeight?.value));
     setEditing(true);
   };
 

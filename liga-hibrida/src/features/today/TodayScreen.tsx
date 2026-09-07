@@ -1,36 +1,30 @@
 // HOY (SPEC §8.2): trainer card, check-in, plan AM/PM, Combustible, advisories, CTA.
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Card, Pill, Screen, Splash } from '@/components';
+import { Button, Card, Screen, Splash } from '@/components';
 import { GYM_NAMES } from '@/domain/content/gyms';
-import type { Advisory, GymId, PlannedItem } from '@/domain/types';
 import { formatDayLabel } from '@/lib/date';
 import { AdductorAfterCard } from './AdductorAfterCard';
 import { AdvisoriesCard } from './AdvisoriesCard';
 import { CheckinCard } from './CheckinCard';
+import { CutCard } from './CutCard';
 import { FuelCard } from './FuelCard';
 import { PlanCards } from './PlanCards';
 import { TrainerHeader } from './TrainerHeader';
 import { useToday } from './useToday';
 
-function gymOf(item: PlannedItem | undefined): GymId | null {
-  return item?.kind === 'gym' ? item.gymId : null;
-}
-
 export function TodayScreen() {
   const model = useToday();
   const navigate = useNavigate();
-  const { profile, day, pvResult, activeSession } = model;
+  const { profile, day, pvResult, activeSession, plannedGym } = model;
 
   if (profile === undefined) return <Splash />;
   if (!profile) return null;
 
-  const gymId = gymOf(day?.am) ?? gymOf(day?.pm);
-  const plannedItem = gymId ? (day?.am?.kind === 'gym' ? day.am : day?.pm) : undefined;
+  const plannedItem = plannedGym ? (day?.am?.kind === 'gym' ? day.am : day?.pm) : undefined;
   const plannedVersion = plannedItem?.kind === 'gym' ? plannedItem.version : 60;
   const adjustment =
-    gymId && pvResult && pvResult.status !== 'ok' ? model.adjustmentFor(gymId) : null;
+    plannedGym && pvResult && pvResult.status !== 'ok' ? model.adjustmentFor(plannedGym) : null;
   const version = adjustment?.status === 'cargado' ? 45 : plannedVersion;
-  const advisories: Advisory[] = adjustment?.advisories ?? [];
 
   return (
     <Screen
@@ -73,12 +67,13 @@ export function TodayScreen() {
       <AdductorAfterCard sessions={model.todaySessions} />
       <PlanCards model={model} />
       <FuelCard model={model} />
-      <AdvisoriesCard advisories={advisories} />
+      <AdvisoriesCard advisories={model.advisories} today={model.today} />
+      <CutCard model={model} />
 
       <div className="flex flex-col gap-2">
-        {gymId ? (
-          <Button size="lg" full onClick={() => navigate(`/gym/${gymId}?version=${version}`)}>
-            Entrar a {GYM_NAMES[gymId]}
+        {plannedGym ? (
+          <Button size="lg" full onClick={() => navigate(`/gym/${plannedGym}?version=${version}`)}>
+            Entrar a {GYM_NAMES[plannedGym]}
           </Button>
         ) : (
           <Button size="lg" full variant="secondary" onClick={() => navigate('/gym')}>
@@ -86,11 +81,11 @@ export function TodayScreen() {
           </Button>
         )}
         <div className="grid grid-cols-2 gap-2">
-          <Button variant="secondary" disabled>
-            Registrar ruta <Pill tone="neutral">Etapa II</Pill>
+          <Button variant="secondary" onClick={() => navigate('/rutas?nueva=ruta')}>
+            Registrar ruta
           </Button>
-          <Button variant="secondary" disabled>
-            Zona Salvaje <Pill tone="neutral">Etapa II</Pill>
+          <Button variant="secondary" onClick={() => navigate('/rutas?nueva=salvaje')}>
+            Zona Salvaje
           </Button>
         </div>
       </div>

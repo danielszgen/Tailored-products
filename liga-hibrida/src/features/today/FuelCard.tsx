@@ -1,22 +1,13 @@
-// Combustible: day fuel type, pre/post of the main gym and the 5-tick checklist (SPEC §8.2).
+// Combustible (R6): day type, pre/post of the main gym, intra guide and the 5-tick checklist.
 import { useEffect, useState } from 'react';
 import { Card, Eyebrow } from '@/components';
-import { GYMS } from '@/domain/content/gyms';
-import { DAY_FUEL_LABELS } from '@/domain/content/week';
-import { DAILY_CHECKLIST, fuelDayTypeFor, type ChecklistId } from '@/domain/content/nutrition';
-import type { GymId, PlannedDay } from '@/domain/types';
+import { GYM_NAMES } from '@/domain/content/gyms';
+import { DAILY_CHECKLIST, type ChecklistId } from '@/domain/content/nutrition';
 import { readChecklist, writeChecklist, type ChecklistState } from './checklist';
 import type { TodayModel } from './useToday';
 
-function mainGym(day: PlannedDay | null): GymId | null {
-  if (!day) return null;
-  if (day.am?.kind === 'gym') return day.am.gymId;
-  if (day.pm?.kind === 'gym') return day.pm.gymId;
-  return null;
-}
-
 export function FuelCard({ model }: { model: TodayModel }) {
-  const { today, day } = model;
+  const { today, fuel } = model;
   const [ticks, setTicks] = useState<ChecklistState>(() => readChecklist(today));
 
   useEffect(() => {
@@ -29,34 +20,51 @@ export function FuelCard({ model }: { model: TodayModel }) {
     writeChecklist(today, next);
   };
 
-  const gymId = mainGym(day);
-  const gym = gymId ? GYMS[gymId] : null;
-  const fuel = day?.fuel;
-  const dayType = fuel ? fuelDayTypeFor(fuel) : undefined;
   const done = DAILY_CHECKLIST.filter((c) => ticks[c.id]).length;
 
   return (
     <Card
-      eyebrow="Combustible"
-      title={fuel ? DAY_FUEL_LABELS[fuel] : '—'}
+      eyebrow="Combustible · R6"
+      title={fuel ? fuel.label : '—'}
       right={
         <span className="font-pixel text-[11px] tracking-[1px] text-ink3">
           {done}/{DAILY_CHECKLIST.length}
         </span>
       }
     >
-      {dayType && <p className="text-sm text-ink2 mb-3">Tipo de día: {dayType.dayType}</p>}
-      {gym && (
+      {fuel?.dayType && (
+        <div className="mb-3">
+          <p className="text-sm text-ink2">Tipo de día: {fuel.dayType.dayType}</p>
+          <p className="text-xs text-ink3">
+            Desayuno {fuel.dayType.breakfast} · Comida {fuel.dayType.lunch} · Merienda pre{' '}
+            {fuel.dayType.preSnack} · Cena/post {fuel.dayType.dinnerPost}
+          </p>
+        </div>
+      )}
+      {fuel?.gymId && (
         <div className="flex flex-col gap-2 mb-3">
           <div>
-            <Eyebrow className="block mb-0.5">Pre · {gym.name}</Eyebrow>
-            <p className="text-sm text-ink2">{gym.fuelPre}</p>
+            <Eyebrow className="block mb-0.5">Pre · {GYM_NAMES[fuel.gymId]}</Eyebrow>
+            <p className="text-sm text-ink2">{fuel.pre}</p>
           </div>
           <div>
             <Eyebrow className="block mb-0.5">Post</Eyebrow>
-            <p className="text-sm text-ink2">{gym.fuelPost}</p>
+            <p className="text-sm text-ink2">{fuel.post}</p>
           </div>
         </div>
+      )}
+      {fuel?.intra && (
+        <div className="mb-3">
+          <Eyebrow className="block mb-0.5">Intra · por duración</Eyebrow>
+          <p className="text-sm text-ink2">{fuel.intra}</p>
+        </div>
+      )}
+      {fuel && fuel.notes.length > 0 && (
+        <ul className="text-xs text-ink3 mb-3 flex flex-col gap-0.5">
+          {fuel.notes.map((n) => (
+            <li key={n}>· {n}</li>
+          ))}
+        </ul>
       )}
       <ul className="grid grid-cols-1 gap-1.5" aria-label="Checklist diario">
         {DAILY_CHECKLIST.map((item) => {
