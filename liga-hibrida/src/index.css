@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens — values mirror src/brand/tokens.ts (SPEC §4.2). */
+:root {
+  --c-bg: #f3f5f9;
+  --c-surface: #ffffff;
+  --c-surface2: #e9edf4;
+  --c-line: #d3dae6;
+  --c-ink: #141b2b;
+  --c-ink2: #4a5468;
+  --c-ink3: #7c879b;
+  --c-accent: #e23d4a;
+  --c-gold: #e9a82a;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --c-bg: #0e1420;
+    --c-surface: #161e2e;
+    --c-surface2: #1e2839;
+    --c-line: #2b3648;
+    --c-ink: #eef2f8;
+    --c-ink2: #b4bdcc;
+    --c-ink3: #7e8899;
+    --c-accent: #ff5462;
+    --c-gold: #f5b942;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --c-bg: #0e1420;
+  --c-surface: #161e2e;
+  --c-surface2: #1e2839;
+  --c-line: #2b3648;
+  --c-ink: #eef2f8;
+  --c-ink2: #b4bdcc;
+  --c-ink3: #7e8899;
+  --c-accent: #ff5462;
+  --c-gold: #f5b942;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    height: 100%;
+  }
+  body {
+    @apply bg-bg text-ink font-body antialiased;
+    min-height: 100dvh;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    overscroll-behavior-y: none;
+  }
+  #root {
+    min-height: 100dvh;
+  }
+  /* iOS zooms into inputs smaller than 16px — never go below. */
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    font-size: 16px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-pixel uppercase text-ink3;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+  .display {
+    @apply font-display;
+  }
+  .card {
+    @apply bg-surface border border-line rounded-card;
+  }
+  .list-item {
+    @apply bg-surface border border-line rounded-list;
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
