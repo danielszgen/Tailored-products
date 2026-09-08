@@ -107,3 +107,33 @@ Cada punto es una interpretación que la app aplica hoy; el código la marca con
 
 - Registro de sesiones regen (nuevo) en la tabla `regen`; contadores contra el mínimo semanal de §6.6 (aductor: 2/semana como objetivo del contador, "2–3" en el texto).
 - La copia JSON semanal tras el Consejo es un botón de descarga (no automática): iOS no permite descargas silenciosas desde una PWA.
+
+## Preguntas surgidas durante la Etapa III
+
+Interpretaciones que aplica la app hoy (marcadas en el código con `// DECISION` o con el comentario de la regla). Cada una se cambia en una función pura y en su test.
+
+### R10 · Progreso del bloque, medallas y evolución (`league.ts`)
+
+- **Semanas completas.** Medallas, nivel y SMART cuentan solo semanas terminadas (domingo pasado). Por eso la medalla CANTERA con 4 semanas limpias se concede el lunes de la semana 5 (fecha `earnedOn` = ese lunes), como pide §9.
+- **CANTERA / SMART 2.** Una semana cuenta si tiene al menos una sesión Lower, todas con aductor después ≤ 3 (si falta, se usa el aductor durante; si no hay nada registrado, se considera sin calambre) y sin racha de 3 registros de aductor al alza dentro de la semana ("dolor creciente"). Una semana sin ninguna sesión Lower **rompe** la racha; las semanas con plantilla Viaje se saltan sin romperla. ¿Prefieres que una semana sin Lower solo "no cuente"?
+- **YUNQUE / SMART 4.** Fuerza relativa (carga+PC)×reps/PC con el peso medio de 7 días en la fecha de cada marca (o el peso inicial de la ficha). Baseline = ficha (o el primer test que lo tenga); actual = test de la semana 8 o 12; hasta entonces, la mejor marca a RIR ≤ 2 de las sesiones sirve de progreso provisional ("se confirma con el Combate de Liga"). "Con peso subiendo" = peso medio del test > peso del baseline. Progreso = el peor de los dos ratios (dominada, fondo).
+- **RESORTE / SMART 3.** carga×reps del mejor registro (tests de semanas 4/8/12 y sesiones de Bulgarian o split squat elevado a RIR ≤ 2) frente al baseline de la ficha (split squat), o al test de semana 0, o a la primera sesión; progreso = (ratio − 1) / 0,15. Con la fixture de 8 semanas (20 kg × 8 → 22 kg × 8) queda al **67 %**; el "60 %" de §9 lo tomo como orientativo. ¿Debería medirse solo con el test (RIR 2 fijo) y no con las sesiones?
+- **VÉRTIGO / SMART 7–8.** Mitad del progreso = semanas limpias de muñeca seguidas (sin racha de 3 al alza ni valor ≥ 5, check-ins + combates) sobre 8; la otra mitad = un marcador de handstand (pared o libre) mejor que en el test anterior. Los "2 rangos" de SMART 8 son tobillo y extensión de muñeca (numéricos) y cadera/hombro cuando se marcan "mejor" en el test.
+- **Nivel de entrenador.** Últimas 4 semanas completas sin plantilla Viaje; anclas = mín(2, Lower) + mín(2, Upper) + mín(1, ruta Z2) + mín(1, yoga/movilidad). "Enfermedad" no existe como plantilla: hoy solo se excluye Viaje. ¿Excluir también Fatiga?
+- **Estadísticas 0–100.** MASA = progreso del peso medio de 7 días desde el inicial hacia 85 kg, con **−20 puntos** si la tendencia semanal supera 0,40 %. FUERZA = media literal del % de mejora carga×reps (press banca, dominada, trap bar, split squat a RIR ≤ 2) acotada a 0–100. MOTOR = 50 % Z2 de los últimos 7 días/150' + 50 % ruta más larga de 28 días/60'. CONTROL = 50 % mejor handstand en pared/60 s + 50 % rangos mejorados/4. AVENTURA = media de ventanas de Zona Salvaje en 28 días/4 y la nota de transferencia del último test (mejor 1 · igual 0,5 · peor 0). ¿Los pesos 50/50 te valen?
+- **SMART restantes.** 1: ≥ 5 pesos en las semanas 1–2, ≥ 3 baselines de fuerza y un test con movilidad (por eso existe el test de semana 0). 5: Z2 ≥ 90' por semana (≥ 60' en descarga) en las últimas 4 semanas completas. 6: carrera ≥ 45' con RPE ≤ 6 y el check-in del día siguiente con síntomas ≤ 2. 9: semanas 3+ con tendencia en 0,15–0,30 %/sem (hecho con ≥ 2 evaluadas y la última en banda). 10: sueño medio de 28 días ≥ 7,5 h sin más de 7 días seguidos por debajo de 7 h. Cualquier objetivo se puede marcar a mano ("progreso automático o manual").
+- **Evolución Forma I → II.** Las 4 condiciones: medalla CANTERA; ≥ 4 semanas limpias de muñeca sin aviso activo; 4/4 semanas con Z2 al mínimo; ≥ 10 pesos en 14 días más un objetivo kcal o un ajuste kcal anotado. Formas II → IV no tienen automatismo (la app dice "consulta al entrenador"); la evolución se confirma a mano y queda como ajuste.
+- **Combates de Liga.** Se añadió la semana 0 (baseline) al tipo `LeagueTest`; un test puede registrarse fuera de su semana eligiendo S0/S4/S8/S12 y el de la misma semana se sobrescribe. Cadera, hombro y transferencia se guardan como "mejor/igual/peor · nota".
+- **Animación de medalla.** Se celebra una vez por dispositivo (`localStorage`), porque HOY también evalúa R10 y puede persistir la medalla antes de abrir LIGA.
+
+### "Pregunta al Rival" (SPEC §10.2)
+
+- **Modelo.** Por defecto `claude-opus-5` (familia Claude 5); `RIVAL_MODEL` lo cambia (p. ej. `claude-fable-5-1`, que exige retención de 30 días en la cuenta). Esfuerzo `medium` (`RIVAL_EFFORT`), pensamiento adaptativo y fallback de rechazo del servidor activado.
+- **Límite de 30 llamadas/día.** Contador en el cliente (`localStorage`) más contador por instancia en la función (best effort: las funciones de Vercel no comparten memoria). ¿Quieres un límite persistente (Vercel KV) antes de exponer la función?
+- **Token.** `RIVAL_APP_TOKEN` en Vercel debe coincidir con el que escribes en Ajustes; viaja en la cabecera `x-rival-token`. La clave de Anthropic solo vive en el servidor.
+- **Consentimiento.** Interruptor en Ajustes (`Profile.rivalConsentAt`, exportable) y vista previa del JSON exacto antes del primer envío. Las respuestas se guardan como `Adjustment{kind:'nota', source:'rival'}`.
+- **Despliegue.** La función solo existe en Vercel (`api/rival.ts`). Si la PWA se sirve desde otro sitio, el campo "Endpoint" de Ajustes apunta al despliegue de Vercel.
+
+### Notificaciones locales
+
+- En iPhone solo funcionan con la PWA instalada y permiso concedido; no hay programación con la app cerrada (sin Notification Triggers ni push sin servidor). Los recordatorios de check-in matinal y de aductor a los 45' se programan mientras la app sigue abierta; el fin del descanso avisa en cualquier caso. Las push reales quedan para la Etapa IV (Expo o servidor).

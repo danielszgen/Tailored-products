@@ -1,9 +1,78 @@
 # PROGRESO — bitácora por etapa
 
+## Etapa III · Liga — "Medallas, tests y evolución"
+
+**Fecha:** 8 de septiembre de 2026.
+**Estado:** completada y verificada. No se ha empezado la Etapa IV (pendiente de confirmación de Daniel).
+
+### Qué se hizo
+
+**Motor (`src/domain`, TypeScript puro, SPEC §7 y §10.2)**
+
+- **R10 · Liga** (`rules/league.ts`): registros por semana del bloque (solo semanas terminadas), veredicto de cada semana Lower (aductor después ≤ 3, sin dolor creciente) y de muñeca, progreso de las 4 medallas con `earnedOn`, detalle e `isNew` (CANTERA: 4 semanas seguidas; YUNQUE: fuerza relativa de dominada y fondo con el peso subiendo; RESORTE: +15 % carga×reps en split squat; VÉRTIGO: 8 semanas limpias de muñeca + un marcador de handstand mejorado), progreso de los 10 SMART (automático o marcado a mano), nivel de entrenador por anclas de las últimas 4 semanas, estadísticas MASA / FUERZA / MOTOR / CONTROL / AVENTURA 0–100, las 4 condiciones de evolución Forma I → II, semana de test sugerida, comparación de Combates de Liga (deltas por área) e informe Markdown del bloque (`blockReport`).
+- **Mejores marcas** (`rules/marks.ts`): puntuación carga×reps a RIR ≤ 2, fuerza relativa (carga+PC)×reps/PC, mejor marca por ejercicio e historial. `hasRisingRun` (R8) se reutiliza para "dolor creciente".
+- **"Pregunta al Rival"** (`domain/rival`): `buildRivalContext` construye el JSON exacto de §10.2 (ficha sin email, últimos 7 check-ins, últimas 6 sesiones resumidas, rutas y Zona Salvaje de 14 días, semana actual, avisos activos y la pregunta) validado con un esquema zod **estricto** (cualquier clave extra se rechaza); system prompt fijo con la Constitución, el contexto de Daniel y R1–R11 en prosa; límites: 30 llamadas/día, 120 palabras, 600 caracteres por pregunta.
+- Tipos y esquema: `LeagueTest.weekOfBlock` admite la semana 0 (baseline) y notas; `Profile.smartManual`, `evolutions` y `rivalConsentAt`. Todo opcional y exportable; Dexie sigue en v1.
+
+**Fixture de 8 semanas** (`tests/fixtures/ochoSemanas.ts` → `ocho_semanas.json`, SPEC Apéndice B): 8 semanas del Bloque 1 (7 sep – 1 nov) con check-ins diarios, 4 combates por semana con doble progresión, rutas Z2 y largas, Zona Salvaje, descarga en la semana 4 y Combates de Liga en las semanas 0, 4 y 8. Se importa desde el onboarding (o REGEN) para ver la app "ya jugada".
+
+**Pantallas (SPEC §8)**
+
+- **LIGA**: tablero con marcadores de tests y medallas; medallas con progreso, detalle, fecha y animación "¡Nueva medalla!" (una vez por dispositivo); SMART con progreso automático y marcado manual; estadísticas 0–100 (también en la ficha de HOY); nivel de entrenador; Formas con las 4 condiciones y confirmación de "Evolucionar a Forma II" (queda como ajuste); Combates de Liga con deltas frente al test anterior; Índice de Movimientos con mejor marca, historial y filtros; acceso al informe del bloque.
+- **Combate de Liga** (`/liga/combate`): asistente de 6 áreas (peso, fuerza, aeróbico, movilidad, handstand, transferencia) para las semanas 0/4/8/12 (la semana se sugiere por la del bloque), guarda `t_<semana>` y muestra la comparación con el test anterior.
+- **Informe del bloque** (`/liga/informe`): Markdown "Semana N/12" con ficha, medallas, SMART, combates, peso, fuerza, semanas, síntomas, evolución y ajustes; copiar, compartir (Web Share) o exportar `.md`.
+- **Pregunta al Rival** (`/regen/rival`, desde REGEN y desde el informe del Consejo): sin consentimiento explica qué se enviaría y lleva a Ajustes; con consentimiento y token, la primera pregunta abre la vista previa con el JSON exacto y solo sale con "Enviar este contexto"; "Ver qué se envía" en cualquier momento; contador N/30 de hoy; respuesta con el modelo y botón de copiar; historial de las últimas 10 conversaciones (guardadas como `Adjustment{source:'rival'}`).
+- **Ajustes**: notificaciones locales (permiso desde el interruptor, estado, qué recuerda, nota de límites en iOS, si está instalada) y El Rival (interruptor "Enviar contexto a El Rival" con fecha de consentimiento, token de la app, endpoint).
+- **GYM**: el resumen del combate muestra el avance de la medalla del gimnasio; fin del descanso con notificación y vibración; recordatorio "¿Aductor 30–60 min después?" a los 45' de Cantera/Resorte. **HOY**: recordatorio del check-in al inicio de la ventana AM si aún no está hecho.
+- Las pantallas secundarias (LIGA, Combate, Informe, Consejo, Ajustes, Rival) se cargan bajo demanda (`React.lazy`).
+
+**Servidor (Vercel, `api/rival.ts`)**
+
+- Función serverless con `@anthropic-ai/sdk`. `ANTHROPIC_API_KEY` y `RIVAL_APP_TOKEN` solo existen en el servidor (`.env.example`); el token se compara en tiempo constante (cabecera `x-rival-token`); el cuerpo se valida con el esquema estricto (`{ context }`); contador diario por instancia; modelo `claude-opus-5` por defecto (`RIVAL_MODEL`), pensamiento adaptativo, esfuerzo `medium` (`RIVAL_EFFORT`) y fallback del servidor; los rechazos del modelo y los errores de la API se convierten en mensajes en español sin filtrar secretos. `vercel.json` excluye `/api/` del rewrite de la SPA y `.gitignore` ignora `.env*`.
+
+**Calidad**
+
+| Comprobación | Resultado |
+|---|---|
+| `pnpm typecheck` | sin errores |
+| `pnpm lint` (ESLint + Prettier) | sin errores ni avisos |
+| `pnpm test` | 338 tests en 39 archivos (R10 y marcas, fixture de 8 semanas, Rival dominio/API/UI, notificaciones, LIGA, Combate, informe, Ajustes, GYM) |
+| Cobertura `src/domain/rules` (`pnpm test:coverage`, umbral 95 % en vite.config) | 99,4 % sentencias · 97,6 % ramas · 98,7 % funciones · 99,4 % líneas |
+| `pnpm build` | 189 KB gzip el chunk inicial (objetivo < 200 KB) + 9 chunks bajo demanda de 0,1–5,6 KB; 22 entradas en precache |
+| Recorrido en Chromium (Playwright, iPhone 390×844, reloj fijado al 2 de noviembre de 2026) | 21/21 pasos: importar la fixture, HOY (semana 9, estadísticas), LIGA (CANTERA conseguida con animación, RESORTE 67 %, "Entrenador de Liga", FUERZA 19, deltas de la semana 8, evolución bloqueada 3/4, mejor marca), Combate S12 → comparación, informe → copiar, Ajustes (notificaciones, consentimiento y token), Rival (vista previa del JSON → respuesta con la función simulada), tema oscuro; sin errores de consola |
+
+### Criterios de aceptación de la Etapa III (SPEC §9)
+
+| Criterio | Estado | Cómo se verificó |
+|---|---|---|
+| Con la fixture de 8 semanas, LIGA muestra la medalla CANTERA conseguida en la semana 5, RESORTE ≈ 60 % y nivel "Entrenador de Liga" | ✅ | `tests/fixtures/ocho-semanas.test.ts` + `tests/ui/league.test.tsx` + recorrido: CANTERA `earnedOn` el lunes de la semana 5, RESORTE 67 % (ver PREGUNTAS), nivel "Entrenador de Liga" |
+| Test de la semana 4 guardado y la semana 8 muestra los deltas | ✅ | `tests/rules/league.test.ts` (`compareTests`) + `league.test.tsx` (asistente semana 4 → deltas en la semana 8) + recorrido (S8 → S12) |
+| Evolución ofrecida solo cuando se cumplen las 4 condiciones | ✅ | `league.test.ts` (`evolutionCheck`) + `league.test.tsx` (3/4 → botón bloqueado; 4/4 → confirmación → Forma II) |
+| Informe de 12 semanas en Markdown compartible (Web Share o copiar) | ✅ | `league.test.ts` (`blockReport`) + `league.test.tsx` (copiar) + recorrido; compartir usa `navigator.share` cuando existe y, si no, copiar o exportar `.md` |
+| "Pregunta al Rival" envía únicamente el contexto de §10.2 y muestra al usuario qué se envía antes de enviar | ✅ | `tests/domain/rival.test.ts` (esquema estricto, sin email/token/ids), `tests/api/rival.test.ts` (token, 400 con claves extra, límite 30, rechazos, errores sin secretos), `tests/ui/rival.test.tsx` (vista previa antes del primer envío; el cuerpo es `{ context }` idéntico a la vista previa) + recorrido con la función simulada. ⚠️ No se ha probado contra la API real desde este entorno: requiere desplegar en Vercel con las variables de entorno. |
+| Notificaciones locales donde iOS lo permita | ⚠️ | Implementadas (permiso desde Ajustes, `showNotification` del service worker, temporizadores mientras la app está abierta) y probadas en jsdom (`tests/lib/notifications.test.ts`); falta la prueba física en un iPhone con la PWA instalada. |
+
+### Cómo activar "Pregunta al Rival" en Vercel
+
+1. Vercel → proyecto → *Settings → Environment Variables*: `ANTHROPIC_API_KEY` (tu clave), `RIVAL_APP_TOKEN` (una cadena larga aleatoria, p. ej. `openssl rand -hex 24`); opcionales `RIVAL_MODEL` y `RIVAL_EFFORT`. Redeploy.
+2. En la app: REGEN → Ajustes → "Pregunta al Rival": activar **Enviar contexto a El Rival** y pegar el mismo token en **Token de la app**.
+3. REGEN → **Pregunta al Rival** → escribir la pregunta → **Preguntar** → revisar el JSON → **Enviar este contexto**. Las siguientes preguntas se envían directamente; "Ver qué se envía" sigue disponible.
+
+### Qué queda (Etapa IV en adelante, no iniciado)
+
+- Etapa IV (SPEC §9): biblia visual generada (avatar en 4 formas, 4 líderes, 4 medallas, 6 tipos, objetos, fondos de Ruta y Zona Salvaje), animaciones de entrada al gimnasio, medalla, evolución y PV, splash e iconos definitivos; opcionales Supabase (sync), exportación a Google Drive y Expo para push reales.
+- Pendientes menores: el límite diario del Rival en el servidor es por instancia (Vercel KV si se quiere blindar); los recordatorios solo viven mientras la app está abierta; el contador de llamadas y la marca de "vista previa vista" están en `localStorage`; la cintura sigue sin registrarse; Formas II → IV no tienen automatismo.
+
+### Decisiones que necesito de Daniel
+
+Ver `docs/PREGUNTAS.md`, sección "Preguntas surgidas durante la Etapa III". Las más importantes: si una semana sin Lower rompe la racha de CANTERA, si RESORTE se mide solo con el test o también con las sesiones, si Fatiga se excluye del nivel de entrenador, los pesos 50/50 de MOTOR / CONTROL / AVENTURA, el límite persistente y el modelo de El Rival.
+
+---
+
 ## Etapa II · Motor — "Las reglas del gimnasio"
 
 **Fecha:** 7 de septiembre de 2026.
-**Estado:** completada y verificada. No se ha empezado la Etapa III (pendiente de confirmación de Daniel).
+**Estado:** completada y verificada. La Etapa III se inició tras la confirmación de Daniel.
 
 ### Qué se hizo
 
