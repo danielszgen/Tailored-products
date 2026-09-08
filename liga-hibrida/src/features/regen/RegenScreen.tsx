@@ -1,6 +1,6 @@
 // REGEN tab (SPEC §8.6): weight + R7, symptoms + R8, regen log, microdose, Mochila, Consejo, data.
-import { Link } from 'react-router-dom';
-import { Screen, Splash } from '@/components';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, Card, Screen, Splash } from '@/components';
 import { Collapsible } from '@/components/Collapsible';
 import { useRegen } from '@/data';
 import { MORNING_CHECK, MORNING_DECISION } from '@/domain/content/items';
@@ -19,6 +19,7 @@ import { WeightCard } from './WeightCard';
 
 export function RegenScreen() {
   const model = useToday();
+  const navigate = useNavigate();
   const { profile, today, weekStart } = model;
   const weekRegen = useRegen({ from: weekStart, to: addDaysISO(weekStart, 6) });
   if (profile === undefined) return <Splash />;
@@ -55,6 +56,15 @@ export function RegenScreen() {
         <p className="mt-2">{MORNING_DECISION.join(' ')}</p>
       </Collapsible>
       <CouncilCard model={model} />
+      <Card eyebrow="Etapa III" title="Pregunta al Rival">
+        <p className="text-sm text-ink2 mb-3">
+          Una pregunta con tu contexto de la semana. Solo con tu consentimiento en Ajustes y viendo
+          antes qué se envía.
+        </p>
+        <Button full variant="secondary" onClick={() => navigate('/regen/rival')}>
+          Pregunta al Rival
+        </Button>
+      </Card>
       <DataCard />
       <p className="text-xs text-ink3 px-1">{NUTRITION_DISCLAIMER}</p>
     </Screen>

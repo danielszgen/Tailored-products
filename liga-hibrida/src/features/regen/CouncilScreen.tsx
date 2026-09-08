@@ -241,6 +241,9 @@ export function CouncilScreen() {
             >
               Exportar .md
             </Button>
+            <Button full variant="secondary" onClick={() => navigate('/regen/rival')}>
+              Pregunta al Rival
+            </Button>
             <Button
               full
               variant="secondary"

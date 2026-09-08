@@ -3,6 +3,7 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { db } from '@/data';
 import { SettingsScreen } from '@/features/settings';
+import { NOTIFICATIONS_IOS_NOTE, NOTIFICATIONS_STORAGE_KEY } from '@/lib/notifications';
 import { freezeDate, renderAt, resetDb, seedProfile, unfreezeDate } from './helpers';
 
 describe('Ajustes (SPEC §8.6)', () => {
@@ -36,5 +37,19 @@ describe('Ajustes (SPEC §8.6)', () => {
     await waitFor(async () => {
       expect(await db.profile.get('me')).toBeUndefined();
     });
+  });
+
+  it('local notifications stay off and read "no disponible" without the Notification API', async () => {
+    const user = userEvent.setup();
+    renderAt(<SettingsScreen />, '/regen/ajustes');
+    const toggle = await screen.findByRole('switch', { name: 'Notificaciones locales' });
+    expect(toggle).not.toBeChecked();
+    expect(screen.getByText('no disponible')).toBeInTheDocument();
+    expect(screen.getByText(NOTIFICATIONS_IOS_NOTE)).toBeInTheDocument();
+
+    await user.click(toggle);
+    await waitFor(() => expect(toggle).not.toBeChecked());
+    expect(screen.getByText('no disponible')).toBeInTheDocument();
+    expect(localStorage.getItem(NOTIFICATIONS_STORAGE_KEY)).toBeNull();
   });
 });
