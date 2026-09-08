@@ -2,12 +2,15 @@ import { Eyebrow, Meter, StatusPill } from '@/components';
 import { FormSilhouette } from '@/brand/icons';
 import { BLOCK_WEEKS, waveForWeek, waveLabel } from '@/domain/content/block';
 import { FORMS } from '@/domain/content/phases';
+import { StatsRow } from '@/features/league/StatsCard';
+import { useLeague } from '@/features/league/useLeague';
 import { formatShort } from '@/lib/date';
 import type { TodayModel } from './useToday';
 
-/** Compact trainer card: name, Forma, week/wave, PV bar and status (SPEC §8.2). */
+/** Compact trainer card: name, Forma, week/wave, PV bar, status and the 0–100 stats (SPEC §8.2, §6.2). */
 export function TrainerHeader({ model }: { model: TodayModel }) {
   const { profile, pvResult, weekOfBlock } = model;
+  const league = useLeague(model.today);
   if (!profile) return null;
 
   let weekText: string;
@@ -42,6 +45,11 @@ export function TrainerHeader({ model }: { model: TodayModel }) {
           showValue={!!pvResult}
           height={8}
         />
+        {league.summary && (
+          <div className="mt-2">
+            <StatsRow stats={league.summary.stats} compact />
+          </div>
+        )}
       </div>
     </section>
   );

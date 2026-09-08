@@ -1,17 +1,26 @@
-// 12-week board with waves, deloads, tests and the current week (SPEC §8.5).
+// 12-week board with waves, deloads, Combates de Liga, earned medals and the current week (SPEC §8.5).
 import { Card, Eyebrow, Pill } from '@/components';
+import { MedalIcon } from '@/brand/icons';
 import { BLOCK_END, blockWeeks } from '@/domain/content/block';
-import type { ISODate } from '@/domain/types';
-import { formatShort } from '@/lib/date';
+import type { MedalProgress } from '@/domain/rules/league';
+import type { ISODate, LeagueTest } from '@/domain/types';
+import { formatShort, weekOfBlock } from '@/lib/date';
 
 export function BlockBoard({
   blockStart,
   currentWeek,
+  tests = [],
+  medals = [],
 }: {
   blockStart: ISODate;
   currentWeek: number | null;
+  tests?: LeagueTest[];
+  medals?: MedalProgress[];
 }) {
   const weeks = blockWeeks(blockStart);
+  const testDone = new Set(tests.map((t) => t.weekOfBlock));
+  const earnedIn = (week: number) =>
+    medals.filter((m) => m.earnedOn && weekOfBlock(m.earnedOn, blockStart) === week);
   return (
     <Card
       eyebrow="Bloque 1"
@@ -21,11 +30,13 @@ export function BlockBoard({
       <ol className="grid grid-cols-4 gap-1.5" aria-label="Semanas del bloque">
         {weeks.map((w) => {
           const current = w.weekOfBlock === currentWeek;
+          const earned = earnedIn(w.weekOfBlock);
+          const done = testDone.has(w.weekOfBlock as 4 | 8 | 12);
           return (
             <li
               key={w.weekOfBlock}
               aria-current={current ? 'true' : undefined}
-              className={`rounded-list border p-2 min-h-[64px] flex flex-col justify-between ${
+              className={`relative rounded-list border p-2 min-h-[64px] flex flex-col justify-between ${
                 current
                   ? 'border-accent bg-accent text-on-accent'
                   : w.isDeload
@@ -33,7 +44,22 @@ export function BlockBoard({
                     : 'border-line bg-surface'
               }`}
             >
-              <span className="font-pixel text-[10px] tracking-[1px]">S{w.weekOfBlock}</span>
+              <span className="flex items-center justify-between">
+                <span className="font-pixel text-[10px] tracking-[1px]">S{w.weekOfBlock}</span>
+                {earned.length > 0 && (
+                  <span className="flex gap-0.5">
+                    {earned.map((m) => (
+                      <MedalIcon
+                        key={m.id}
+                        gym={m.id}
+                        state="earned"
+                        size={14}
+                        title={`Medalla ${m.name} conseguida`}
+                      />
+                    ))}
+                  </span>
+                )}
+              </span>
               <span
                 className={`text-[11px] leading-tight ${current ? 'text-on-accent' : 'text-ink2'}`}
               >
@@ -42,15 +68,16 @@ export function BlockBoard({
               <span
                 className={`text-[10px] ${current ? 'text-on-accent opacity-80' : 'text-ink3'}`}
               >
-                {formatShort(w.start)}
+                {w.isTest ? (done ? 'Test ✓' : 'Test') : formatShort(w.start)}
               </span>
             </li>
           );
         })}
       </ol>
-      <div className="flex gap-2 mt-3">
+      <div className="flex flex-wrap gap-2 mt-3">
         <Pill tone="neutral">S4 · S8 descarga</Pill>
         <Pill tone="gold">S4 · S8 · S12 Combate de Liga</Pill>
+        {testDone.has(0) && <Pill tone="ok">Baseline S0 ✓</Pill>}
       </div>
     </Card>
   );

@@ -1,61 +1,94 @@
-// The 10 SMART objectives of Bloque 1 and the trainer level placeholder (SPEC §6.2, §6.10).
-import { Card, Eyebrow, Pill } from '@/components';
-import { Collapsible } from '@/components/Collapsible';
-import {
-  BLOCK_SUCCESS_CRITERIA,
-  SMART_OBJECTIVES,
-  STATS,
-  STAT_PLACEHOLDER,
-} from '@/domain/content/smart';
-import { TRAINER_LEVEL_NOTE, TRAINER_LEVELS } from '@/domain/content/tests';
-import { TypeGlyph } from '@/brand/icons';
+// The 10 SMART objectives of Bloque 1 with automatic progress or a manual mark (SPEC §6.2, §8.5).
+import { useState } from 'react';
+import { Button, Card, Meter, Pill } from '@/components';
+import { updateProfile } from '@/data';
+import { BLOCK_SUCCESS_CRITERIA } from '@/domain/content/smart';
+import type { SmartProgress } from '@/domain/rules/league';
+import type { ISODate, Profile } from '@/domain/types';
+import { formatShort } from '@/lib/date';
 
-export function SmartCard() {
+const STATUS_LABEL: Record<SmartProgress['status'], string> = {
+  done: 'Conseguido',
+  progress: 'En progreso',
+  pending: 'Pendiente',
+  manual: 'Manual',
+};
+
+const STATUS_TONE: Record<SmartProgress['status'], 'ok' | 'cargado' | 'neutral' | 'gold'> = {
+  done: 'ok',
+  progress: 'cargado',
+  pending: 'neutral',
+  manual: 'gold',
+};
+
+export function SmartCard({
+  smart,
+  profile,
+  today,
+}: {
+  smart: SmartProgress[] | null;
+  profile: Profile;
+  today: ISODate;
+}) {
+  const [busy, setBusy] = useState<number | null>(null);
+
+  async function toggleManual(o: SmartProgress) {
+    setBusy(o.id);
+    try {
+      const next = { ...(profile.smartManual ?? {}) };
+      if (o.manual) delete next[String(o.id)];
+      else next[String(o.id)] = { done: true, date: today };
+      await updateProfile({ smartManual: next });
+    } finally {
+      setBusy(null);
+    }
+  }
+
   return (
-    <>
-      <Card eyebrow="Estadísticas" title="Ficha del entrenador">
-        <ul className="grid grid-cols-5 gap-1 text-center">
-          {STATS.map((s) => (
-            <li key={s.key} className="flex flex-col items-center gap-1">
-              <TypeGlyph type={s.key} size={22} title={s.name} />
-              <span className="font-pixel text-[9px] tracking-[1px] text-ink3">{s.name}</span>
-              <span className="display text-lg">{STAT_PLACEHOLDER}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="text-xs text-ink3 mt-2">Los números 0–100 se calculan en la Etapa III.</p>
-      </Card>
-
-      <Card
-        eyebrow="Objetivos SMART"
-        title="Bloque 1 · 10 objetivos"
-        right={<Pill tone="neutral">progreso · Etapa III</Pill>}
-      >
-        <ol className="flex flex-col gap-2">
-          {SMART_OBJECTIVES.map((o) => (
-            <li key={o.id} className="text-sm">
-              <span className="font-bold text-ink">
-                {o.id}. {o.title}
-              </span>
+    <Card eyebrow="Objetivos SMART" title="Bloque 1 · 10 objetivos">
+      {!smart ? (
+        <p className="text-sm text-ink3">Calculando…</p>
+      ) : (
+        <ol className="flex flex-col gap-3" aria-label="Objetivos SMART">
+          {smart.map((o) => (
+            <li key={o.id} className="text-sm" data-testid={`smart-${o.id}`}>
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-bold text-ink">
+                  {o.id}. {o.title}
+                </span>
+                <Pill tone={STATUS_TONE[o.status]}>
+                  {o.status === 'manual' && o.manual?.done
+                    ? 'Hecho a mano'
+                    : STATUS_LABEL[o.status]}
+                </Pill>
+              </div>
               <span className="block text-ink2">{o.target}</span>
-              <span className="block text-xs text-ink3">Validación: {o.validation}</span>
+              <Meter
+                value={(o.progress ?? 0) * 100}
+                tone={o.status === 'done' || o.manual?.done ? 'ok' : 'accent'}
+                height={5}
+                showValue={false}
+                className="mt-1"
+              />
+              <span className="block text-xs text-ink3 mt-1">
+                {o.progress === null ? 'Sin datos · ' : ''}
+                {o.detail}
+                {o.manual ? ` Marcado a mano el ${formatShort(o.manual.date)}.` : ''}
+              </span>
+              <Button
+                variant="ghost"
+                className="mt-1 -ml-4"
+                onClick={() => void toggleManual(o)}
+                disabled={busy === o.id}
+                aria-label={`${o.manual ? 'Quitar marca manual' : 'Marcar hecho a mano'}: ${o.title}`}
+              >
+                {o.manual ? 'Quitar marca manual' : 'Marcar hecho a mano'}
+              </Button>
             </li>
           ))}
         </ol>
-        <p className="text-xs text-ink3 mt-3">{BLOCK_SUCCESS_CRITERIA}</p>
-      </Card>
-
-      <Collapsible title="Nivel de entrenador" eyebrow="Adherencia 4 semanas">
-        <p>Se calcula con 4 semanas de datos (Etapa III).</p>
-        <ul className="mt-2 flex flex-col gap-1">
-          {TRAINER_LEVELS.map((l) => (
-            <li key={l.id}>
-              <span className="font-bold text-ink">{l.name}</span> · {l.min}–{l.max} %
-            </li>
-          ))}
-        </ul>
-        <Eyebrow className="block mt-2">{TRAINER_LEVEL_NOTE}</Eyebrow>
-      </Collapsible>
-    </>
+      )}
+      <p className="text-xs text-ink3 mt-3">{BLOCK_SUCCESS_CRITERIA}</p>
+    </Card>
   );
 }
