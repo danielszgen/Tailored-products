@@ -180,10 +180,13 @@ export type PlannedItem =
   // + Literal item the app cannot model yet (e.g. "2 full-body de mantenimiento" in the travel template)
   | { kind: 'note'; text: string };
 
+/** + Week 0 = baseline test recorded during "Semana 0–2" (SMART 1 "test movilidad"). */
+export type LeagueTestWeek = 0 | 4 | 8 | 12;
+
 export interface LeagueTest {
   id: string;
   date: ISODate;
-  weekOfBlock: 4 | 8 | 12;
+  weekOfBlock: LeagueTestWeek;
   pullupRir2?: { loadKg: number; reps: number };
   dipRir2?: { loadKg: number; reps: number };
   splitSquat?: { loadKg: number; reps: number; side: 'L' | 'R' }[];
@@ -193,6 +196,8 @@ export interface LeagueTest {
   waistCm?: number;
   weightAvg7?: number;
   transferNote?: string;
+  bilateralNote?: string; // + "patrón bilateral técnico" of the legs test (§6.10)
+  note?: string; // + free note (e.g. the 3 photos taken outside the app)
 }
 
 export interface Medal {
@@ -223,6 +228,19 @@ export interface Profile {
   defaultTemplate?: WeekTemplate; // + settings: default week template
   /** + Barbell-squat transition (§6.5 / R8): 'barbell' replaces Cantera A1 by the high-bar squat. */
   squatVariant?: 'tolerated' | 'barbell';
+  /** + Manual SMART overrides ("progreso automático o manual", §8.5), keyed by objective id. */
+  smartManual?: Record<string, SmartManual>;
+  /** + Evolutions confirmed by Daniel (§6.3 "Daniel confirma manualmente"). */
+  evolutions?: { form: Form; date: ISODate }[];
+  /** + Consent for "Pregunta al Rival" (§10.2): present = granted on that date. */
+  rivalConsentAt?: ISODate;
+}
+
+/** + Manual state of a SMART objective (§8.5). */
+export interface SmartManual {
+  done: boolean;
+  date: ISODate;
+  note?: string;
 }
 export interface Adjustment {
   id: string;

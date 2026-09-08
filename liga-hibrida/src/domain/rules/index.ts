@@ -8,3 +8,5 @@ export * from './weight';
 export * from './symptoms';
 export * from './minimum';
 export * from './council';
+export * from './marks';
+export * from './league';

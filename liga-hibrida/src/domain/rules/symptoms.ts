@@ -69,6 +69,14 @@ export function isRisingSeries(values: number[]): boolean {
   return a < b && b < c;
 }
 
+/** True when any 3 consecutive records of the series rise (R10 looks inside whole weeks). */
+export function hasRisingRun(values: number[]): boolean {
+  for (let i = 2; i < values.length; i++) {
+    if (values[i - 2] < values[i - 1] && values[i - 1] < values[i]) return true;
+  }
+  return false;
+}
+
 /** Value ≥ 4 in every record of the last 7 days, with at least 3 records. */
 export function isPersistent(points: SymptomPoint[], today: ISODate): boolean {
   const from = addDaysISO(today, -(PERSISTENT_DAYS - 1));

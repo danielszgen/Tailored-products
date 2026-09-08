@@ -285,7 +285,8 @@ const LIGHT_ICON: Record<Light | 'none', string> = {
   none: '⚪',
 };
 
-function mainLiftSummary(session: SessionLog): string {
+/** "A1 70 kg × 8/8/8/8 @ RIR 2 · A2 …" — the main lifts of a session (also sent to El Rival). */
+export function mainLiftSummary(session: SessionLog): string {
   const parts: string[] = [];
   for (const log of session.exercises) {
     const spec = getExercise(session.gymId, log.exerciseId);

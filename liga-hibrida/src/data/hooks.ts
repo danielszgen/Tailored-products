@@ -5,6 +5,7 @@ import type {
   Adjustment,
   Checkin,
   ISODate,
+  LeagueTest,
   Medal,
   RegenLog,
   RouteLog,
@@ -24,6 +25,7 @@ import {
   listRegen,
   listRoutes,
   listSessions,
+  listTests,
   listWeeks,
   listWild,
   weightSeries,
@@ -95,4 +97,9 @@ export function useAdjustments(): Adjustment[] | undefined {
 /** All stored weeks, ascending. */
 export function useWeeks(): WeekPlan[] | undefined {
   return useLiveQuery(() => listWeeks(), []);
+}
+
+/** League tests (Combates de Liga), ascending by date. */
+export function useTests(): LeagueTest[] | undefined {
+  return useLiveQuery(() => listTests(), []);
 }

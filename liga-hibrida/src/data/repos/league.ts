@@ -14,6 +14,14 @@ export async function listTests(database: LigaDB = db): Promise<LeagueTest[]> {
   return database.tests.orderBy('date').toArray();
 }
 
+export async function getTest(id: string, database: LigaDB = db): Promise<LeagueTest | undefined> {
+  return database.tests.get(id);
+}
+
+export async function deleteTest(id: string, database: LigaDB = db): Promise<void> {
+  await database.tests.delete(id);
+}
+
 // --- Medals -----------------------------------------------------------------
 
 function inGymOrder(medals: Medal[]): Medal[] {

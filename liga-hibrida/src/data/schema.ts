@@ -201,10 +201,17 @@ export const WeekPlanSchema = z.object({
 
 const LoadRepsSchema = z.object({ loadKg: z.number(), reps: z.number() });
 
+export const LeagueTestWeekSchema = z.union([
+  z.literal(0),
+  z.literal(4),
+  z.literal(8),
+  z.literal(12),
+]);
+
 export const LeagueTestSchema = z.object({
   id: z.string(),
   date: ISODateSchema,
-  weekOfBlock: z.union([z.literal(4), z.literal(8), z.literal(12)]),
+  weekOfBlock: LeagueTestWeekSchema,
   pullupRir2: LoadRepsSchema.optional(),
   dipRir2: LoadRepsSchema.optional(),
   splitSquat: z.array(LoadRepsSchema.extend({ side: SideSchema })).optional(),
@@ -234,6 +241,8 @@ export const LeagueTestSchema = z.object({
   waistCm: z.number().optional(),
   weightAvg7: z.number().optional(),
   transferNote: z.string().optional(),
+  bilateralNote: z.string().optional(),
+  note: z.string().optional(),
 });
 
 export const MedalSchema = z.object({
@@ -267,6 +276,14 @@ export const ProfileSchema = z.object({
   calorieMode: z.enum(['contar', 'porciones']).optional(),
   defaultTemplate: WeekTemplateSchema.optional(),
   squatVariant: z.enum(['tolerated', 'barbell']).optional(),
+  smartManual: z
+    .record(
+      z.string(),
+      z.object({ done: z.boolean(), date: ISODateSchema, note: z.string().optional() }),
+    )
+    .optional(),
+  evolutions: z.array(z.object({ form: FormSchema, date: ISODateSchema })).optional(),
+  rivalConsentAt: ISODateSchema.optional(),
 });
 
 export const StoredProfileSchema = ProfileSchema.extend({ id: z.literal(PROFILE_ID) });

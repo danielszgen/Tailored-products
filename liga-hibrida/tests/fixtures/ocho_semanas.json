@@ -1,0 +1,5451 @@
+{
+  "app": "liga-hibrida",
+  "schemaVersion": 1,
+  "exportedAt": "2026-11-02T07:30:00.000Z",
+  "tables": {
+    "checkins": [
+      {
+        "date": "2026-09-07",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-08",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79.21,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-09",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 78.92,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-10",
+        "sleepHours": 8.5,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.12,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-11",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 78.83,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-12",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.14,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-13",
+        "sleepHours": 8.5,
+        "energy": 5,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 78.95,
+        "pv": 91,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-14",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.06,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-15",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79.26,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-16",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 78.97,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-17",
+        "sleepHours": 8.5,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.18,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-18",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 78.89,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-19",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.19,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-20",
+        "sleepHours": 8.5,
+        "energy": 5,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79,
+        "pv": 91,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-21",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.12,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-22",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79.34,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-23",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.06,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-24",
+        "sleepHours": 8.5,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.28,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-25",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-26",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.32,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-27",
+        "sleepHours": 8.5,
+        "energy": 5,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.15,
+        "pv": 91,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-28",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.27,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-29",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79.49,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-09-30",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.21,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-01",
+        "sleepHours": 8.5,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.43,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-02",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79.15,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-03",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.47,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-04",
+        "sleepHours": 8.5,
+        "energy": 5,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.29,
+        "pv": 91,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-05",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.41,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-06",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79.63,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-07",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.35,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-08",
+        "sleepHours": 8.5,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.57,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-09",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79.29,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-10",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.61,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-11",
+        "sleepHours": 8.5,
+        "energy": 5,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.43,
+        "pv": 91,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-12",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.55,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-13",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 3,
+        "adductor": 2,
+        "weightKg": 79.77,
+        "pv": 74,
+        "status": "cargado"
+      },
+      {
+        "date": "2026-10-14",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 4,
+        "adductor": 1,
+        "weightKg": 79.49,
+        "pv": 78,
+        "status": "ko"
+      },
+      {
+        "date": "2026-10-15",
+        "sleepHours": 8.5,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 5,
+        "adductor": 1,
+        "weightKg": 79.71,
+        "pv": 75,
+        "status": "ko"
+      },
+      {
+        "date": "2026-10-16",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 5,
+        "adductor": 2,
+        "weightKg": 79.43,
+        "pv": 69,
+        "status": "ko"
+      },
+      {
+        "date": "2026-10-17",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 3,
+        "adductor": 1,
+        "weightKg": 79.75,
+        "pv": 80,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-18",
+        "sleepHours": 8.5,
+        "energy": 5,
+        "legs": 4,
+        "wrist": 2,
+        "adductor": 1,
+        "weightKg": 79.57,
+        "pv": 89,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-19",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.69,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-20",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79.91,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-21",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.63,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-22",
+        "sleepHours": 8.5,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.85,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-23",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79.57,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-24",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.89,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-25",
+        "sleepHours": 8.5,
+        "energy": 5,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.71,
+        "pv": 91,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-26",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.83,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-27",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 80.06,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-28",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.78,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-29",
+        "sleepHours": 8.5,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 80,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-30",
+        "sleepHours": 7.5,
+        "energy": 4,
+        "legs": 3,
+        "wrist": 1,
+        "adductor": 2,
+        "weightKg": 79.72,
+        "pv": 76,
+        "status": "ok"
+      },
+      {
+        "date": "2026-10-31",
+        "sleepHours": 8,
+        "energy": 4,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 80.04,
+        "pv": 85,
+        "status": "ok"
+      },
+      {
+        "date": "2026-11-01",
+        "sleepHours": 8.5,
+        "energy": 5,
+        "legs": 4,
+        "wrist": 1,
+        "adductor": 1,
+        "weightKg": 79.86,
+        "pv": 91,
+        "status": "ok"
+      }
+    ],
+    "sessions": [
+      {
+        "id": "s_cantera_2026-09-07",
+        "date": "2026-09-07",
+        "gymId": "cantera",
+        "weekOfBlock": 1,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "hack_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 60,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 60,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 60,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 60,
+                "reps": 6,
+                "rir": 3
+              }
+            ]
+          },
+          {
+            "exerciseId": "romanian_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 80,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 80,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 80,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "bulgarian_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "leg_press_or_extension",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-07T08:00:00",
+        "finishedAt": "2026-09-07T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 2
+      },
+      {
+        "id": "s_yunque_2026-09-08",
+        "date": "2026-09-08",
+        "gymId": "yunque",
+        "weekOfBlock": 1,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "bench_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 70,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 70,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 70,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 70,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "weighted_pullup",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 10,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 10,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 10,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 10,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "incline_db_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 24,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 24,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 24,
+                "reps": 9,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-08T08:00:00",
+        "finishedAt": "2026-09-08T09:02:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_resorte_2026-09-10",
+        "date": "2026-09-10",
+        "gymId": "resorte",
+        "weekOfBlock": 1,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "trap_bar_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 5,
+                "rir": 3
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 5,
+                "rir": 3
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 100,
+                "reps": 5,
+                "rir": 3
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 100,
+                "reps": 5,
+                "rir": 3
+              }
+            ]
+          },
+          {
+            "exerciseId": "front_foot_elevated_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "hip_thrust",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 100,
+                "reps": 10,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-10T08:00:00",
+        "finishedAt": "2026-09-10T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 1
+      },
+      {
+        "id": "s_vertigo_2026-09-11",
+        "date": "2026-09-11",
+        "gymId": "vertigo",
+        "weekOfBlock": 1,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "weighted_dip",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 20,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 20,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 20,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 20,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "chinup_neutral",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 5,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "db_military_or_landmine_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 16,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 16,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 16,
+                "reps": 10,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-11T08:00:00",
+        "finishedAt": "2026-09-11T09:02:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_cantera_2026-09-14",
+        "date": "2026-09-14",
+        "gymId": "cantera",
+        "weekOfBlock": 2,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "hack_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 60,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 60,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 60,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 60,
+                "reps": 7,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "romanian_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 85,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 85,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 85,
+                "reps": 7,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "bulgarian_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "leg_press_or_extension",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-14T08:00:00",
+        "finishedAt": "2026-09-14T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 2,
+        "sportLast24h": "Zona Salvaje el sábado, domingo paseo"
+      },
+      {
+        "id": "s_yunque_2026-09-15",
+        "date": "2026-09-15",
+        "gymId": "yunque",
+        "weekOfBlock": 2,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "bench_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 70,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 70,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 70,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 70,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "weighted_pullup",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 10,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 10,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 10,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 10,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "incline_db_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 24,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 24,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 24,
+                "reps": 10,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-15T08:00:00",
+        "finishedAt": "2026-09-15T09:02:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_resorte_2026-09-17",
+        "date": "2026-09-17",
+        "gymId": "resorte",
+        "weekOfBlock": 2,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "trap_bar_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 100,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 100,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "front_foot_elevated_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 14,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "hip_thrust",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 110,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 110,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 110,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-17T08:00:00",
+        "finishedAt": "2026-09-17T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 2
+      },
+      {
+        "id": "s_vertigo_2026-09-18",
+        "date": "2026-09-18",
+        "gymId": "vertigo",
+        "weekOfBlock": 2,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "weighted_dip",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 20,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 20,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 20,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 20,
+                "reps": 7,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "chinup_neutral",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 5,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "db_military_or_landmine_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 18,
+                "reps": 9,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 18,
+                "reps": 9,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-18T08:00:00",
+        "finishedAt": "2026-09-18T09:02:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_cantera_2026-09-21",
+        "date": "2026-09-21",
+        "gymId": "cantera",
+        "weekOfBlock": 3,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "hack_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 65,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 65,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 65,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 65,
+                "reps": 6,
+                "rir": 3
+              }
+            ]
+          },
+          {
+            "exerciseId": "romanian_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 85,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 85,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 85,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "bulgarian_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "leg_press_or_extension",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-21T08:00:00",
+        "finishedAt": "2026-09-21T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 1,
+        "sportLast24h": "Zona Salvaje el sábado, domingo paseo"
+      },
+      {
+        "id": "s_yunque_2026-09-22",
+        "date": "2026-09-22",
+        "gymId": "yunque",
+        "weekOfBlock": 3,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "bench_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 72.5,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 72.5,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 72.5,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 72.5,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "weighted_pullup",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 12.5,
+                "reps": 5,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 12.5,
+                "reps": 5,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 12.5,
+                "reps": 5,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 12.5,
+                "reps": 5,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "incline_db_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 26,
+                "reps": 9,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 26,
+                "reps": 9,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 26,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-22T08:00:00",
+        "finishedAt": "2026-09-22T09:02:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_resorte_2026-09-24",
+        "date": "2026-09-24",
+        "gymId": "resorte",
+        "weekOfBlock": 3,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "trap_bar_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 105,
+                "reps": 5,
+                "rir": 3
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 105,
+                "reps": 5,
+                "rir": 3
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 105,
+                "reps": 5,
+                "rir": 3
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 105,
+                "reps": 5,
+                "rir": 3
+              }
+            ]
+          },
+          {
+            "exerciseId": "front_foot_elevated_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "hip_thrust",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 110,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 110,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 110,
+                "reps": 9,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-24T08:00:00",
+        "finishedAt": "2026-09-24T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 1
+      },
+      {
+        "id": "s_vertigo_2026-09-25",
+        "date": "2026-09-25",
+        "gymId": "vertigo",
+        "weekOfBlock": 3,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "weighted_dip",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 22.5,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 22.5,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 22.5,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 22.5,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "chinup_neutral",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 7.5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 7.5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 7.5,
+                "reps": 7,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "db_military_or_landmine_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 18,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 18,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 18,
+                "reps": 9,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-25T08:00:00",
+        "finishedAt": "2026-09-25T09:02:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_cantera_2026-09-28",
+        "date": "2026-09-28",
+        "gymId": "cantera",
+        "weekOfBlock": 4,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "hack_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 55,
+                "reps": 6,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 55,
+                "reps": 6,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "romanian_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 75,
+                "reps": 6,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 75,
+                "reps": 6,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "bulgarian_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 4,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 4,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 4,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 4,
+                "side": "R"
+              }
+            ]
+          }
+        ],
+        "durationMin": 45,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-28T08:00:00",
+        "finishedAt": "2026-09-28T08:45:00",
+        "adductorDuring": 1,
+        "adductorAfter": 1,
+        "sportLast24h": "Zona Salvaje el sábado, domingo paseo"
+      },
+      {
+        "id": "s_yunque_2026-09-29",
+        "date": "2026-09-29",
+        "gymId": "yunque",
+        "weekOfBlock": 4,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "bench_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 65,
+                "reps": 6,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 65,
+                "reps": 6,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "weighted_pullup",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 10,
+                "reps": 5,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 10,
+                "reps": 5,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "incline_db_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 22,
+                "reps": 8,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 22,
+                "reps": 8,
+                "rir": 4
+              }
+            ]
+          }
+        ],
+        "durationMin": 45,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-09-29T08:00:00",
+        "finishedAt": "2026-09-29T08:45:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_resorte_2026-10-01",
+        "date": "2026-10-01",
+        "gymId": "resorte",
+        "weekOfBlock": 4,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "trap_bar_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 90,
+                "reps": 4,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 90,
+                "reps": 4,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "front_foot_elevated_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 12,
+                "reps": 8,
+                "rir": 4,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 12,
+                "reps": 8,
+                "rir": 4,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 12,
+                "reps": 8,
+                "rir": 4,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 12,
+                "reps": 8,
+                "rir": 4,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "hip_thrust",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 90,
+                "reps": 8,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 90,
+                "reps": 8,
+                "rir": 4
+              }
+            ]
+          }
+        ],
+        "durationMin": 45,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-01T08:00:00",
+        "finishedAt": "2026-10-01T08:45:00",
+        "adductorDuring": 1,
+        "adductorAfter": 1
+      },
+      {
+        "id": "s_vertigo_2026-10-02",
+        "date": "2026-10-02",
+        "gymId": "vertigo",
+        "weekOfBlock": 4,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "weighted_dip",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 20,
+                "reps": 5,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 20,
+                "reps": 5,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "chinup_neutral",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 5,
+                "reps": 6,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 5,
+                "reps": 6,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "db_military_or_landmine_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 4
+              }
+            ]
+          }
+        ],
+        "durationMin": 45,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-02T08:00:00",
+        "finishedAt": "2026-10-02T08:45:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_cantera_2026-10-05",
+        "date": "2026-10-05",
+        "gymId": "cantera",
+        "weekOfBlock": 5,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "hack_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 65,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 65,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 65,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 65,
+                "reps": 7,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "romanian_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 90,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 90,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 90,
+                "reps": 7,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "bulgarian_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "leg_press_or_extension",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-05T08:00:00",
+        "finishedAt": "2026-10-05T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 2
+      },
+      {
+        "id": "s_yunque_2026-10-06",
+        "date": "2026-10-06",
+        "gymId": "yunque",
+        "weekOfBlock": 5,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "bench_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 72.5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 72.5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 72.5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 72.5,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "weighted_pullup",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 12.5,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 12.5,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 12.5,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 12.5,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "incline_db_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 26,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 26,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 26,
+                "reps": 9,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-06T08:00:00",
+        "finishedAt": "2026-10-06T09:02:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_resorte_2026-10-08",
+        "date": "2026-10-08",
+        "gymId": "resorte",
+        "weekOfBlock": 5,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "trap_bar_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 105,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 105,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 105,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 105,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "front_foot_elevated_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "hip_thrust",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 120,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 120,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 120,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-08T08:00:00",
+        "finishedAt": "2026-10-08T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 2
+      },
+      {
+        "id": "s_vertigo_2026-10-09",
+        "date": "2026-10-09",
+        "gymId": "vertigo",
+        "weekOfBlock": 5,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "weighted_dip",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 22.5,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 22.5,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 22.5,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 22.5,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "chinup_neutral",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 7.5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 7.5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 7.5,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "db_military_or_landmine_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 18,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 18,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 18,
+                "reps": 10,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-09T08:00:00",
+        "finishedAt": "2026-10-09T09:02:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_cantera_2026-10-12",
+        "date": "2026-10-12",
+        "gymId": "cantera",
+        "weekOfBlock": 6,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "hack_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 70,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 70,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 70,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 70,
+                "reps": 6,
+                "rir": 3
+              }
+            ]
+          },
+          {
+            "exerciseId": "romanian_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 90,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 90,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 90,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "bulgarian_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "leg_press_or_extension",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-12T08:00:00",
+        "finishedAt": "2026-10-12T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 1,
+        "sportLast24h": "Zona Salvaje el sábado, domingo paseo"
+      },
+      {
+        "id": "s_yunque_2026-10-13",
+        "date": "2026-10-13",
+        "gymId": "yunque",
+        "weekOfBlock": 6,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "bench_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 75,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 75,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 75,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 75,
+                "reps": 7,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "weighted_pullup",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 12.5,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 12.5,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 12.5,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 12.5,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "incline_db_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 26,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 26,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 26,
+                "reps": 10,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-13T08:00:00",
+        "finishedAt": "2026-10-13T09:02:00",
+        "wristDuring": 3,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_resorte_2026-10-15",
+        "date": "2026-10-15",
+        "gymId": "resorte",
+        "weekOfBlock": 6,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "trap_bar_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 110,
+                "reps": 5,
+                "rir": 3
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 110,
+                "reps": 5,
+                "rir": 3
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 110,
+                "reps": 5,
+                "rir": 3
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 110,
+                "reps": 5,
+                "rir": 3
+              }
+            ]
+          },
+          {
+            "exerciseId": "front_foot_elevated_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "hip_thrust",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 120,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 120,
+                "reps": 9,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 120,
+                "reps": 9,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-15T08:00:00",
+        "finishedAt": "2026-10-15T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 2
+      },
+      {
+        "id": "s_vertigo_2026-10-16",
+        "date": "2026-10-16",
+        "gymId": "vertigo",
+        "weekOfBlock": 6,
+        "version": 45,
+        "statusAtStart": "ko",
+        "energyStart": 3,
+        "energyEnd": 3,
+        "feel": "pesado",
+        "exercises": [
+          {
+            "exerciseId": "weighted_dip",
+            "sets": [],
+            "skipped": true
+          },
+          {
+            "exerciseId": "chinup_neutral",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 7.5,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 7.5,
+                "reps": 6,
+                "rir": 3
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 7.5,
+                "reps": 6,
+                "rir": 3
+              }
+            ]
+          },
+          {
+            "exerciseId": "db_military_or_landmine_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 16,
+                "reps": 10,
+                "rir": 3
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 16,
+                "reps": 10,
+                "rir": 3
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 16,
+                "reps": 10,
+                "rir": 3
+              }
+            ]
+          }
+        ],
+        "durationMin": 40,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-16T08:00:00",
+        "finishedAt": "2026-10-16T09:02:00",
+        "wristDuring": 4,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_cantera_2026-10-19",
+        "date": "2026-10-19",
+        "gymId": "cantera",
+        "weekOfBlock": 7,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "hack_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 70,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 70,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 70,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 70,
+                "reps": 7,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "romanian_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 95,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 95,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 95,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "bulgarian_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 22,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 22,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 22,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 22,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 22,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 22,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "leg_press_or_extension",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 12,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-19T08:00:00",
+        "finishedAt": "2026-10-19T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 2,
+        "sportLast24h": "Zona Salvaje el sábado, domingo paseo"
+      },
+      {
+        "id": "s_yunque_2026-10-20",
+        "date": "2026-10-20",
+        "gymId": "yunque",
+        "weekOfBlock": 7,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "bench_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 77.5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 77.5,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 77.5,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 77.5,
+                "reps": 7,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "weighted_pullup",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 15,
+                "reps": 5,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 15,
+                "reps": 5,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 15,
+                "reps": 5,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 15,
+                "reps": 5,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "incline_db_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 28,
+                "reps": 9,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 28,
+                "reps": 9,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 28,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-20T08:00:00",
+        "finishedAt": "2026-10-20T09:02:00",
+        "wristDuring": 2,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_resorte_2026-10-22",
+        "date": "2026-10-22",
+        "gymId": "resorte",
+        "weekOfBlock": 7,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "trap_bar_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 110,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 110,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 110,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 110,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "front_foot_elevated_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              },
+              {
+                "setIndex": 5,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "L"
+              },
+              {
+                "setIndex": 6,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 2,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "hip_thrust",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 120,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 120,
+                "reps": 10,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 120,
+                "reps": 10,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-22T08:00:00",
+        "finishedAt": "2026-10-22T09:02:00",
+        "adductorDuring": 1,
+        "adductorAfter": 1
+      },
+      {
+        "id": "s_vertigo_2026-10-23",
+        "date": "2026-10-23",
+        "gymId": "vertigo",
+        "weekOfBlock": 7,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "weighted_dip",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 25,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 25,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 25,
+                "reps": 6,
+                "rir": 2
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 25,
+                "reps": 6,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "chinup_neutral",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 10,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 10,
+                "reps": 7,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 10,
+                "reps": 7,
+                "rir": 2
+              }
+            ]
+          },
+          {
+            "exerciseId": "db_military_or_landmine_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 20,
+                "reps": 9,
+                "rir": 2
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 2
+              }
+            ]
+          }
+        ],
+        "durationMin": 62,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-23T08:00:00",
+        "finishedAt": "2026-10-23T09:02:00",
+        "wristDuring": 2,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_cantera_2026-10-26",
+        "date": "2026-10-26",
+        "gymId": "cantera",
+        "weekOfBlock": 8,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "hack_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 60,
+                "reps": 6,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 60,
+                "reps": 6,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "romanian_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 80,
+                "reps": 6,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 80,
+                "reps": 6,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "bulgarian_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 4,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 4,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 4,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 20,
+                "reps": 8,
+                "rir": 4,
+                "side": "R"
+              }
+            ]
+          }
+        ],
+        "durationMin": 45,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-26T08:00:00",
+        "finishedAt": "2026-10-26T08:45:00",
+        "adductorDuring": 1,
+        "adductorAfter": 1
+      },
+      {
+        "id": "s_yunque_2026-10-27",
+        "date": "2026-10-27",
+        "gymId": "yunque",
+        "weekOfBlock": 8,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "bench_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 70,
+                "reps": 6,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 70,
+                "reps": 6,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "weighted_pullup",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 12.5,
+                "reps": 5,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 12.5,
+                "reps": 5,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "incline_db_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 24,
+                "reps": 8,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 24,
+                "reps": 8,
+                "rir": 4
+              }
+            ]
+          }
+        ],
+        "durationMin": 45,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-27T08:00:00",
+        "finishedAt": "2026-10-27T08:45:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      },
+      {
+        "id": "s_resorte_2026-10-29",
+        "date": "2026-10-29",
+        "gymId": "resorte",
+        "weekOfBlock": 8,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "trap_bar_deadlift",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 4,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 4,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "front_foot_elevated_split_squat",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 4,
+                "side": "L"
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 4,
+                "side": "R"
+              },
+              {
+                "setIndex": 3,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 4,
+                "side": "L"
+              },
+              {
+                "setIndex": 4,
+                "loadKg": 16,
+                "reps": 8,
+                "rir": 4,
+                "side": "R"
+              }
+            ]
+          },
+          {
+            "exerciseId": "hip_thrust",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 100,
+                "reps": 8,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 100,
+                "reps": 8,
+                "rir": 4
+              }
+            ]
+          }
+        ],
+        "durationMin": 45,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-29T08:00:00",
+        "finishedAt": "2026-10-29T08:45:00",
+        "adductorDuring": 1,
+        "adductorAfter": 1
+      },
+      {
+        "id": "s_vertigo_2026-10-30",
+        "date": "2026-10-30",
+        "gymId": "vertigo",
+        "weekOfBlock": 8,
+        "version": 60,
+        "statusAtStart": "ok",
+        "energyStart": 4,
+        "energyEnd": 3,
+        "feel": "normal",
+        "exercises": [
+          {
+            "exerciseId": "weighted_dip",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 22.5,
+                "reps": 5,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 22.5,
+                "reps": 5,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "chinup_neutral",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 7.5,
+                "reps": 6,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 7.5,
+                "reps": 6,
+                "rir": 4
+              }
+            ]
+          },
+          {
+            "exerciseId": "db_military_or_landmine_press",
+            "sets": [
+              {
+                "setIndex": 1,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 4
+              },
+              {
+                "setIndex": 2,
+                "loadKg": 18,
+                "reps": 8,
+                "rir": 4
+              }
+            ]
+          }
+        ],
+        "durationMin": 45,
+        "completed": true,
+        "warmupDone": true,
+        "startedAt": "2026-10-30T08:00:00",
+        "finishedAt": "2026-10-30T08:45:00",
+        "wristDuring": 1,
+        "adductorDuring": 0
+      }
+    ],
+    "routes": [
+      {
+        "id": "r_2026-09-08_run",
+        "date": "2026-09-08",
+        "kind": "run",
+        "minutes": 45,
+        "rpe": 5,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-09-11_bike",
+        "date": "2026-09-11",
+        "kind": "bike",
+        "minutes": 55,
+        "rpe": 4,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-09-15_run",
+        "date": "2026-09-15",
+        "kind": "run",
+        "minutes": 45,
+        "rpe": 5,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-09-18_bike",
+        "date": "2026-09-18",
+        "kind": "bike",
+        "minutes": 55,
+        "rpe": 4,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-09-22_run",
+        "date": "2026-09-22",
+        "kind": "run",
+        "minutes": 45,
+        "rpe": 5,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-09-25_bike",
+        "date": "2026-09-25",
+        "kind": "bike",
+        "minutes": 55,
+        "rpe": 4,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-09-29_bike",
+        "date": "2026-09-29",
+        "kind": "bike",
+        "minutes": 60,
+        "rpe": 4,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-10-06_run",
+        "date": "2026-10-06",
+        "kind": "run",
+        "minutes": 50,
+        "rpe": 5,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-10-09_bike",
+        "date": "2026-10-09",
+        "kind": "bike",
+        "minutes": 55,
+        "rpe": 4,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-10-13_run",
+        "date": "2026-10-13",
+        "kind": "run",
+        "minutes": 50,
+        "rpe": 5,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-10-16_bike",
+        "date": "2026-10-16",
+        "kind": "bike",
+        "minutes": 55,
+        "rpe": 4,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-10-20_run",
+        "date": "2026-10-20",
+        "kind": "run",
+        "minutes": 50,
+        "rpe": 5,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-10-23_bike",
+        "date": "2026-10-23",
+        "kind": "bike",
+        "minutes": 60,
+        "rpe": 4,
+        "countsAs": "z2"
+      },
+      {
+        "id": "r_2026-10-27_bike",
+        "date": "2026-10-27",
+        "kind": "bike",
+        "minutes": 60,
+        "rpe": 4,
+        "countsAs": "z2"
+      }
+    ],
+    "wild": [
+      {
+        "id": "w_2026-09-12_mtb",
+        "date": "2026-09-12",
+        "kind": "mtb",
+        "minutes": 120,
+        "intensity": "dura",
+        "note": "Con amigos, 900 m+"
+      },
+      {
+        "id": "w_2026-09-19_surf",
+        "date": "2026-09-19",
+        "kind": "surf",
+        "minutes": 90,
+        "intensity": "moderada"
+      },
+      {
+        "id": "w_2026-09-26_trail",
+        "date": "2026-09-26",
+        "kind": "trail",
+        "minutes": 75,
+        "intensity": "moderada",
+        "note": "Ritmo conversacional"
+      },
+      {
+        "id": "w_2026-10-10_mtb",
+        "date": "2026-10-10",
+        "kind": "mtb",
+        "minutes": 150,
+        "intensity": "dura",
+        "note": "Enduro, 1.200 m+"
+      },
+      {
+        "id": "w_2026-10-17_surf",
+        "date": "2026-10-17",
+        "kind": "surf",
+        "minutes": 90,
+        "intensity": "facil"
+      },
+      {
+        "id": "w_2026-10-24_boulder",
+        "date": "2026-10-24",
+        "kind": "boulder",
+        "minutes": 60,
+        "intensity": "moderada"
+      }
+    ],
+    "regen": [
+      {
+        "id": "g_2026-09-09_yoga",
+        "date": "2026-09-09",
+        "kind": "yoga",
+        "minutes": 45
+      },
+      {
+        "id": "g_2026-09-13_movilidad",
+        "date": "2026-09-13",
+        "kind": "movilidad",
+        "minutes": 30
+      },
+      {
+        "id": "g_2026-09-07_muneca",
+        "date": "2026-09-07",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-09_muneca",
+        "date": "2026-09-09",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-11_muneca",
+        "date": "2026-09-11",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-08_aductor",
+        "date": "2026-09-08",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-10_aductor",
+        "date": "2026-09-10",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-16_yoga",
+        "date": "2026-09-16",
+        "kind": "yoga",
+        "minutes": 45
+      },
+      {
+        "id": "g_2026-09-20_movilidad",
+        "date": "2026-09-20",
+        "kind": "movilidad",
+        "minutes": 30
+      },
+      {
+        "id": "g_2026-09-14_muneca",
+        "date": "2026-09-14",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-16_muneca",
+        "date": "2026-09-16",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-18_muneca",
+        "date": "2026-09-18",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-15_aductor",
+        "date": "2026-09-15",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-17_aductor",
+        "date": "2026-09-17",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-23_yoga",
+        "date": "2026-09-23",
+        "kind": "yoga",
+        "minutes": 45
+      },
+      {
+        "id": "g_2026-09-27_movilidad",
+        "date": "2026-09-27",
+        "kind": "movilidad",
+        "minutes": 30
+      },
+      {
+        "id": "g_2026-09-21_muneca",
+        "date": "2026-09-21",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-23_muneca",
+        "date": "2026-09-23",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-25_muneca",
+        "date": "2026-09-25",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-22_aductor",
+        "date": "2026-09-22",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-24_aductor",
+        "date": "2026-09-24",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-30_yoga",
+        "date": "2026-09-30",
+        "kind": "yoga",
+        "minutes": 45
+      },
+      {
+        "id": "g_2026-10-04_movilidad",
+        "date": "2026-10-04",
+        "kind": "movilidad",
+        "minutes": 30
+      },
+      {
+        "id": "g_2026-09-28_muneca",
+        "date": "2026-09-28",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-30_muneca",
+        "date": "2026-09-30",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-02_muneca",
+        "date": "2026-10-02",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-09-29_aductor",
+        "date": "2026-09-29",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-01_aductor",
+        "date": "2026-10-01",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-07_yoga",
+        "date": "2026-10-07",
+        "kind": "yoga",
+        "minutes": 45
+      },
+      {
+        "id": "g_2026-10-11_movilidad",
+        "date": "2026-10-11",
+        "kind": "movilidad",
+        "minutes": 30
+      },
+      {
+        "id": "g_2026-10-05_muneca",
+        "date": "2026-10-05",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-07_muneca",
+        "date": "2026-10-07",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-09_muneca",
+        "date": "2026-10-09",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-06_aductor",
+        "date": "2026-10-06",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-08_aductor",
+        "date": "2026-10-08",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-14_yoga",
+        "date": "2026-10-14",
+        "kind": "yoga",
+        "minutes": 45
+      },
+      {
+        "id": "g_2026-10-18_movilidad",
+        "date": "2026-10-18",
+        "kind": "movilidad",
+        "minutes": 30
+      },
+      {
+        "id": "g_2026-10-12_muneca",
+        "date": "2026-10-12",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-14_muneca",
+        "date": "2026-10-14",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-16_muneca",
+        "date": "2026-10-16",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-13_aductor",
+        "date": "2026-10-13",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-15_aductor",
+        "date": "2026-10-15",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-21_yoga",
+        "date": "2026-10-21",
+        "kind": "yoga",
+        "minutes": 45
+      },
+      {
+        "id": "g_2026-10-25_movilidad",
+        "date": "2026-10-25",
+        "kind": "movilidad",
+        "minutes": 30
+      },
+      {
+        "id": "g_2026-10-19_muneca",
+        "date": "2026-10-19",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-21_muneca",
+        "date": "2026-10-21",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-23_muneca",
+        "date": "2026-10-23",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-20_aductor",
+        "date": "2026-10-20",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-22_aductor",
+        "date": "2026-10-22",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-28_yoga",
+        "date": "2026-10-28",
+        "kind": "yoga",
+        "minutes": 45
+      },
+      {
+        "id": "g_2026-11-01_movilidad",
+        "date": "2026-11-01",
+        "kind": "movilidad",
+        "minutes": 30
+      },
+      {
+        "id": "g_2026-10-26_muneca",
+        "date": "2026-10-26",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-28_muneca",
+        "date": "2026-10-28",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-30_muneca",
+        "date": "2026-10-30",
+        "kind": "muneca",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-27_aductor",
+        "date": "2026-10-27",
+        "kind": "aductor",
+        "minutes": 10
+      },
+      {
+        "id": "g_2026-10-29_aductor",
+        "date": "2026-10-29",
+        "kind": "aductor",
+        "minutes": 10
+      }
+    ],
+    "weeks": [
+      {
+        "weekStart": "2026-09-07",
+        "weekOfBlock": 1,
+        "wave": 1,
+        "template": "estandar",
+        "days": {
+          "0": {
+            "am": {
+              "kind": "gym",
+              "gymId": "cantera",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "natacion_suave"
+            },
+            "fuel": "alta"
+          },
+          "1": {
+            "am": {
+              "kind": "gym",
+              "gymId": "yunque",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "run",
+              "minutes": [
+                45,
+                55
+              ]
+            },
+            "fuel": "media_alta"
+          },
+          "2": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "sport",
+              "sport": "escalada",
+              "minutes": [
+                45,
+                60
+              ],
+              "rpeMax": 6
+            },
+            "fuel": "media"
+          },
+          "3": {
+            "am": {
+              "kind": "gym",
+              "gymId": "resorte",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "paseo"
+            },
+            "fuel": "alta"
+          },
+          "4": {
+            "am": {
+              "kind": "gym",
+              "gymId": "vertigo",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "bike",
+              "minutes": [
+                40,
+                60
+              ],
+              "optional": true
+            },
+            "fuel": "media_alta"
+          },
+          "5": {
+            "am": {
+              "kind": "wild"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "muy_alta"
+          },
+          "6": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "media_baja"
+          }
+        },
+        "substitutions": []
+      },
+      {
+        "weekStart": "2026-09-14",
+        "weekOfBlock": 2,
+        "wave": 1,
+        "template": "estandar",
+        "days": {
+          "0": {
+            "am": {
+              "kind": "gym",
+              "gymId": "cantera",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "natacion_suave"
+            },
+            "fuel": "alta"
+          },
+          "1": {
+            "am": {
+              "kind": "gym",
+              "gymId": "yunque",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "run",
+              "minutes": [
+                45,
+                55
+              ]
+            },
+            "fuel": "media_alta"
+          },
+          "2": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "sport",
+              "sport": "escalada",
+              "minutes": [
+                45,
+                60
+              ],
+              "rpeMax": 6
+            },
+            "fuel": "media"
+          },
+          "3": {
+            "am": {
+              "kind": "gym",
+              "gymId": "resorte",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "paseo"
+            },
+            "fuel": "alta"
+          },
+          "4": {
+            "am": {
+              "kind": "gym",
+              "gymId": "vertigo",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "bike",
+              "minutes": [
+                40,
+                60
+              ],
+              "optional": true
+            },
+            "fuel": "media_alta"
+          },
+          "5": {
+            "am": {
+              "kind": "wild"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "muy_alta"
+          },
+          "6": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "media_baja"
+          }
+        },
+        "substitutions": []
+      },
+      {
+        "weekStart": "2026-09-21",
+        "weekOfBlock": 3,
+        "wave": 1,
+        "template": "estandar",
+        "days": {
+          "0": {
+            "am": {
+              "kind": "gym",
+              "gymId": "cantera",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "natacion_suave"
+            },
+            "fuel": "alta"
+          },
+          "1": {
+            "am": {
+              "kind": "gym",
+              "gymId": "yunque",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "run",
+              "minutes": [
+                45,
+                55
+              ]
+            },
+            "fuel": "media_alta"
+          },
+          "2": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "sport",
+              "sport": "escalada",
+              "minutes": [
+                45,
+                60
+              ],
+              "rpeMax": 6
+            },
+            "fuel": "media"
+          },
+          "3": {
+            "am": {
+              "kind": "gym",
+              "gymId": "resorte",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "paseo"
+            },
+            "fuel": "alta"
+          },
+          "4": {
+            "am": {
+              "kind": "gym",
+              "gymId": "vertigo",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "bike",
+              "minutes": [
+                40,
+                60
+              ],
+              "optional": true
+            },
+            "fuel": "media_alta"
+          },
+          "5": {
+            "am": {
+              "kind": "wild"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "muy_alta"
+          },
+          "6": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "media_baja"
+          }
+        },
+        "substitutions": []
+      },
+      {
+        "weekStart": "2026-09-28",
+        "weekOfBlock": 4,
+        "wave": "deload",
+        "template": "estandar",
+        "days": {
+          "0": {
+            "am": {
+              "kind": "gym",
+              "gymId": "cantera",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "natacion_suave"
+            },
+            "fuel": "alta"
+          },
+          "1": {
+            "am": {
+              "kind": "gym",
+              "gymId": "yunque",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "run",
+              "minutes": [
+                30,
+                40
+              ]
+            },
+            "fuel": "media_alta"
+          },
+          "2": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "sport",
+              "sport": "escalada",
+              "minutes": [
+                45,
+                60
+              ],
+              "rpeMax": 6
+            },
+            "fuel": "media"
+          },
+          "3": {
+            "am": {
+              "kind": "gym",
+              "gymId": "resorte",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "paseo"
+            },
+            "fuel": "alta"
+          },
+          "4": {
+            "am": {
+              "kind": "gym",
+              "gymId": "vertigo",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "bike",
+              "minutes": [
+                25,
+                45
+              ],
+              "optional": true
+            },
+            "fuel": "media_alta"
+          },
+          "5": {
+            "am": {
+              "kind": "wild",
+              "note": "Descarga: aventura solo fácil."
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "muy_alta"
+          },
+          "6": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "media_baja"
+          }
+        },
+        "substitutions": []
+      },
+      {
+        "weekStart": "2026-10-05",
+        "weekOfBlock": 5,
+        "wave": 2,
+        "template": "estandar",
+        "days": {
+          "0": {
+            "am": {
+              "kind": "gym",
+              "gymId": "cantera",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "natacion_suave"
+            },
+            "fuel": "alta"
+          },
+          "1": {
+            "am": {
+              "kind": "gym",
+              "gymId": "yunque",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "run",
+              "minutes": [
+                45,
+                55
+              ]
+            },
+            "fuel": "media_alta"
+          },
+          "2": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "sport",
+              "sport": "escalada",
+              "minutes": [
+                45,
+                60
+              ],
+              "rpeMax": 6
+            },
+            "fuel": "media"
+          },
+          "3": {
+            "am": {
+              "kind": "gym",
+              "gymId": "resorte",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "paseo"
+            },
+            "fuel": "alta"
+          },
+          "4": {
+            "am": {
+              "kind": "gym",
+              "gymId": "vertigo",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "bike",
+              "minutes": [
+                40,
+                60
+              ],
+              "optional": true
+            },
+            "fuel": "media_alta"
+          },
+          "5": {
+            "am": {
+              "kind": "wild"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "muy_alta"
+          },
+          "6": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "media_baja"
+          }
+        },
+        "substitutions": []
+      },
+      {
+        "weekStart": "2026-10-12",
+        "weekOfBlock": 6,
+        "wave": 2,
+        "template": "estandar",
+        "days": {
+          "0": {
+            "am": {
+              "kind": "gym",
+              "gymId": "cantera",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "natacion_suave"
+            },
+            "fuel": "alta"
+          },
+          "1": {
+            "am": {
+              "kind": "gym",
+              "gymId": "yunque",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "run",
+              "minutes": [
+                45,
+                55
+              ]
+            },
+            "fuel": "media_alta"
+          },
+          "2": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "sport",
+              "sport": "escalada",
+              "minutes": [
+                45,
+                60
+              ],
+              "rpeMax": 6
+            },
+            "fuel": "media"
+          },
+          "3": {
+            "am": {
+              "kind": "gym",
+              "gymId": "resorte",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "paseo"
+            },
+            "fuel": "alta"
+          },
+          "4": {
+            "am": {
+              "kind": "gym",
+              "gymId": "vertigo",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "bike",
+              "minutes": [
+                40,
+                60
+              ],
+              "optional": true
+            },
+            "fuel": "media_alta"
+          },
+          "5": {
+            "am": {
+              "kind": "wild"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "muy_alta"
+          },
+          "6": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "media_baja"
+          }
+        },
+        "substitutions": []
+      },
+      {
+        "weekStart": "2026-10-19",
+        "weekOfBlock": 7,
+        "wave": 2,
+        "template": "estandar",
+        "days": {
+          "0": {
+            "am": {
+              "kind": "gym",
+              "gymId": "cantera",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "natacion_suave"
+            },
+            "fuel": "alta"
+          },
+          "1": {
+            "am": {
+              "kind": "gym",
+              "gymId": "yunque",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "run",
+              "minutes": [
+                45,
+                55
+              ]
+            },
+            "fuel": "media_alta"
+          },
+          "2": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "sport",
+              "sport": "escalada",
+              "minutes": [
+                45,
+                60
+              ],
+              "rpeMax": 6
+            },
+            "fuel": "media"
+          },
+          "3": {
+            "am": {
+              "kind": "gym",
+              "gymId": "resorte",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "paseo"
+            },
+            "fuel": "alta"
+          },
+          "4": {
+            "am": {
+              "kind": "gym",
+              "gymId": "vertigo",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "bike",
+              "minutes": [
+                40,
+                60
+              ],
+              "optional": true
+            },
+            "fuel": "media_alta"
+          },
+          "5": {
+            "am": {
+              "kind": "wild"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "muy_alta"
+          },
+          "6": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "media_baja"
+          }
+        },
+        "substitutions": []
+      },
+      {
+        "weekStart": "2026-10-26",
+        "weekOfBlock": 8,
+        "wave": "deload",
+        "template": "estandar",
+        "days": {
+          "0": {
+            "am": {
+              "kind": "gym",
+              "gymId": "cantera",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "natacion_suave"
+            },
+            "fuel": "alta"
+          },
+          "1": {
+            "am": {
+              "kind": "gym",
+              "gymId": "yunque",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "run",
+              "minutes": [
+                30,
+                40
+              ]
+            },
+            "fuel": "media_alta"
+          },
+          "2": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "sport",
+              "sport": "escalada",
+              "minutes": [
+                45,
+                60
+              ],
+              "rpeMax": 6
+            },
+            "fuel": "media"
+          },
+          "3": {
+            "am": {
+              "kind": "gym",
+              "gymId": "resorte",
+              "version": 60
+            },
+            "pm": {
+              "kind": "regen",
+              "what": "paseo"
+            },
+            "fuel": "alta"
+          },
+          "4": {
+            "am": {
+              "kind": "gym",
+              "gymId": "vertigo",
+              "version": 60
+            },
+            "pm": {
+              "kind": "route",
+              "routeKind": "bike",
+              "minutes": [
+                25,
+                45
+              ],
+              "optional": true
+            },
+            "fuel": "media_alta"
+          },
+          "5": {
+            "am": {
+              "kind": "wild",
+              "note": "Descarga: aventura solo fácil."
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "muy_alta"
+          },
+          "6": {
+            "am": {
+              "kind": "regen",
+              "what": "yoga"
+            },
+            "pm": {
+              "kind": "off"
+            },
+            "fuel": "media_baja"
+          }
+        },
+        "substitutions": []
+      }
+    ],
+    "tests": [
+      {
+        "id": "t_0",
+        "date": "2026-09-08",
+        "weekOfBlock": 0,
+        "handstand": {
+          "wallSec": 20
+        },
+        "mobility": {
+          "ankleCm": 8.5,
+          "wristExtDeg": 55,
+          "hipNote": "igual",
+          "shoulderNote": "igual"
+        },
+        "waistCm": 84,
+        "weightAvg7": 79,
+        "note": "Baseline de Semana 0: fotos hechas fuera de la app."
+      },
+      {
+        "id": "t_4",
+        "date": "2026-09-30",
+        "weekOfBlock": 4,
+        "pullupRir2": {
+          "loadKg": 12.5,
+          "reps": 5
+        },
+        "dipRir2": {
+          "loadKg": 22.5,
+          "reps": 6
+        },
+        "splitSquat": [
+          {
+            "loadKg": 20,
+            "reps": 8,
+            "side": "L"
+          },
+          {
+            "loadKg": 20,
+            "reps": 8,
+            "side": "R"
+          }
+        ],
+        "z2Standard": {
+          "routeKind": "run",
+          "minutes": 45,
+          "rpe": 5,
+          "hrAvg": 138
+        },
+        "handstand": {
+          "wallSec": 25
+        },
+        "mobility": {
+          "ankleCm": 9,
+          "wristExtDeg": 60,
+          "hipNote": "igual",
+          "shoulderNote": "igual"
+        },
+        "waistCm": 84,
+        "weightAvg7": 79.2,
+        "transferNote": "igual · MTB estable, escalada sin cambios",
+        "bilateralNote": "Goblet squat limpio, sin calambre"
+      },
+      {
+        "id": "t_8",
+        "date": "2026-10-28",
+        "weekOfBlock": 8,
+        "pullupRir2": {
+          "loadKg": 15,
+          "reps": 5
+        },
+        "dipRir2": {
+          "loadKg": 25,
+          "reps": 6
+        },
+        "splitSquat": [
+          {
+            "loadKg": 22,
+            "reps": 8,
+            "side": "L"
+          },
+          {
+            "loadKg": 22,
+            "reps": 8,
+            "side": "R"
+          }
+        ],
+        "z2Standard": {
+          "routeKind": "run",
+          "minutes": 45,
+          "rpe": 4,
+          "hrAvg": 132
+        },
+        "handstand": {
+          "wallSec": 35,
+          "freeSec": 3
+        },
+        "mobility": {
+          "ankleCm": 10.5,
+          "wristExtDeg": 65,
+          "hipNote": "mejor",
+          "shoulderNote": "igual"
+        },
+        "waistCm": 84.5,
+        "weightAvg7": 79.8,
+        "transferNote": "mejor · MTB con más piernas en las subidas",
+        "bilateralNote": "Hack squat 70 kg estable"
+      }
+    ],
+    "medals": [
+      {
+        "id": "cantera",
+        "progress": 0
+      },
+      {
+        "id": "yunque",
+        "progress": 0
+      },
+      {
+        "id": "resorte",
+        "progress": 0
+      },
+      {
+        "id": "vertigo",
+        "progress": 0
+      }
+    ],
+    "adjustments": [
+      {
+        "id": "kcal_2026-09-21",
+        "date": "2026-09-21",
+        "kind": "kcal",
+        "detail": "Semana 3 · +0,07 %/sem (79 → 79,1 kg). Sube < 0,10 %/sem → +150 a +200 kcal/día",
+        "source": "app"
+      },
+      {
+        "id": "kcal_2026-10-05",
+        "date": "2026-10-05",
+        "kind": "kcal",
+        "detail": "Semana 5 · +0,19 %/sem (79,2 → 79,3 kg). Sube 0,10–0,25 %/sem → Mantener (zona objetivo)",
+        "source": "app"
+      }
+    ],
+    "profile": [
+      {
+        "name": "Daniel",
+        "heightCm": 190,
+        "startWeightKg": 79,
+        "targetWeightKg": [
+          85,
+          88
+        ],
+        "amWindow": [
+          "07:00",
+          "09:00"
+        ],
+        "pmWindow": [
+          "19:00",
+          "21:00"
+        ],
+        "blockStart": "2026-09-07",
+        "form": 1,
+        "baselines": {
+          "bench_press": {
+            "loadKg": 70,
+            "reps": 8,
+            "date": "2026-09-07"
+          },
+          "weighted_pullup": {
+            "loadKg": 10,
+            "reps": 6,
+            "date": "2026-09-07"
+          },
+          "weighted_dip": {
+            "loadKg": 20,
+            "reps": 6,
+            "date": "2026-09-07"
+          },
+          "trap_bar_deadlift": {
+            "loadKg": 100,
+            "reps": 5,
+            "date": "2026-09-07"
+          },
+          "bulgarian_split_squat": {
+            "loadKg": 20,
+            "reps": 8,
+            "date": "2026-09-07"
+          }
+        },
+        "kcalBaseline": 3000,
+        "calorieMode": "porciones",
+        "defaultTemplate": "estandar",
+        "id": "me"
+      }
+    ]
+  }
+}
