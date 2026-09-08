@@ -1,4 +1,5 @@
 // HOY (SPEC §8.2): trainer card, check-in, plan AM/PM, Combustible, advisories, CTA.
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, Screen, Splash } from '@/components';
 import { GYM_NAMES } from '@/domain/content/gyms';
@@ -8,6 +9,7 @@ import { AdvisoriesCard } from './AdvisoriesCard';
 import { CheckinCard } from './CheckinCard';
 import { CutCard } from './CutCard';
 import { FuelCard } from './FuelCard';
+import { scheduleMorningReminder } from './morningReminder';
 import { PlanCards } from './PlanCards';
 import { TrainerHeader } from './TrainerHeader';
 import { useToday } from './useToday';
@@ -15,7 +17,14 @@ import { useToday } from './useToday';
 export function TodayScreen() {
   const model = useToday();
   const navigate = useNavigate();
-  const { profile, day, pvResult, activeSession, plannedGym } = model;
+  const { profile, checkin, day, pvResult, activeSession, plannedGym } = model;
+
+  // Morning check-in reminder at the AM window start (only while the app is open; no-op when
+  // notifications are off). `checkin` is undefined while loading and null when there is none.
+  useEffect(() => {
+    if (!profile || checkin === undefined) return;
+    scheduleMorningReminder({ amWindow: profile.amWindow, hasCheckin: checkin !== null });
+  }, [profile, checkin]);
 
   if (profile === undefined) return <Splash />;
   if (!profile) return null;

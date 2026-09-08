@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { isNotificationsEnabled, showLocalNotification, vibrate } from '@/lib/notifications';
 
 export interface RestTimerState {
   running: boolean;
@@ -7,7 +8,15 @@ export interface RestTimerState {
   range: [number, number] | null;
 }
 
-/** Countdown for rest between sets. Vibrates (when supported) when it reaches 0; no audio (D5). */
+/** End of rest: haptic tick where supported plus a local notification when enabled; no audio (D5). */
+function notifyRestEnd() {
+  vibrate(200); // iOS has no navigator.vibrate: degrades silently
+  if (isNotificationsEnabled()) {
+    void showLocalNotification('Descanso terminado', 'Siguiente serie.', { tag: 'rest' });
+  }
+}
+
+/** Countdown for rest between sets. Vibrates/notifies when it reaches 0; no audio (D5). */
 export function useRestTimer() {
   const [state, setState] = useState<RestTimerState>({
     running: false,
@@ -36,13 +45,7 @@ export function useRestTimer() {
         if (next <= 0) {
           if (interval.current) clearInterval(interval.current);
           interval.current = null;
-          try {
-            if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
-              navigator.vibrate(200); // iOS has no navigator.vibrate: degrades silently
-            }
-          } catch {
-            /* ignore */
-          }
+          notifyRestEnd();
           return { ...s, running: false, remaining: 0 };
         }
         return { ...s, remaining: next };

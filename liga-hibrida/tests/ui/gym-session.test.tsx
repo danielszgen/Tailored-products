@@ -77,6 +77,13 @@ describe('GYM · combat in Cantera (SPEC §8.3)', () => {
       expect(sessions[0].energyEnd).toBeDefined();
     });
     expect(await screen.findByText(/Resumen del combate/)).toBeInTheDocument();
+
+    // Medal advance of the gym (R10) and the rows useLeague persists for the export.
+    expect(await screen.findByText('Avance de la medalla')).toBeInTheDocument();
+    expect(await screen.findByText(/semanas seguidas de Lower/)).toBeInTheDocument();
+    await waitFor(async () => {
+      expect(await db.medals.count()).toBe(4);
+    });
   });
 
   it('suggests +2,5 kg after 8/8/8/8 at RIR 2 (R2) and prefills the load', async () => {

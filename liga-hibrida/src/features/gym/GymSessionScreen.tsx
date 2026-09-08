@@ -8,6 +8,7 @@ import { GYM_ORDER, GYM_NAMES, SESSION_CODE_LABEL, versionNote } from '@/domain/
 import { hierarchyName } from '@/domain/content/constitution';
 import { deloadSummary } from '@/domain/rules/deload';
 import type { GymId, Scale5, SessionVersion } from '@/domain/types';
+import { scheduleAdductorReminder } from './adductorReminder';
 import { ExerciseCard } from './ExerciseCard';
 import { FinishSheet } from './FinishSheet';
 import { RestTimer } from './RestTimer';
@@ -246,6 +247,8 @@ function Combat({ gymId }: { gymId: GymId }) {
         onFinish={async (input) => {
           timer.skip();
           await model.finish(input);
+          // "¿Aductor 30–60 min después?" in 45 min (Lower only); HOY keeps the in-app fallback.
+          scheduleAdductorReminder(gymId);
           setFinishOpen(false);
         }}
       />
