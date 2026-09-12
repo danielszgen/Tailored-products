@@ -23,7 +23,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.node.json --noEmit",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
-    "icons": "node scripts/icons.mjs"
+    "icons": "node scripts/icons.mjs",
+    "art": "node scripts/art/build.mjs && prettier --write src/brand/art/manifest.ts && node scripts/icons.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.124.0",

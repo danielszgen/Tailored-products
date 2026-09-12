@@ -148,3 +148,27 @@
     filter: drop-shadow(0 0 10px rgba(233, 168, 42, 0.85));
   }
 }
+
+/* Etapa IV sprite sheets (src/brand/art). The frames sit side by side in one PNG and the
+   animation steps background-position across them, so nothing animates in JavaScript. Each
+   element sets --sprite-end to minus the full sheet width; `steps()` therefore lands on frames
+   0..n-1 and never on the blank past the end. The global prefers-reduced-motion rule collapses
+   the duration, and because fill-mode is none the background falls back to frame 0. */
+.pixel-art {
+  image-rendering: pixelated;
+}
+
+.sprite-anim {
+  display: inline-block;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+}
+
+@keyframes sprite-play {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: var(--sprite-end);
+  }
+}
