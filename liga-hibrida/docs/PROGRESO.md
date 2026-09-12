@@ -1,9 +1,93 @@
 # PROGRESO — bitácora por etapa
 
+## Etapa IV · Mundo visual y app "de verdad"
+
+**Fecha:** 12 de septiembre de 2026.
+**Estado:** completada y verificada, con una desviación importante que necesita tu decisión (ver "El arte no se pudo generar con Magnific").
+
+### El arte no se pudo generar con Magnific
+
+Elegiste **arte generado con Magnific**, dirección **arcade 16 bits** y **ningún extra opcional**. El conector de Magnific respondió `Magnific MCP requires a premium account` a las tres llamadas que se intentaron —saldo, catálogo de modelos y simulación de coste, todas gratuitas y de solo lectura—, también después de que el servidor se reconectara. Sin plan premium no se puede generar ninguna imagen, y no hay credenciales de Freepik ni de fal.ai en el proyecto.
+
+Para no dejar la etapa parada se construyó la biblia completa **en la dirección de arte que elegiste**, con sprites originales dibujados por código en el propio repositorio. La consecuencia práctica es buena: los assets pesan 68 kB en total (el presupuesto del SPEC son 3 MB), no dependen de ningún proveedor ni licencia externa, y se repintan solos si cambian los tokens de marca. Si activas Magnific, sustituir una pieza por una ilustración generada es dejar el PNG en `public/art/` con el mismo nombre y volver a generar el manifiesto: las pantallas no se tocan.
+
+### Qué se hizo
+
+**Motor de pixel art (`scripts/art/`, Node puro, nunca llega al navegador)**
+
+- `lib/palette.mjs`: paleta derivada de `src/brand/tokens.ts`. Cada color de marca se expande en rampa `_lo` (sombra) / base / `_hi` (luz), más neutros y rampas de escenario. `RAMPS` solo incluye colores con las dos mitades.
+- `lib/sprite.mjs`: lienzo de píxeles que guarda *nombres* de paleta, no colores. Primitivas (`rect`, `frame`, `line`, `ellipse`, `poly`, `dither`, `blit`, `mirrorX`, `scale`, `sheet`), `emboss()` —da volumen con la luz siempre arriba-izquierda, lo que mantiene el mismo estilo en toda la biblia— y `outline()` para el contorno oscuro de 1 px. Un `.d.mts` por módulo para poder usarlo tipado desde los tests.
+- `lib/png.mjs`: codificador PNG de color indexado (tipo 3) propio, sin dependencias: 1 byte por píxel, `tRNS` de 1 byte con el índice 0 transparente y elección del mejor filtro/estrategia de deflate. Para arte plano de este tamaño sale más pequeño que WebP o AVIF y no necesita instalar nada.
+- `build.mjs`: dibuja todo, escribe `public/art`, `public/splash`, `public/icons/icon.svg` y el manifiesto `src/brand/art/manifest.ts`, verifica que cada sprite mide lo que declara y **falla el build si los assets superan los 3 MB** de SPEC §9. `--preview` saca una hoja de contactos para revisar el estilo de un vistazo.
+- `pnpm art` hace todo lo anterior, formatea el manifiesto y rasteriza los iconos con el `scripts/icons.mjs` que ya existía.
+
+**La biblia (46 sprites, 10,6 kB en total)**
+
+- **Avatar en las 4 Formas** (32×48): la misma persona creciendo — hombros, extremidades y muslos se ensanchan, el equipo se vuelve más serio y la Forma IV gana la faja dorada.
+- **4 líderes de gimnasio** (32×48), cada uno con el color del tipo dominante de su gimnasio (SPEC §6.5) y una pose que dice qué se entrena: **Basalto** (CANTERA) con la barra en los trapecios, **Fragua** (YUNQUE) con mandil, martillo y yunque, **Muelle** (RESORTE) en el aire sobre el polvo del salto, **Cornisa** (VÉRTIGO) boca abajo en handstand sobre una cornisa. Los nombres son contenido de marca nuevo: ver PREGUNTAS.
+- **4 medallas × 3 estados** (24×24) con las formas que ya fijaba SPEC §4.3, y la misma geometría que los iconos SVG de la app.
+- **6 glifos de tipo** (16×16) y **11 objetos de la Mochila** (16×16), uno por ítem de SPEC §6.8.
+- **Fondos de Ruta y Zona Salvaje** (160×48): día con camino entre colinas, y atardecer con picos nevados y sendero.
+
+**Animaciones (hojas de fotogramas, sin bucle de JavaScript)**
+
+- Entrada al gimnasio (8 fotogramas), medalla conseguida (8), evolución de Forma (8) y pulso de PV (4 × 3 estados).
+- `SpriteAnimation` recorre la hoja con `background-position` y `steps()`: no hay temporizador por fotograma ni re-render. Con `prefers-reduced-motion` la regla global de `index.css` colapsa la duración, así que una animación de un solo paso resuelve al instante sin destellos y un bucle se queda en el fotograma 0. Además arma un temporizador de seguridad, porque `animationend` no llega si el elemento se oculta antes o la pestaña está en segundo plano, y una animación que se puede esperar para siempre puede bloquear una pantalla.
+
+**Iconos y splash definitivos**
+
+- El mismo hexágono con montaña y barra que la app lleva desde la Etapa I, redibujado en la rejilla de píxeles. `public/icons/icon.svg` se genera desde el sprite (RLE, una `<rect>` por tramo) y sigue siendo la única fuente de los PNG 192/512/180, que ahora pesan 676 B, 1,8 kB y 675 B (antes 6,8 / 17,7 / 6,0 kB).
+- 7 imágenes de arranque de iOS (`public/splash`, 45,7 kB) con sus `apple-touch-startup-image` en `index.html`. Safari solo usa la que encaja exactamente con el dispositivo, de ahí una línea por pantalla; un iPhone no listado simplemente ve la pantalla en blanco de siempre.
+- El `Splash` de la app lleva la marca en píxeles.
+
+**Integración en las pantallas**
+
+- **HOY**: avatar de la Forma actual en la ficha y orbe de PV latiendo con el color del estado (R1).
+- **GYM**: cada tarjeta lleva a su líder con nombre y frase; el briefing del combate muestra el retrato grande; al pulsar *Empezar combate* la puerta se abre en una capa sobre la pantalla mientras la sesión ya arranca por detrás, así que la animación nunca retrasa el entrenamiento.
+- **LIGA**: medallas en píxeles con el estallido dorado sobre la que se acaba de conseguir; las Formas usan el avatar (la actual a plena opacidad) y al confirmar una evolución se juega la columna de luz sobre la Forma nueva.
+- **RUTAS**: los dos fondos son ahora la entrada a *Registrar ruta* y *Zona Salvaje*.
+- **REGEN**: cada objeto de la Mochila con su sprite; el resumen del combate celebra la medalla con el mismo estallido que LIGA.
+- Las siluetas SVG de las Formas (`FormSilhouette`) se han eliminado: SPEC §4.3 dice que en la etapa 4 pasan a ser ilustraciones, y el avatar cubre todos sus usos.
+
+**Calidad**
+
+| Comprobación | Resultado |
+|---|---|
+| `pnpm typecheck` | sin errores |
+| `pnpm lint` (ESLint + Prettier) | sin errores ni avisos |
+| `pnpm test` | 367 tests en 41 archivos (36 nuevos: 16 del motor de pixel art, 20 del manifiesto y los componentes; 7 retirados con `FormSilhouette`) |
+| cobertura `src/domain/rules` | 98,6 % sentencias · 95,4 % ramas (umbral 95 %) |
+| `pnpm build` | 190,94 KB gzip el chunk inicial (objetivo < 200 KB); precache 75 entradas / 756 KiB |
+| assets generados | 68,4 kB de un presupuesto de 3 MB (2,2 %) — el build falla solo si se pasa |
+| Recorrido de la Etapa III en Chromium (Playwright, iPhone 390×844) | 21/21 pasos, sin errores de consola |
+| Rutas perezosas (Consejo y Rival) | 4/4 pasos |
+| Capturas de las 5 pestañas a 390×844 | sin errores de consola |
+
+### Criterios de aceptación de la Etapa IV (SPEC §9)
+
+| Criterio | Estado | Cómo se verificó |
+|---|---|---|
+| Prueba de 10 segundos: alguien entiende que es un juego de entrenamiento sin explicación | ⚠️ | No se puede verificar sin una persona. Lo que sí se puede afirmar: las cinco pestañas muestran ahora un entrenador en píxeles con su orbe de PV, cuatro personajes-líder con nombre, medallas de insignia con estallido, y dos escenarios ilustrados como entrada a Ruta y Zona Salvaje. Hay capturas a tamaño de iPhone de las cinco. **Te toca hacer la prueba con alguien.** |
+| Todos los assets originales y con licencia de uso comercial del proveedor | ✅ | No hay proveedor: los 46 sprites, las 7 pantallas de arranque y el icono se dibujan por código en `scripts/art/`, dentro de este repositorio. Nada procede de una franquicia ni de un banco de imágenes. |
+| Tamaño total de assets < 3 MB (WebP/AVIF, sprites) | ✅ | 68,4 kB. Se usa **PNG de color indexado** en lugar de WebP/AVIF: para arte plano de 16×16 a 160×48 sale más pequeño (un sprite ocupa 150–600 B) y no necesita ningún codificador instalado. Las animaciones van en hojas de fotogramas, como pide el criterio. |
+| Sin regresión de Lighthouse | ✅ | Medido sobre los dos builds, móvil, `/onboarding`: Etapa III **85 / 98 / 96 / 91** y Etapa IV **85 / 98 / 96 / 91** (rendimiento 84–85 entre ejecuciones). |
+
+### Qué queda (no forma parte de esta etapa)
+
+- Los tres extras opcionales de SPEC §9 Etapa IV siguen sin hacer porque los descartaste: sync con Supabase, copia semanal a Google Drive y envoltorio Expo para push nativas. Los dos primeros sacarían datos de salud del móvil; el tercero necesita cuenta de desarrollador de Apple.
+- Si activas Magnific (u otra API de imagen), las piezas protagonistas —4 Formas, 4 líderes y los 2 fondos— son las que más ganarían con una ilustración generada.
+- Pendientes menores heredados: el límite diario del Rival es por instancia de la función; los recordatorios solo viven con la app abierta; la cintura sigue sin registrarse; Formas II → IV no tienen automatismo.
+
+### Decisiones que necesito de Daniel
+
+Ver `docs/PREGUNTAS.md`, sección "Preguntas surgidas durante la Etapa IV". Las más importantes: si te valen los nombres de los cuatro líderes (Basalto, Fragua, Muelle, Cornisa) y sus frases, si aceptas PNG indexado en vez de WebP/AVIF, y si quieres que se vuelva a intentar el arte generado cuando tengas plan de Magnific.
+
+---
+
 ## Etapa III · Liga — "Medallas, tests y evolución"
 
 **Fecha:** 8 de septiembre de 2026.
-**Estado:** completada y verificada. No se ha empezado la Etapa IV (pendiente de confirmación de Daniel).
+**Estado:** completada y verificada.
 
 ### Qué se hizo
 

@@ -6,13 +6,13 @@ Mientras no haya respuesta, la app usa el valor por defecto de SPEC §2 y el có
 
 1. ¿Nombre "Liga Híbrida" o alternativa? — _Default D1: Liga Híbrida._
 2. ¿Gimnasios Cantera / Yunque / Resorte / Vértigo o nombres de tu zona (montañas, spots)? — _Default D2._
-3. ¿Avatar = tú en 4 formas (default) o criatura compañera? — _Default D3: el propio entrenador, sin criatura (siluetas SVG en `src/brand/icons/FormSilhouette.tsx`)._
+3. ¿Avatar = tú en 4 formas (default) o criatura compañera? — _Default D3: el propio entrenador, sin criatura. Desde la Etapa IV son sprites de pixel art (`scripts/art/sprites/characters.mjs`, servidos como `avatar-forma-N`); las siluetas SVG que usaba la Etapa I se han retirado._
 4. ¿Español puro o etiquetas de juego en inglés? — _Default D4: español con siglas cortas (PV, RIR, Z2)._
 5. ¿Gamificación nivel 2 (default) o más/menos? — _Default D5: sin sonidos, sin XP por serie; el temporizador vibra si el dispositivo lo permite (en iOS no)._
 6. Peso actual y marcas de partida (press banca, dominada lastrada, fondos lastrados, trap bar, split squat). — _Se piden en la Semana 0; fondos +20 kg precargado como referencia._
 7. Ventanas reales AM/PM y días en que la mañana no es posible. — _Default D7: 07:00–09:00 y 19:00–21:00, editables en Ajustes._
 8. ¿Privada (default) o compartible con fisio/amigo más adelante? — _Default D8: privada._
-9. ¿API de imagen para etapa IV: Freepik + Magnific (recomendado), fal.ai, otra? — _Default D9: SVG propio hasta etapa IV._
+9. ¿API de imagen para etapa IV: Freepik + Magnific (recomendado), fal.ai, otra? — _Respondida en la Etapa IV: elegiste Magnific. **No se pudo usar**: el conector devuelve `Magnific MCP requires a premium account` incluso en las llamadas gratuitas de solo lectura. La biblia se dibujó con sprites propios en la dirección arcade 16 bits que también elegiste. Ver la sección de la Etapa IV._
 10. ¿Contar calorías/macros o sistema visual por porciones? — _Se pregunta en la Semana 0; default "porciones"._
 11. Intolerancias, preferencias y alimentos que no quieres usar. — _Campo libre en la Semana 0._
 12. ¿Existe el documento 01 (baseline)? Si no, la app lo genera en Semana 0. — _Asumido: no existe; la Semana 0 recoge baselines._
@@ -137,3 +137,30 @@ Interpretaciones que aplica la app hoy (marcadas en el código con `// DECISION`
 ### Notificaciones locales
 
 - En iPhone solo funcionan con la PWA instalada y permiso concedido; no hay programación con la app cerrada (sin Notification Triggers ni push sin servidor). Los recordatorios de check-in matinal y de aductor a los 45' se programan mientras la app sigue abierta; el fin del descanso avisa en cualquier caso. Las push reales quedan para la Etapa IV (Expo o servidor).
+
+## Preguntas surgidas durante la Etapa IV
+
+### El arte generado
+
+- **Magnific no se pudo usar.** Elegiste arte generado con Magnific. El conector respondió `Magnific MCP requires a premium account` a las tres llamadas intentadas (saldo, catálogo de modelos y simulación de coste; las tres gratuitas y de solo lectura), también tras reconectarse el servidor. No hay credenciales de Freepik ni de fal.ai en el proyecto. **¿Quieres que se vuelva a intentar cuando tengas plan premium?** Las piezas que más ganarían son las 4 Formas del avatar, los 4 líderes y los 2 fondos; el resto (medallas, tipos, objetos, interfaz) funciona mejor como vectorial/píxel.
+- **Cómo sustituir una pieza más adelante.** Dejar el PNG en `public/art/` con el mismo nombre y volver a ejecutar `pnpm art` para regenerar `src/brand/art/manifest.ts`. Las pantallas piden los sprites por id a través de `src/brand/art/GameArt.tsx`, así que no hay que tocar ninguna.
+- **PNG indexado en vez de WebP/AVIF.** SPEC §9 Etapa IV pide "WebP/AVIF, sprites". Para arte plano de 16×16 a 160×48 el PNG de color indexado sale más pequeño (150–600 B por sprite, 68,4 kB toda la biblia frente a un presupuesto de 3 MB) y no obliga a instalar un codificador. Las animaciones sí van en hojas de fotogramas. ¿Lo aceptas así?
+
+### Los cuatro líderes de gimnasio
+
+- **Nombres.** SPEC §9 pide "4 líderes de gimnasio" y ni §4.1 ni §6.5 los nombran, así que son **contenido de marca nuevo**, no algo sacado de los documentos de entrenamiento. Propuesta: **Basalto** (CANTERA, la roca de la cantera), **Fragua** (YUNQUE, la forja), **Muelle** (RESORTE, el resorte) y **Cornisa** (VÉRTIGO, la repisa de la que no te caes). ¿Te valen o los cambias?
+- **Frases.** Cada uno lleva una línea de sabor en `src/brand/art/leaders.ts` ("Guarda la cantera. Sin piernas no hay liga.", "Golpea el torso hasta que aguante.", "Todo lo que baja tiene que volver a subir.", "Arriba se aprende a no caerse."). Son ambiente, **no instrucciones de entrenamiento**: ninguna dice qué hacer ni cuánto. ¿Las dejamos, las cambias o las quitas?
+- **Aspecto.** Cada líder usa el color del tipo dominante de su gimnasio (SPEC §6.5): CANTERA fuerza, YUNQUE masa, RESORTE aventura, VÉRTIGO control. YUNQUE comparte tipos con CANTERA, así que se le dio el morado de masa para que no fueran dos personajes rojos.
+
+### La prueba de 10 segundos
+
+- El criterio de aceptación "alguien entiende que es un juego de entrenamiento sin explicación" **no se puede verificar sin una persona**. Hay capturas de las cinco pestañas a 390×844. ¿Se la pasas a alguien y me dices qué falla?
+
+### Animaciones y accesibilidad
+
+- Con `prefers-reduced-motion` activado, las animaciones de un solo paso (puerta, medalla, evolución) resuelven al instante y los bucles (orbe de PV) se quedan quietos en el primer fotograma. Es decir: la información llega, el movimiento no. ¿Prefieres que con movimiento reducido desaparezcan del todo?
+- La puerta del gimnasio no retrasa el combate: la sesión arranca al pulsar y la animación se juega encima. ¿Te gusta así o prefieres que se abra antes de entrar?
+
+### Splash de iOS
+
+- Safari solo usa la imagen de arranque cuya media query encaja exactamente con el dispositivo, así que hay una por pantalla: SE/8, XR/11, X–11 Pro, 12–14, 14–16 Pro, Plus/Pro Max y 15–16 Pro Max. Un iPhone fuera de esa lista ve la pantalla en blanco de siempre. **Dime qué iPhone tienes** y confirmo que su tamaño está cubierto.
