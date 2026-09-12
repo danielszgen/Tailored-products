@@ -1,22 +1,12 @@
 import type { ReactElement } from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import {
-  BrandMark,
-  colors,
-  FormSilhouette,
-  GYM_COLORS,
-  GymIcon,
-  MedalIcon,
-  StatusIcon,
-  TypeGlyph,
-} from '@/brand';
-import type { Form, GymId, StatKey, Status } from '@/domain/types';
+import { BrandMark, colors, GYM_COLORS, GymIcon, MedalIcon, StatusIcon, TypeGlyph } from '@/brand';
+import type { GymId, StatKey, Status } from '@/domain/types';
 
 const TYPES: Array<StatKey | 'regen'> = ['masa', 'fuerza', 'motor', 'control', 'aventura', 'regen'];
 const GYMS: GymId[] = ['cantera', 'yunque', 'resorte', 'vertigo'];
 const STATUSES: Status[] = ['ok', 'cargado', 'ko'];
-const FORMS: Form[] = [1, 2, 3, 4];
 const LOCKED_STROKE = 'var(--c-ink3)';
 
 function renderSvg(ui: ReactElement): SVGSVGElement {
@@ -50,10 +40,6 @@ describe('icon contract (size, className, title / aria)', () => {
       (title) => <MedalIcon gym="cantera" state="earned" title={title} size={32} className="x" />,
     ],
     ['StatusIcon', (title) => <StatusIcon status="ok" title={title} size={32} className="x" />],
-    [
-      'FormSilhouette',
-      (title) => <FormSilhouette form={2} title={title} size={32} className="x" />,
-    ],
     ['GymIcon', (title) => <GymIcon gym="yunque" title={title} size={32} className="x" />],
     ['BrandMark', (title) => <BrandMark title={title} size={32} className="x" />],
   ];
@@ -177,25 +163,6 @@ describe('StatusIcon', () => {
     const ko = renderSvg(<StatusIcon status="ko" />);
     expect(ko.querySelector(`circle[fill="${colors.status.ko}"]`)).not.toBeNull();
     expect(ko.querySelector('path[stroke]')?.getAttribute('d')).toMatch(/l7 7/);
-  });
-});
-
-describe('FormSilhouette', () => {
-  it.each(FORMS)('Form %s is a monochrome currentColor figure', (form) => {
-    const svg = renderSvg(<FormSilhouette form={form} />);
-    expect(shapeCount(svg)).toBeGreaterThan(0);
-    const used = new Set(paints(svg));
-    expect(used.has('currentColor')).toBe(true);
-    for (const value of used) expect(['currentColor', 'none']).toContain(value);
-  });
-
-  it('gains definition from Form I to Form IV', () => {
-    const counts = FORMS.map((form) => shapeCount(renderSvg(<FormSilhouette form={form} />)));
-    expect(counts[3]).toBeGreaterThan(counts[2]);
-    expect(counts[2]).toBeGreaterThan(counts[0]);
-    expect(
-      new Set(FORMS.map((form) => renderSvg(<FormSilhouette form={form} />).innerHTML)).size,
-    ).toBe(FORMS.length);
   });
 });
 

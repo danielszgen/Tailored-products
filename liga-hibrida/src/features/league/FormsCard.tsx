@@ -1,7 +1,7 @@
 // Formas I–IV with the R10 evolution check and the "Evolucionar" confirmation (SPEC §6.3, §8.5).
 import { useState } from 'react';
 import { Button, Card, Pill, Sheet } from '@/components';
-import { FormSilhouette } from '@/brand/icons';
+import { EvolutionFlash, TrainerAvatar } from '@/brand/art';
 import { saveAdjustment, updateProfile } from '@/data';
 import { EVOLUTION_RULE, FORM_ORDER, FORMS } from '@/domain/content/phases';
 import type { EvolutionCheck } from '@/domain/rules/league';
@@ -19,6 +19,8 @@ export function FormsCard({
 }) {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  // Plays over the Forma that has just been reached (SPEC §9 Etapa IV "animación de evolución").
+  const [flash, setFlash] = useState(false);
   const current = profile.form;
   const target = evolution?.to ?? null;
   const ready = !!evolution?.ready && target !== null;
@@ -39,6 +41,7 @@ export function FormsCard({
         source: 'daniel',
       });
       setOpen(false);
+      setFlash(true);
     } finally {
       setBusy(false);
     }
@@ -52,8 +55,8 @@ export function FormsCard({
           const isCurrent = f === current;
           return (
             <li key={f} className={`list-item p-3 flex gap-3 ${isCurrent ? 'border-accent' : ''}`}>
-              <span className={isCurrent ? 'text-accent' : 'text-ink3'}>
-                <FormSilhouette form={f} size={40} />
+              <span className={isCurrent ? 'shrink-0' : 'shrink-0 opacity-40'}>
+                <TrainerAvatar form={f} scale={1} />
               </span>
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
@@ -120,6 +123,21 @@ export function FormsCard({
           a la {target ? FORMS[target].fullName : ''} y queda anotado en los ajustes.
         </p>
       </Sheet>
+
+      {flash && (
+        <div
+          className="fixed inset-0 z-50 grid place-items-center bg-bg/90"
+          data-testid="evolution-flash"
+        >
+          <div className="relative grid place-items-center">
+            <TrainerAvatar form={profile.form} scale={3} />
+            <span className="absolute inset-0 grid place-items-center pointer-events-none">
+              <EvolutionFlash scale={3} onDone={() => setFlash(false)} />
+            </span>
+          </div>
+          <p className="display text-xl mt-4">{FORMS[profile.form].fullName}</p>
+        </div>
+      )}
     </Card>
   );
 }

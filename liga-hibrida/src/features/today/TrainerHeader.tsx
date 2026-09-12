@@ -1,5 +1,5 @@
 import { Eyebrow, Meter, StatusPill } from '@/components';
-import { FormSilhouette } from '@/brand/icons';
+import { PvOrb, TrainerAvatar } from '@/brand/art';
 import { BLOCK_WEEKS, waveForWeek, waveLabel } from '@/domain/content/block';
 import { FORMS } from '@/domain/content/phases';
 import { StatsRow } from '@/features/league/StatsCard';
@@ -24,8 +24,8 @@ export function TrainerHeader({ model }: { model: TodayModel }) {
 
   return (
     <section className="card p-4 flex gap-3 items-center">
-      <div className="text-ink shrink-0" aria-hidden>
-        <FormSilhouette form={profile.form} size={48} />
+      <div className="shrink-0">
+        <TrainerAvatar form={profile.form} scale={1} />
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center justify-between gap-2">
@@ -38,13 +38,18 @@ export function TrainerHeader({ model }: { model: TodayModel }) {
         </div>
         <Eyebrow className="block">{FORMS[profile.form].fullName}</Eyebrow>
         <Eyebrow className="block mb-2">{weekText}</Eyebrow>
-        <Meter
-          label="PV"
-          value={pvResult?.pv ?? 0}
-          tone={pvResult?.status ?? 'accent'}
-          showValue={!!pvResult}
-          height={8}
-        />
+        <div className="flex items-center gap-2">
+          {pvResult && <PvOrb status={pvResult.status} scale={1} />}
+          <div className="flex-1">
+            <Meter
+              label="PV"
+              value={pvResult?.pv ?? 0}
+              tone={pvResult?.status ?? 'accent'}
+              showValue={!!pvResult}
+              height={8}
+            />
+          </div>
+        </div>
         {league.summary && (
           <div className="mt-2">
             <StatsRow stats={league.summary.stats} compact />

@@ -1,6 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
-import { Button, Card, Pill } from '@/components';
+import { Button, Card, Eyebrow, Pill } from '@/components';
 import { GymIcon, TypeGlyph } from '@/brand/icons';
+import { GymLeader, LEADER_NAMES, LEADER_TAGLINES } from '@/brand/art';
 import { lastCompletedSession } from '@/data';
 import { GYMS, SESSION_CODE_LABEL, getExercise, isMainLift } from '@/domain/content/gyms';
 import type { GymId, SessionVersion } from '@/domain/types';
@@ -51,6 +52,13 @@ export function GymCard({
       right={<Pill tone="neutral">coste {gym.cost}</Pill>}
     >
       <p className="text-sm text-ink2">{gym.goal}</p>
+      <div className="flex items-start gap-3 mt-2">
+        <GymLeader gymId={gymId} scale={1} className="shrink-0" />
+        <div className="min-w-0">
+          <Eyebrow className="block">Líder · {LEADER_NAMES[gymId]}</Eyebrow>
+          <p className="text-xs text-ink3">{LEADER_TAGLINES[gymId]}</p>
+        </div>
+      </div>
       <div className="flex flex-wrap gap-1.5 mt-2">
         {gym.primaryTypes.map((t) => (
           <Pill key={t} tone={t}>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { Button, Card, Eyebrow, Pill, Screen, Segmented, Splash, StatusPill } from '@/components';
 import { GymIcon } from '@/brand/icons';
+import { GymGate, GymLeader, LEADER_NAMES, LEADER_TAGLINES } from '@/brand/art';
 import { updateProfile } from '@/data';
 import { GYM_ORDER, GYM_NAMES, SESSION_CODE_LABEL, versionNote } from '@/domain/content/gyms';
 import { hierarchyName } from '@/domain/content/constitution';
@@ -49,6 +50,8 @@ function Combat({ gymId }: { gymId: GymId }) {
   const [energyStart, setEnergyStart] = useState<Scale5>(3);
   const [version, setVersion] = useState<SessionVersion>(defaultVersion);
   const [finishOpen, setFinishOpen] = useState(false);
+  // The gate animation covers the jump from the briefing to the combat (SPEC §9 Etapa IV).
+  const [entering, setEntering] = useState(false);
   const { gym, session, finished, adjustment, exercises, previous, suggestions, today, wave } =
     model;
 
@@ -68,6 +71,14 @@ function Combat({ gymId }: { gymId: GymId }) {
         : null;
   const deloadLines = deloadSummary(wave);
 
+  // Rendered by both branches: the combat starts immediately and the gate plays over the
+  // switch, so the animation never delays the session or gets cut short by the rerender.
+  const gate = entering ? (
+    <div className="fixed inset-0 z-50 grid place-items-center bg-bg/95" data-testid="gym-gate">
+      <GymGate scale={4} onDone={() => setEntering(false)} />
+    </div>
+  ) : null;
+
   if (finished) {
     return (
       <Screen title={header} eyebrow={SESSION_CODE_LABEL[gymId]} back="/gym">
@@ -81,6 +92,14 @@ function Combat({ gymId }: { gymId: GymId }) {
     return (
       <Screen title={header} eyebrow={`${SESSION_CODE_LABEL[gymId]} · ${gym.goal}`} back="/gym">
         <Card eyebrow="Antes de empezar" title="Estado y versión">
+          <div className="flex items-center gap-3 mb-4">
+            <GymLeader gymId={gymId} scale={2} className="shrink-0" />
+            <div className="min-w-0">
+              <Eyebrow className="block">Líder del gimnasio</Eyebrow>
+              <p className="display text-lg">{LEADER_NAMES[gymId]}</p>
+              <p className="text-xs text-ink3">{LEADER_TAGLINES[gymId]}</p>
+            </div>
+          </div>
           <div className="flex items-center gap-2 mb-3">
             {today.pvResult ? (
               <>
@@ -128,10 +147,18 @@ function Combat({ gymId }: { gymId: GymId }) {
               Estado CARGADO: la versión sugerida es 45&apos;.
             </p>
           )}
-          <Button full size="lg" onClick={() => model.start({ version, energyStart })}>
+          <Button
+            full
+            size="lg"
+            onClick={() => {
+              setEntering(true);
+              void model.start({ version, energyStart });
+            }}
+          >
             Empezar combate
           </Button>
         </Card>
+        {gate}
         {deloadLines.length > 0 && (
           <Card eyebrow="R3" title={wave === 'deload' ? 'Semana de descarga' : 'Final de Liga'}>
             <ul className="text-sm text-ink2 flex flex-col gap-1">
@@ -151,6 +178,7 @@ function Combat({ gymId }: { gymId: GymId }) {
   }
 
   const locked = !session.warmupDone;
+
   const firstIncomplete = exercises.find((e) => {
     const log = session.exercises.find((l) => l.exerciseId === e.id);
     const targetSets = (e.perSide ? 2 : 1) * targetsFromSuggestion(e, suggestions[e.id]).sets;
@@ -229,6 +257,8 @@ function Combat({ gymId }: { gymId: GymId }) {
           </Eyebrow>
         )}
       </Card>
+
+      {gate}
 
       {/* Keep the last card reachable while the sticky rest timer is visible. */}
       <div aria-hidden style={{ height: timer.running ? 112 : 0 }} />

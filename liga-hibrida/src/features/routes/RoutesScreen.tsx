@@ -1,7 +1,8 @@
 // RUTAS tab (SPEC §8.4): weekly counter, route and Zona Salvaje logging with R4/R5, references.
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Button, Card, Pill, Screen, Splash } from '@/components';
+import { Card, Pill, Screen, Splash } from '@/components';
+import { SceneBanner } from '@/brand/art';
 import { Collapsible } from '@/components/Collapsible';
 import { ensureWeek, useRoutes, useWild } from '@/data';
 import { BLOCK_WEEKS } from '@/domain/content/block';
@@ -82,13 +83,34 @@ export function RoutesScreen() {
         today={today}
       />
 
-      <div className="grid grid-cols-2 gap-2">
-        <Button size="lg" onClick={() => setSheet('route')}>
-          Registrar ruta
-        </Button>
-        <Button size="lg" variant="secondary" onClick={() => setSheet('wild')}>
-          Zona Salvaje
-        </Button>
+      {/* The two backdrops of SPEC §9 Etapa IV double as the entry points they illustrate. */}
+      <div className="grid gap-2">
+        {(
+          [
+            { scene: 'ruta', sheet: 'route', label: 'Registrar ruta', hint: 'Z2 fácil' },
+            {
+              scene: 'zona-salvaje',
+              sheet: 'wild',
+              label: 'Zona Salvaje',
+              hint: 'La ventana del sábado',
+            },
+          ] as const
+        ).map((tile) => (
+          <button
+            key={tile.sheet}
+            type="button"
+            // The hint is flavour, so the accessible name stays the action itself.
+            aria-label={tile.label}
+            className="card overflow-hidden text-left block w-full"
+            onClick={() => setSheet(tile.sheet)}
+          >
+            <SceneBanner scene={tile.scene} />
+            <span className="flex items-baseline justify-between gap-2 p-3">
+              <span className="display text-lg">{tile.label}</span>
+              <span className="eyebrow">{tile.hint}</span>
+            </span>
+          </button>
+        ))}
       </div>
       {message && (
         <p role="status" className="text-sm text-status-ok px-1">

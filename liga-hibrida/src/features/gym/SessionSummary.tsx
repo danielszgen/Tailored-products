@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Eyebrow, Meter, Pill, type MeterTone } from '@/components';
-import { MedalIcon, type MedalState } from '@/brand/icons';
+import { type MedalState } from '@/brand/icons';
+import { MedalBurst, PixelMedal } from '@/brand/art';
 import { GYM_NAMES, getExercise } from '@/domain/content/gyms';
 import type { MedalProgress } from '@/domain/rules/league';
 import type { GymId, SessionLog } from '@/domain/types';
@@ -130,12 +131,20 @@ function MedalAdvance({ gymId }: { gymId: GymId }) {
       }
     >
       <div className="flex gap-3">
-        <MedalIcon
-          gym={gymId}
-          state={state}
-          size={44}
-          title={`Medalla ${medal.name} ${STATE_LABEL[state]}`}
-        />
+        <span className={`shrink-0 relative${celebrate ? ' medal-pop' : ''}`}>
+          <PixelMedal
+            gymId={gymId}
+            earned={medal.earned}
+            progress={medal.progress}
+            scale={2}
+            alt={`Medalla ${medal.name} ${STATE_LABEL[state]}`}
+          />
+          {celebrate && (
+            <span className="absolute inset-0 grid place-items-center pointer-events-none">
+              <MedalBurst scale={2} />
+            </span>
+          )}
+        </span>
         <div className="min-w-0 flex-1">
           <p className="text-xs text-ink2">{medal.condition}</p>
           <Meter

@@ -5,8 +5,8 @@ export { GYM_COLORS, MedalIcon } from './MedalIcon';
 export type { MedalIconProps, MedalState } from './MedalIcon';
 export { StatusIcon } from './StatusIcon';
 export type { StatusIconProps } from './StatusIcon';
-export { FormSilhouette } from './FormSilhouette';
-export type { FormSilhouetteProps } from './FormSilhouette';
+// The four Forma silhouettes are gone: SPEC §4.3 has Etapa IV replace them with illustrations,
+// and the trainer is now drawn by `TrainerAvatar` in src/brand/art.
 export { GymIcon } from './GymIcon';
 export type { GymIconProps } from './GymIcon';
 export { BrandMark } from './BrandMark';

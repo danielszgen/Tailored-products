@@ -1,6 +1,7 @@
 // Mochila: objects with their rule; creatina daily tick (SPEC §8.6, §6.8).
 import { useState } from 'react';
 import { Card, Eyebrow } from '@/components';
+import { ObjectIcon } from '@/brand/art';
 import { BACKPACK_ITEMS, NOT_NEEDED, RECOVERY_ORDER } from '@/domain/content/items';
 import { todayISO } from '@/lib/date';
 import { isCreatineTaken, setCreatineTaken } from './creatine';
@@ -15,7 +16,10 @@ export function BackpackCard() {
         {BACKPACK_ITEMS.map((item) => (
           <li key={item.id} className="list-item p-3">
             <div className="flex items-center justify-between gap-2">
-              <span className="text-sm font-bold text-ink">{item.name}</span>
+              <span className="flex items-center gap-2 min-w-0">
+                <ObjectIcon itemId={item.id} scale={2} className="shrink-0" />
+                <span className="text-sm font-bold text-ink">{item.name}</span>
+              </span>
               {item.daily && (
                 <button
                   type="button"

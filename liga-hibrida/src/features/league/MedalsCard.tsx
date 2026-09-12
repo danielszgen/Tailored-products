@@ -2,7 +2,7 @@
 // (SPEC §6.10, §8.5, §9 Etapa III "medallas con animación").
 import { useEffect, useState } from 'react';
 import { Card, Eyebrow, Meter, Pill } from '@/components';
-import { MedalIcon } from '@/brand/icons';
+import { MedalBurst, PixelMedal } from '@/brand/art';
 import type { MedalProgress } from '@/domain/rules/league';
 import type { GymId } from '@/domain/types';
 import { formatShort } from '@/lib/date';
@@ -47,13 +47,19 @@ export function MedalsCard({ medals }: { medals: MedalProgress[] | null }) {
             const pop = celebrated.includes(m.id);
             return (
               <li key={m.id} className="flex gap-3" data-testid={`medal-${m.id}`}>
-                <span className={pop ? 'medal-pop shrink-0' : 'shrink-0'}>
-                  <MedalIcon
-                    gym={m.id}
-                    state={state}
-                    size={44}
-                    title={`Medalla ${m.name} ${state === 'earned' ? 'conseguida' : state === 'progress' ? 'en progreso' : 'bloqueada'}`}
+                <span className={`shrink-0 relative${pop ? ' medal-pop' : ''}`}>
+                  <PixelMedal
+                    gymId={m.id}
+                    earned={m.earned}
+                    progress={m.progress}
+                    scale={2}
+                    alt={`Medalla ${m.name} ${state === 'earned' ? 'conseguida' : state === 'progress' ? 'en progreso' : 'bloqueada'}`}
                   />
+                  {pop && (
+                    <span className="absolute inset-0 grid place-items-center pointer-events-none">
+                      <MedalBurst scale={2} />
+                    </span>
+                  )}
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2">
