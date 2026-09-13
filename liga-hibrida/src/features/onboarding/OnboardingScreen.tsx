@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Eyebrow, Segmented, Stepper } from '@/components';
 import { BrandMark } from '@/brand/icons';
+import { TrainerAvatar } from '@/brand/art';
 import { ensureMedals, ensureWeek, saveProfile } from '@/data';
 import { DEFAULT_BLOCK_START } from '@/domain/content/block';
 import { dayIndexOf } from '@/lib/date';
@@ -296,6 +297,10 @@ export function OnboardingScreen() {
 
         {step === 4 && (
           <Card eyebrow="Resumen" title={`${name || 'Entrenador'} · Forma I`}>
+            {/* The trainer they have just created, before they ever open HOY. */}
+            <div className="flex justify-center mb-3">
+              <TrainerAvatar form={1} scale={2} />
+            </div>
             <dl className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
               <dt className="text-ink3">Altura</dt>
               <dd className="text-ink">{heightCm} cm</dd>

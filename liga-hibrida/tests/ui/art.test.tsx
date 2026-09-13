@@ -14,6 +14,7 @@ import {
   ObjectIcon,
   PixelArt,
   PixelMedal,
+  PixelTypeGlyph,
   PvOrb,
   SceneBanner,
   SpriteAnimation,
@@ -22,12 +23,12 @@ import {
 } from '@/brand/art';
 import { GYM_NAMES, GYM_ORDER } from '@/domain/content/gyms';
 import { BACKPACK_ITEMS } from '@/domain/content/items';
-import type { Form, Status } from '@/domain/types';
+import type { Form, StatKey, Status } from '@/domain/types';
 
 const PUBLIC_DIR = path.resolve(__dirname, '../../public');
 const FORMS: Form[] = [1, 2, 3, 4];
 const STATUSES: Status[] = ['ok', 'cargado', 'ko'];
-const TYPES = ['masa', 'fuerza', 'motor', 'control', 'aventura', 'regen'];
+const TYPES: Array<StatKey | 'regen'> = ['masa', 'fuerza', 'motor', 'control', 'aventura', 'regen'];
 
 /** Width and height straight out of the PNG header. */
 function pngSize(file: string) {
@@ -205,6 +206,16 @@ describe('the domain-aware sprites', () => {
       expect(container.querySelector('img'), item.id).not.toBeNull();
       unmount();
     }
+  });
+
+  it('draws the six type glyphs, named only where no text names them', () => {
+    for (const type of TYPES) {
+      const { container, unmount } = render(<PixelTypeGlyph type={type} alt={type} />);
+      expect(container.querySelector('img'), type).toHaveAttribute('src', ART[`type-${type}`].src);
+      unmount();
+    }
+    const { container } = render(<PixelTypeGlyph type="masa" />);
+    expect(container.querySelector('img')).toHaveAttribute('alt', '');
   });
 
   it('renders nothing instead of throwing when a sprite has not been drawn', () => {

@@ -1,4 +1,4 @@
-import type { Form, GymId, Status } from '@/domain/types';
+import type { Form, GymId, StatKey, Status } from '@/domain/types';
 import { GYM_NAMES } from '@/domain/content/gyms';
 import { ART } from './manifest';
 import { findArt } from './lookup';
@@ -115,6 +115,29 @@ export function GymGate({ scale = 3, onDone }: { scale?: number; onDone?: () => 
 /** The light column of an evolution, played over the Forma that is being left behind. */
 export function EvolutionFlash({ scale = 2, onDone }: { scale?: number; onDone?: () => void }) {
   return <SpriteAnimation id="anim-evolution" scale={scale} durationMs={720} onDone={onDone} />;
+}
+
+/**
+ * One of the six type glyphs of SPEC §4.3, at the arcade scale.
+ *
+ * The SVG `TypeGlyph` stays where the glyph has to be tiny or follow the text colour (the type
+ * pills are 12 px in the accent of their own pill); a 16 px sprite squeezed into 12 px would just
+ * lose pixels. Here, at 16 or 32 px, the sprite is the one that belongs.
+ */
+export function PixelTypeGlyph({
+  type,
+  scale = 1,
+  alt = '',
+  className,
+}: {
+  type: StatKey | 'regen';
+  scale?: number;
+  alt?: string;
+  className?: string;
+}) {
+  const id = findArt(`type-${type}`);
+  if (!id) return null;
+  return <PixelArt id={id} scale={scale} alt={alt} className={className} />;
 }
 
 /** A Mochila object (SPEC §6.8), by the item id of src/domain/content/items.ts. */

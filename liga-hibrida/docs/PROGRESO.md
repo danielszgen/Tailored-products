@@ -47,6 +47,8 @@ Para no dejar la etapa parada se construyó la biblia completa **en la direcció
 - **LIGA**: medallas en píxeles con el estallido dorado sobre la que se acaba de conseguir; las Formas usan el avatar (la actual a plena opacidad) y al confirmar una evolución se juega la columna de luz sobre la Forma nueva.
 - **RUTAS**: los dos fondos son ahora la entrada a *Registrar ruta* y *Zona Salvaje*.
 - **REGEN**: cada objeto de la Mochila con su sprite; el resumen del combate celebra la medalla con el mismo estallido que LIGA.
+- **Semana 0**: el último paso del onboarding enseña al entrenador en Forma I justo encima de "Crear ficha", que es el momento exacto en que alguien decide si esto parece un juego o un formulario.
+- **Estadísticas**: los 5 glifos de tipo son los de píxeles, a 32 px en LIGA y a 16 px —su tamaño nativo— en la ficha compacta de HOY. Los glifos SVG siguen en las pastillas de tipo, donde miden 12 px y toman el color del texto: ahí un sprite de 16 px solo perdería píxeles.
 - Las siluetas SVG de las Formas (`FormSilhouette`) se han eliminado: SPEC §4.3 dice que en la etapa 4 pasan a ser ilustraciones, y el avatar cubre todos sus usos.
 
 **Calidad**
@@ -55,9 +57,9 @@ Para no dejar la etapa parada se construyó la biblia completa **en la direcció
 |---|---|
 | `pnpm typecheck` | sin errores |
 | `pnpm lint` (ESLint + Prettier) | sin errores ni avisos |
-| `pnpm test` | 367 tests en 41 archivos (36 nuevos: 16 del motor de pixel art, 20 del manifiesto y los componentes; 7 retirados con `FormSilhouette`) |
+| `pnpm test` | 368 tests en 41 archivos (37 nuevos: 16 del motor de pixel art, 21 del manifiesto y los componentes; 7 retirados con `FormSilhouette`) |
 | cobertura `src/domain/rules` | 98,6 % sentencias · 95,4 % ramas (umbral 95 %) |
-| `pnpm build` | 190,94 KB gzip el chunk inicial (objetivo < 200 KB); precache 75 entradas / 756 KiB |
+| `pnpm build` | 191,08 KB gzip el chunk inicial (objetivo < 200 KB); precache 75 entradas / 756 KiB |
 | assets generados | 68,4 kB de un presupuesto de 3 MB (2,2 %) — el build falla solo si se pasa |
 | Recorrido de la Etapa III en Chromium (Playwright, iPhone 390×844) | 21/21 pasos, sin errores de consola |
 | Rutas perezosas (Consejo y Rival) | 4/4 pasos |

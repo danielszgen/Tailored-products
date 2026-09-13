@@ -10,6 +10,7 @@ export {
   MedalBurst,
   ObjectIcon,
   PixelMedal,
+  PixelTypeGlyph,
   PvOrb,
   SceneBanner,
   TrainerAvatar,

@@ -1,7 +1,7 @@
 // "Estadísticas 0–100 en la ficha" (SPEC §6.2, Etapa III) and the trainer level (§6.10).
 import { Card, Eyebrow, Meter } from '@/components';
 import { Collapsible } from '@/components/Collapsible';
-import { TypeGlyph } from '@/brand/icons';
+import { PixelTypeGlyph } from '@/brand/art';
 import { STAT_PLACEHOLDER } from '@/domain/content/smart';
 import { TRAINER_LEVEL_NOTE, TRAINER_LEVELS } from '@/domain/content/tests';
 import type { StatValue, TrainerLevelResult } from '@/domain/rules/league';
@@ -17,7 +17,8 @@ export function StatsRow({
     <ul className="grid grid-cols-5 gap-1 text-center" aria-label="Estadísticas">
       {(stats ?? []).map((s) => (
         <li key={s.key} className="flex flex-col items-center gap-1" title={s.detail}>
-          <TypeGlyph type={s.key} size={compact ? 16 : 22} title={s.name} />
+          {/* Compact carries the only identification, since the name is not written under it. */}
+          <PixelTypeGlyph type={s.key} scale={compact ? 1 : 2} alt={compact ? s.name : ''} />
           {!compact && (
             <span className="font-pixel text-[9px] tracking-[1px] text-ink3">{s.name}</span>
           )}
