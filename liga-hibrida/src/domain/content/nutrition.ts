@@ -1,5 +1,5 @@
 // Nutrition (document 03) — SPEC §6.9. Pure data; the calorie algorithm itself is rule R7 (Etapa II).
-import type { DayFuel } from '../types';
+import type { ChecklistId, DayFuel } from '../types';
 
 export const MASTER_RULE =
   'Medir mantenimiento real 14 días (semanas 1–2: registrar comida y pesarse 5–7 días/sem al levantarse) → superávit pequeño → media de peso sube 0,10–0,25 %/semana con cintura, rendimiento y digestión bajo control.';
@@ -158,7 +158,9 @@ export const SNACK_TOOLKIT = {
   ],
 } as const;
 
-export type ChecklistId = 'proteina' | 'fruta' | 'verdura' | 'hidratar' | 'fuel';
+// The id union lives in domain/types.ts, where the stored DayLog references it; the labels below
+// are content. Re-exported so the screens keep importing both from here.
+export type { ChecklistId };
 
 /** "Checklist diario" — the 5 ticks of the Combustible card. */
 export const DAILY_CHECKLIST: readonly { id: ChecklistId; label: string }[] = [

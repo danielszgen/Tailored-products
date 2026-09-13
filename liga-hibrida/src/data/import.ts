@@ -127,7 +127,7 @@ export async function importAll(
   database: LigaDB = db,
 ): Promise<Record<TableName, number>> {
   assertSupportedVersion(file.schemaVersion);
-  // Files from older schema versions would be migrated here before writing (none yet: v1 only).
+  // Older files carry no `days`; the schema defaults it to [], so nothing to migrate on the way in.
   const { tables } = file;
 
   return await database.transaction('rw', database.tables, async () => {
@@ -145,6 +145,7 @@ export async function importAll(
       database.medals.bulkPut(tables.medals),
       database.adjustments.bulkPut(tables.adjustments),
       database.profile.bulkPut(tables.profile),
+      database.days.bulkPut(tables.days),
     ]);
     return countRows(tables);
   });

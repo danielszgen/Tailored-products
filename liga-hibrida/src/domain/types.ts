@@ -149,6 +149,22 @@ export interface RegenLog {
   note?: string;
 }
 
+/** The five ticks of the daily Combustible checklist (SPEC §8.2); labels in content/nutrition. */
+export type ChecklistId = 'proteina' | 'fruta' | 'verdura' | 'hidratar' | 'fuel';
+
+/**
+ * The ticks of one day. These are records of what was done, not settings, so they live in the
+ * database and travel in the export like every other log — which is what makes moving between
+ * a phone and a computer lossless.
+ */
+export interface DayLog {
+  date: ISODate;
+  /** The creatina habit (SPEC §8.6: "único hábito con tick diario"). */
+  creatine?: boolean;
+  /** Combustible checklist (SPEC §8.2). Absent keys are unticked. */
+  checklist?: Partial<Record<ChecklistId, boolean>>;
+}
+
 export interface PlannedDay {
   am?: PlannedItem;
   pm?: PlannedItem;

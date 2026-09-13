@@ -1,5 +1,6 @@
 // Data layer entry point: Dexie database, repositories, React hooks, export/import and schemas.
 export * from './db';
+export * from './days';
 export * from './repos';
 export * from './hooks';
 export * from './export';

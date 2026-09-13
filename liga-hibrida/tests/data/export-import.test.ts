@@ -23,6 +23,10 @@ function checkin(date: ISODate, patch: Partial<Checkin> = {}): Checkin {
 
 /** Writes at least one row into every table. */
 async function seedEverything(database: LigaDB): Promise<void> {
+  await database.days.bulkPut([
+    { date: '2026-09-07', creatine: true, checklist: { proteina: true, hidratar: true } },
+    { date: '2026-09-08', creatine: true },
+  ]);
   await database.checkins.bulkPut([
     checkin('2026-09-07', { weightKg: 80.2, note: 'Primer día' }),
     checkin('2026-09-08', {
@@ -195,6 +199,7 @@ describe('export → clear → import round trip', () => {
       medals: 4,
       adjustments: 1,
       profile: 1,
+      days: 2,
     });
 
     const second = await exportAll(database);
@@ -338,6 +343,7 @@ describe('importAll modes', () => {
         medals: [{ id: 'cantera', progress: 25 }],
         adjustments: [],
         profile: [],
+        days: [],
       },
     };
 

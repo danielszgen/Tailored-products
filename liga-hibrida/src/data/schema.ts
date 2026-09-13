@@ -302,6 +302,14 @@ export const AdjustmentSchema = z.object({
 
 export const EXPORT_APP = 'liga-hibrida' as const;
 
+export const ChecklistIdSchema = z.enum(['proteina', 'fruta', 'verdura', 'hidratar', 'fuel']);
+
+export const DayLogSchema = z.object({
+  date: ISODateSchema,
+  creatine: z.boolean().optional(),
+  checklist: z.record(ChecklistIdSchema, z.boolean()).optional(),
+});
+
 /** One array per Dexie table, in the same order as TABLE_NAMES in db.ts. */
 export const ExportTablesSchema = z.object({
   checkins: z.array(CheckinSchema),
@@ -314,6 +322,9 @@ export const ExportTablesSchema = z.object({
   medals: z.array(MedalSchema),
   adjustments: z.array(AdjustmentSchema),
   profile: z.array(StoredProfileSchema),
+  // Added in schema v2. Defaulted so a file exported by v1 still parses and `countRows` in
+  // import.ts always finds an array.
+  days: z.array(DayLogSchema).default([]),
 });
 
 export const ExportFileSchema = z.object({

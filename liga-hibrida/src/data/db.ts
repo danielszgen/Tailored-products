@@ -3,6 +3,7 @@ import Dexie, { type EntityTable } from 'dexie';
 import type {
   Adjustment,
   Checkin,
+  DayLog,
   LeagueTest,
   Medal,
   Profile,
@@ -18,7 +19,13 @@ export const PROFILE_ID = 'me' as const;
 export type StoredProfile = Profile & { id: typeof PROFILE_ID };
 
 export const DB_NAME = 'liga-hibrida';
-export const SCHEMA_VERSION = 1;
+
+/**
+ * 1 · Etapa I: the ten tables of SPEC §5.
+ * 2 · `days`, the daily ticks that used to live in localStorage and therefore never made it into
+ *     the export. Purely additive: Dexie creates the store and every existing row is untouched.
+ */
+export const SCHEMA_VERSION = 2;
 
 export class LigaDB extends Dexie {
   checkins!: EntityTable<Checkin, 'date'>;
@@ -31,10 +38,11 @@ export class LigaDB extends Dexie {
   medals!: EntityTable<Medal, 'id'>;
   adjustments!: EntityTable<Adjustment, 'id'>;
   profile!: EntityTable<StoredProfile, 'id'>;
+  days!: EntityTable<DayLog, 'date'>;
 
   constructor(name: string = DB_NAME) {
     super(name);
-    this.version(SCHEMA_VERSION).stores({
+    this.version(1).stores({
       checkins: 'date',
       sessions: 'id, date, gymId, weekOfBlock',
       routes: 'id, date, kind',
@@ -46,6 +54,8 @@ export class LigaDB extends Dexie {
       adjustments: 'id, date, kind',
       profile: 'id',
     });
+    // Only the delta: Dexie keeps every store declared in the previous version.
+    this.version(2).stores({ days: 'date' });
   }
 }
 
@@ -60,6 +70,7 @@ export const TABLE_NAMES = [
   'medals',
   'adjustments',
   'profile',
+  'days',
 ] as const;
 export type TableName = (typeof TABLE_NAMES)[number];
 

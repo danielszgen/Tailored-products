@@ -1,24 +1,16 @@
 // Combustible (R6): day type, pre/post of the main gym, intra guide and the 5-tick checklist.
-import { useEffect, useState } from 'react';
 import { Card, Eyebrow } from '@/components';
+import { setChecklistTick, useDayLog } from '@/data';
 import { GYM_NAMES } from '@/domain/content/gyms';
 import { DAILY_CHECKLIST, type ChecklistId } from '@/domain/content/nutrition';
-import { readChecklist, writeChecklist, type ChecklistState } from './checklist';
 import type { TodayModel } from './useToday';
 
 export function FuelCard({ model }: { model: TodayModel }) {
   const { today, fuel } = model;
-  const [ticks, setTicks] = useState<ChecklistState>(() => readChecklist(today));
+  // Stored in Dexie so the ticks travel in the export (schema v2); `undefined` means loading.
+  const ticks = useDayLog(today)?.checklist ?? {};
 
-  useEffect(() => {
-    setTicks(readChecklist(today));
-  }, [today]);
-
-  const toggle = (id: ChecklistId) => {
-    const next = { ...ticks, [id]: !ticks[id] };
-    setTicks(next);
-    writeChecklist(today, next);
-  };
+  const toggle = (id: ChecklistId) => void setChecklistTick(today, id, !ticks[id]);
 
   const done = DAILY_CHECKLIST.filter((c) => ticks[c.id]).length;
 

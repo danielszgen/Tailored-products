@@ -43,7 +43,7 @@ Mientras no haya respuesta, la app usa el valor por defecto de SPEC §2 y el có
 
 ### Datos
 
-- **Checklist diario de Combustible y tick de creatina.** Se guardan en `localStorage` por fecha (no entran en la exportación JSON). ¿Los pasamos a una tabla Dexie exportable en la Etapa III?
+- **Checklist diario de Combustible y tick de creatina.** ~~Se guardan en `localStorage` por fecha (no entran en la exportación JSON).~~ **Resuelto tras el despliegue:** viven en la tabla `days` de Dexie (esquema v2) y entran en la exportación, porque exportar/importar es el único puente entre el PC y el iPhone y así no se pierde nada. Lo que ya estuviera en `localStorage` se migra solo al abrir la app. Siguen fuera, y a propósito, los avisos descartados y las medallas ya celebradas: son estado de interfaz de cada dispositivo, no registro tuyo.
 - **Inicio del bloque.** La Semana 0 obliga a elegir un lunes (D13). Si el bloque empieza otro día, ¿qué semana cuenta como 1?
 
 ## Preguntas surgidas durante la Etapa II

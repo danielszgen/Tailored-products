@@ -1,14 +1,14 @@
 // Mochila: objects with their rule; creatina daily tick (SPEC §8.6, §6.8).
-import { useState } from 'react';
 import { Card, Eyebrow } from '@/components';
 import { ObjectIcon } from '@/brand/art';
+import { setCreatineTaken, useDayLog } from '@/data';
 import { BACKPACK_ITEMS, NOT_NEEDED, RECOVERY_ORDER } from '@/domain/content/items';
 import { todayISO } from '@/lib/date';
-import { isCreatineTaken, setCreatineTaken } from './creatine';
 
 export function BackpackCard() {
   const today = todayISO();
-  const [taken, setTaken] = useState(() => isCreatineTaken(today));
+  // Stored in Dexie so the streak travels in the export (schema v2).
+  const taken = useDayLog(today)?.creatine ?? false;
 
   return (
     <Card eyebrow="Mochila" title="Objetos y su regla">
@@ -26,11 +26,7 @@ export function BackpackCard() {
                   role="checkbox"
                   aria-checked={taken}
                   aria-label="Creatina hoy"
-                  onClick={() => {
-                    const next = !taken;
-                    setTaken(next);
-                    setCreatineTaken(today, next);
-                  }}
+                  onClick={() => void setCreatineTaken(today, !taken)}
                   className={`min-h-touch min-w-touch px-3 rounded-list border text-sm font-bold ${
                     taken
                       ? 'bg-status-ok text-[#141B2B] border-status-ok'

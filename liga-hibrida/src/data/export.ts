@@ -6,19 +6,31 @@ import { EXPORT_APP, type ExportFile, type ExportTables } from './schema';
 /** Snapshot of all tables, read inside one read-only transaction. Rows are in primary-key order. */
 export async function exportAll(database: LigaDB = db): Promise<ExportFile> {
   const tables = await database.transaction('r', database.tables, async () => {
-    const [checkins, sessions, routes, wild, regen, weeks, tests, medals, adjustments, profile] =
-      await Promise.all([
-        database.checkins.toArray(),
-        database.sessions.toArray(),
-        database.routes.toArray(),
-        database.wild.toArray(),
-        database.regen.toArray(),
-        database.weeks.toArray(),
-        database.tests.toArray(),
-        database.medals.toArray(),
-        database.adjustments.toArray(),
-        database.profile.toArray(),
-      ]);
+    const [
+      checkins,
+      sessions,
+      routes,
+      wild,
+      regen,
+      weeks,
+      tests,
+      medals,
+      adjustments,
+      profile,
+      days,
+    ] = await Promise.all([
+      database.checkins.toArray(),
+      database.sessions.toArray(),
+      database.routes.toArray(),
+      database.wild.toArray(),
+      database.regen.toArray(),
+      database.weeks.toArray(),
+      database.tests.toArray(),
+      database.medals.toArray(),
+      database.adjustments.toArray(),
+      database.profile.toArray(),
+      database.days.toArray(),
+    ]);
     const snapshot: ExportTables = {
       checkins,
       sessions,
@@ -30,6 +42,7 @@ export async function exportAll(database: LigaDB = db): Promise<ExportFile> {
       medals,
       adjustments,
       profile,
+      days,
     };
     return snapshot;
   });

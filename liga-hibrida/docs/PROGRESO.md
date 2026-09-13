@@ -1,5 +1,26 @@
 # PROGRESO — bitácora por etapa
 
+## Después del despliegue · Los ticks diarios entran en la exportación (esquema v2)
+
+**Fecha:** 13 de septiembre de 2026.
+
+Al desplegar en Vercel la app pasó a usarse en dos sitios —el PC y el iPhone—, y como los datos son local-first, **exportar/importar JSON es el único puente entre ellos**. Ahí salió a la luz un agujero que llevaba abierto desde la Etapa I y estaba anotado en PREGUNTAS: el tick diario de creatina (SPEC §8.6) y el checklist de Combustible (SPEC §8.2) vivían en `localStorage`, así que **no entraban en la exportación**. Pasar del PC al iPhone los habría borrado en silencio.
+
+- **Tabla `days`** en Dexie, una fila por fecha con `creatine` y `checklist`. El esquema sube a v2; el cambio es puramente aditivo, así que ninguna fila existente se toca.
+- **La exportación los lleva** y la importación los acepta. Un archivo exportado antes de este cambio (sin la clave `days`) sigue importándose: el esquema la rellena con una lista vacía.
+- **Migración automática**: al abrir la app, lo que quedara en `localStorage` se dobla dentro de la tabla y las claves se borran. Es idempotente y nunca pisa una fila que ya exista, así que una importación siempre gana.
+- **Lo que sigue en `localStorage`, a propósito**: los avisos descartados y las medallas ya celebradas. Son estado de interfaz de cada dispositivo, no registro del entrenamiento.
+
+| Comprobación | Resultado |
+|---|---|
+| `pnpm typecheck` · `pnpm lint` | sin errores |
+| `pnpm test` | 379 tests en 43 archivos (11 nuevos: 9 de la tabla y la migración, 2 de los ticks a través de las pantallas) |
+| `pnpm build` | 191,60 KB gzip el chunk inicial (objetivo < 200 KB) |
+| Migración en Chromium (claves viejas sembradas → recarga) | 7/7 pasos: las dos fechas acaban en Dexie, `localStorage` queda limpio, REGEN muestra la creatina ya marcada, sin errores de consola |
+| Recorridos de la Etapa III y de las rutas perezosas | 21/21 y 4/4 pasos |
+
+---
+
 ## Etapa IV · Mundo visual y app "de verdad"
 
 **Fecha:** 12 de septiembre de 2026.

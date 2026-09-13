@@ -550,6 +550,9 @@ export function buildOchoSemanas(): ExportFile {
       medals,
       adjustments: buildAdjustments(checkins),
       profile: [{ ...ochoSemanasProfile(), id: 'me' }],
+      // Schema v2. The fixture leaves the daily ticks empty: Apéndice B does not list them, and
+      // an old file with no `days` key is covered by its own test in tests/data.
+      days: [],
     },
   };
 }
